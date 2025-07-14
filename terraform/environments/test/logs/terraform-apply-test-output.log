@@ -1,0 +1,36 @@
+(myvenv) masonkeresty@Masons-MacBook-Pro test % terraform apply "solution.plan"               
+Acquiring state lock. This may take a few moments...
+module.appservice.azurerm_service_plan.test: Creating...
+module.publicip.azurerm_public_ip.test: Creating...
+module.network.azurerm_virtual_network.test: Creating...
+module.nsg-test.azurerm_network_security_group.nsg: Creating...
+module.publicip.azurerm_public_ip.test: Creation complete after 3s [id=/subscriptions/a785336a-35d8-4efd-80be-93d34a9e4b66/resourceGroups/Azuredevops/providers/Microsoft.Network/publicIPAddresses/myApplication-publicip-pubip]
+module.nsg-test.azurerm_network_security_group.nsg: Creation complete after 3s [id=/subscriptions/a785336a-35d8-4efd-80be-93d34a9e4b66/resourceGroups/Azuredevops/providers/Microsoft.Network/networkSecurityGroups/myApplication-NSG]
+module.network.azurerm_virtual_network.test: Creation complete after 5s [id=/subscriptions/a785336a-35d8-4efd-80be-93d34a9e4b66/resourceGroups/Azuredevops/providers/Microsoft.Network/virtualNetworks/myApplication-NET]
+module.network.azurerm_subnet.test: Creating...
+module.appservice.azurerm_service_plan.test: Still creating... [10s elapsed]
+module.network.azurerm_subnet.test: Creation complete after 5s [id=/subscriptions/a785336a-35d8-4efd-80be-93d34a9e4b66/resourceGroups/Azuredevops/providers/Microsoft.Network/virtualNetworks/myApplication-NET/subnets/myApplication-NET-sub]
+module.nsg-test.azurerm_subnet_network_security_group_association.test: Creating...
+module.vm.azurerm_network_interface.main[0]: Creating...
+module.nsg-test.azurerm_subnet_network_security_group_association.test: Creation complete after 5s [id=/subscriptions/a785336a-35d8-4efd-80be-93d34a9e4b66/resourceGroups/Azuredevops/providers/Microsoft.Network/virtualNetworks/myApplication-NET/subnets/myApplication-NET-sub]
+module.appservice.azurerm_service_plan.test: Still creating... [20s elapsed]
+module.vm.azurerm_network_interface.main[0]: Still creating... [10s elapsed]
+module.appservice.azurerm_service_plan.test: Creation complete after 26s [id=/subscriptions/a785336a-35d8-4efd-80be-93d34a9e4b66/resourceGroups/Azuredevops/providers/Microsoft.Web/serverFarms/myApplication-AppService]
+module.appservice.azurerm_linux_web_app.test: Creating...
+module.vm.azurerm_network_interface.main[0]: Creation complete after 18s [id=/subscriptions/a785336a-35d8-4efd-80be-93d34a9e4b66/resourceGroups/Azuredevops/providers/Microsoft.Network/networkInterfaces/ud-nic-0]
+module.vm.azurerm_linux_virtual_machine.main[0]: Creating...
+module.appservice.azurerm_linux_web_app.test: Still creating... [10s elapsed]
+module.vm.azurerm_linux_virtual_machine.main[0]: Still creating... [10s elapsed]
+module.appservice.azurerm_linux_web_app.test: Still creating... [21s elapsed]
+module.vm.azurerm_linux_virtual_machine.main[0]: Still creating... [20s elapsed]
+module.appservice.azurerm_linux_web_app.test: Still creating... [31s elapsed]
+module.vm.azurerm_linux_virtual_machine.main[0]: Still creating... [30s elapsed]
+module.appservice.azurerm_linux_web_app.test: Still creating... [41s elapsed]
+module.vm.azurerm_linux_virtual_machine.main[0]: Still creating... [40s elapsed]
+module.appservice.azurerm_linux_web_app.test: Still creating... [51s elapsed]
+module.vm.azurerm_linux_virtual_machine.main[0]: Creation complete after 49s [id=/subscriptions/a785336a-35d8-4efd-80be-93d34a9e4b66/resourceGroups/Azuredevops/providers/Microsoft.Compute/virtualMachines/ud-vm-0]
+module.appservice.azurerm_linux_web_app.test: Creation complete after 56s [id=/subscriptions/a785336a-35d8-4efd-80be-93d34a9e4b66/resourceGroups/Azuredevops/providers/Microsoft.Web/sites/myApplication-AppService]
+Releasing state lock. This may take a few moments...
+
+Apply complete! Resources: 9 added, 0 changed, 0 destroyed.
+(myvenv) masonkeresty@Masons-MacBook-Pro test % 

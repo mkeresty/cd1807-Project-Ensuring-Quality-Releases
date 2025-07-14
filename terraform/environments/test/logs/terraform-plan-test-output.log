@@ -1,0 +1,275 @@
+(myvenv) masonkeresty@Masons-MacBook-Pro test % terraform plan -out "solution.plan"
+Acquiring state lock. This may take a few moments...
+azurerm_resource_group.main: Refreshing state... [id=/subscriptions/a785336a-35d8-4efd-80be-93d34a9e4b66/resourceGroups/Azuredevops]
+
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the
+following symbols:
+  + create
+
+Terraform will perform the following actions:
+
+  # module.appservice.azurerm_linux_web_app.test will be created
+  + resource "azurerm_linux_web_app" "test" {
+      + app_settings                                   = {
+          + "WEBSITE_RUN_FROM_PACKAGE" = "0"
+        }
+      + client_affinity_enabled                        = false
+      + client_certificate_enabled                     = false
+      + client_certificate_mode                        = "Required"
+      + custom_domain_verification_id                  = (sensitive value)
+      + default_hostname                               = (known after apply)
+      + enabled                                        = true
+      + ftp_publish_basic_authentication_enabled       = true
+      + hosting_environment_id                         = (known after apply)
+      + https_only                                     = false
+      + id                                             = (known after apply)
+      + key_vault_reference_identity_id                = (known after apply)
+      + kind                                           = (known after apply)
+      + location                                       = "eastus"
+      + name                                           = "myApplication-AppService"
+      + outbound_ip_address_list                       = (known after apply)
+      + outbound_ip_addresses                          = (known after apply)
+      + possible_outbound_ip_address_list              = (known after apply)
+      + possible_outbound_ip_addresses                 = (known after apply)
+      + public_network_access_enabled                  = true
+      + resource_group_name                            = "Azuredevops"
+      + service_plan_id                                = (known after apply)
+      + site_credential                                = (sensitive value)
+      + virtual_network_backup_restore_enabled         = false
+      + vnet_image_pull_enabled                        = false
+      + webdeploy_publish_basic_authentication_enabled = true
+      + zip_deploy_file                                = (known after apply)
+
+      + site_config {
+          + always_on                               = false
+          + container_registry_use_managed_identity = false
+          + default_documents                       = (known after apply)
+          + detailed_error_logging_enabled          = (known after apply)
+          + ftps_state                              = "Disabled"
+          + http2_enabled                           = false
+          + ip_restriction_default_action           = "Allow"
+          + linux_fx_version                        = (known after apply)
+          + load_balancing_mode                     = "LeastRequests"
+          + local_mysql_enabled                     = false
+          + managed_pipeline_mode                   = "Integrated"
+          + minimum_tls_version                     = "1.2"
+          + remote_debugging_enabled                = false
+          + remote_debugging_version                = (known after apply)
+          + scm_ip_restriction_default_action       = "Allow"
+          + scm_minimum_tls_version                 = "1.2"
+          + scm_type                                = (known after apply)
+          + scm_use_main_ip_restriction             = false
+          + use_32_bit_worker                       = true
+          + vnet_route_all_enabled                  = false
+          + websockets_enabled                      = false
+          + worker_count                            = (known after apply)
+
+          + application_stack (known after apply)
+        }
+    }
+
+  # module.appservice.azurerm_service_plan.test will be created
+  + resource "azurerm_service_plan" "test" {
+      + id                              = (known after apply)
+      + kind                            = (known after apply)
+      + location                        = "eastus"
+      + maximum_elastic_worker_count    = (known after apply)
+      + name                            = "myApplication-AppService"
+      + os_type                         = "Linux"
+      + per_site_scaling_enabled        = false
+      + premium_plan_auto_scale_enabled = false
+      + reserved                        = (known after apply)
+      + resource_group_name             = "Azuredevops"
+      + sku_name                        = "F1"
+      + worker_count                    = (known after apply)
+    }
+
+  # module.network.azurerm_subnet.test will be created
+  + resource "azurerm_subnet" "test" {
+      + address_prefixes                              = [
+          + "10.5.1.0/24",
+        ]
+      + default_outbound_access_enabled               = true
+      + id                                            = (known after apply)
+      + name                                          = "myApplication-NET-sub"
+      + private_endpoint_network_policies             = "Disabled"
+      + private_link_service_network_policies_enabled = true
+      + resource_group_name                           = "Azuredevops"
+      + virtual_network_name                          = "myApplication-NET"
+    }
+
+  # module.network.azurerm_virtual_network.test will be created
+  + resource "azurerm_virtual_network" "test" {
+      + address_space                  = [
+          + "10.5.0.0/16",
+        ]
+      + dns_servers                    = (known after apply)
+      + guid                           = (known after apply)
+      + id                             = (known after apply)
+      + location                       = "eastus"
+      + name                           = "myApplication-NET"
+      + private_endpoint_vnet_policies = "Disabled"
+      + resource_group_name            = "Azuredevops"
+      + subnet                         = (known after apply)
+    }
+
+  # module.nsg-test.azurerm_network_security_group.nsg will be created
+  + resource "azurerm_network_security_group" "nsg" {
+      + id                  = (known after apply)
+      + location            = "eastus"
+      + name                = "myApplication-NSG"
+      + resource_group_name = "Azuredevops"
+      + security_rule       = [
+          + {
+              + access                                     = "Allow"
+              + destination_address_prefix                 = "*"
+              + destination_address_prefixes               = []
+              + destination_application_security_group_ids = []
+              + destination_port_range                     = "22"
+              + destination_port_ranges                    = []
+              + direction                                  = "Inbound"
+              + name                                       = "SSH"
+              + priority                                   = 1001
+              + protocol                                   = "Tcp"
+              + source_address_prefix                      = "*"
+              + source_address_prefixes                    = []
+              + source_application_security_group_ids      = []
+              + source_port_range                          = "*"
+              + source_port_ranges                         = []
+                # (1 unchanged attribute hidden)
+            },
+          + {
+              + access                                     = "Allow"
+              + destination_address_prefix                 = "*"
+              + destination_address_prefixes               = []
+              + destination_application_security_group_ids = []
+              + destination_port_range                     = "5000"
+              + destination_port_ranges                    = []
+              + direction                                  = "Inbound"
+              + name                                       = "myApplication-NSG-5000"
+              + priority                                   = 100
+              + protocol                                   = "Tcp"
+              + source_address_prefix                      = "10.5.1.0/24"
+              + source_address_prefixes                    = []
+              + source_application_security_group_ids      = []
+              + source_port_range                          = "*"
+              + source_port_ranges                         = []
+                # (1 unchanged attribute hidden)
+            },
+        ]
+    }
+
+  # module.nsg-test.azurerm_subnet_network_security_group_association.test will be created
+  + resource "azurerm_subnet_network_security_group_association" "test" {
+      + id                        = (known after apply)
+      + network_security_group_id = (known after apply)
+      + subnet_id                 = (known after apply)
+    }
+
+  # module.publicip.azurerm_public_ip.test will be created
+  + resource "azurerm_public_ip" "test" {
+      + allocation_method       = "Static"
+      + ddos_protection_mode    = "VirtualNetworkInherited"
+      + fqdn                    = (known after apply)
+      + id                      = (known after apply)
+      + idle_timeout_in_minutes = 4
+      + ip_address              = (known after apply)
+      + ip_version              = "IPv4"
+      + location                = "eastus"
+      + name                    = "myApplication-publicip-pubip"
+      + resource_group_name     = "Azuredevops"
+      + sku                     = "Standard"
+      + sku_tier                = "Regional"
+    }
+
+  # module.vm.azurerm_linux_virtual_machine.main[0] will be created
+  + resource "azurerm_linux_virtual_machine" "main" {
+      + admin_username                                         = "adminuser"
+      + allow_extension_operations                             = true
+      + bypass_platform_safety_checks_on_user_schedule_enabled = false
+      + computer_name                                          = (known after apply)
+      + disable_password_authentication                        = true
+      + disk_controller_type                                   = (known after apply)
+      + extensions_time_budget                                 = "PT1H30M"
+      + id                                                     = (known after apply)
+      + location                                               = "eastus"
+      + max_bid_price                                          = -1
+      + name                                                   = "ud-vm-0"
+      + network_interface_ids                                  = (known after apply)
+      + patch_assessment_mode                                  = "ImageDefault"
+      + patch_mode                                             = "ImageDefault"
+      + platform_fault_domain                                  = -1
+      + priority                                               = "Regular"
+      + private_ip_address                                     = (known after apply)
+      + private_ip_addresses                                   = (known after apply)
+      + provision_vm_agent                                     = true
+      + public_ip_address                                      = (known after apply)
+      + public_ip_addresses                                    = (known after apply)
+      + resource_group_name                                    = "Azuredevops"
+      + size                                                   = "Standard_B1s"
+      + virtual_machine_id                                     = (known after apply)
+      + vm_agent_platform_updates_enabled                      = (known after apply)
+
+      + admin_ssh_key {
+          + public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDfy9OZMaglxczcucEIXRS/t2MEZvpi34YxcQaFlsYyoYqNKyGaJLeCaaCWWRE12LphaEi9+NOxgtgczluZcQFqoCue+lM0utuZWISv1A1oSuEsiPM92kdHsEvnbM6kEku4LkFFgT/w62ig2iZmQhDXip4/7H0JSbdYIx+xoDM4AQBHI9KWM/5TzkmT5njdN5xzmqxuDM4yy5apjuJbuhf63hj4Z3EMec095tgRFSv0K3uAaslW9c7woadTzLVEjqjJ8/cTfX1m1P92KI+a1w5vzDc5AIYJgI3yWNq/j/8XL3e62fZ8igFgoDIsH8DkXhHCjizWsz0o2Gd2Hsm4BHgRbltOPEX8SPW40OWQb+ytmywjqdmaGI6w4N9sNprB7qSMeTDLVO3jYr3olmG85/cJc/5MKKloOcdW4ZObUOgZxuNONO4SdOXGHh2ASC5mOsJ1g1VuwhYigt/e9InRIFnpVuoDkQ94NSaXej0tLqoQHHx9ZcF4LzOcxPcr7j6XysU= masonkeresty@Masons-MacBook-Pro.local"
+          + username   = "adminuser"
+        }
+
+      + os_disk {
+          + caching                   = "ReadWrite"
+          + disk_size_gb              = (known after apply)
+          + id                        = (known after apply)
+          + name                      = (known after apply)
+          + storage_account_type      = "Standard_LRS"
+          + write_accelerator_enabled = false
+        }
+
+      + source_image_reference {
+          + offer     = "UbuntuServer"
+          + publisher = "Canonical"
+          + sku       = "18.04-LTS"
+          + version   = "latest"
+        }
+
+      + termination_notification (known after apply)
+    }
+
+  # module.vm.azurerm_network_interface.main[0] will be created
+  + resource "azurerm_network_interface" "main" {
+      + accelerated_networking_enabled = false
+      + applied_dns_servers            = (known after apply)
+      + id                             = (known after apply)
+      + internal_domain_name_suffix    = (known after apply)
+      + ip_forwarding_enabled          = false
+      + location                       = "eastus"
+      + mac_address                    = (known after apply)
+      + name                           = "ud-nic-0"
+      + private_ip_address             = (known after apply)
+      + private_ip_addresses           = (known after apply)
+      + resource_group_name            = "Azuredevops"
+      + tags                           = {
+          + "project" = "project_3"
+        }
+      + virtual_machine_id             = (known after apply)
+
+      + ip_configuration {
+          + gateway_load_balancer_frontend_ip_configuration_id = (known after apply)
+          + name                                               = "internal"
+          + primary                                            = (known after apply)
+          + private_ip_address                                 = (known after apply)
+          + private_ip_address_allocation                      = "Dynamic"
+          + private_ip_address_version                         = "IPv4"
+          + subnet_id                                          = (known after apply)
+        }
+    }
+
+Plan: 9 to add, 0 to change, 0 to destroy.
+
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+Saved the plan to: solution.plan
+
+To perform exactly these actions, run the following command to apply:
+    terraform apply "solution.plan"
+Releasing state lock. This may take a few moments...
+(myvenv) masonkeresty@Masons-MacBook-Pro test % 

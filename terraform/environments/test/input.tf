@@ -1,16 +1,76 @@
 # Azure GUIDS
-variable "subscription_id" {}
-variable "client_id" {}
-variable "client_secret" {}
-variable "tenant_id" {}
+variable "subscription_id" {
+    description = "The Azure subscription ID"
+}
+variable "client_id" {
+    description = "The Azure client ID"
+}
+variable "client_secret" {
+    description = "The Azure client secret"
+}
+variable "tenant_id" {
+    description = "The Azure tenant ID"
+}
 
 # Resource Group/Location
-variable "location" {}
-variable "resource_group" {}
-variable "application_type" {}
+variable "location" {
+    description = "The Azure location for resources"
+    default = "southcentralus"
+}
+
+variable "resource_group_name" {
+    description = "The name of the Azure resource group"
+    default = "Azuredevops"
+}
+
+variable "application_type" {
+    description = "The type of application being deployed"
+    default = "myApplication"
+}
 
 # Network
-variable virtual_network_name {}
-variable address_prefix_test {}
-variable address_space {}
+variable virtual_network_name {
+    description = "The name of the virtual network"
+    default = "myVirtualNetwork"
+}
+
+variable address_space {
+    description = "Value for address space"
+    default = ["10.5.0.0/16"]
+}
+
+variable address_prefix_test {
+    description = "Value for address prefix test"
+    default = "10.5.1.0/24"
+}
+
+
+variable "prefix" {
+  description = "The prefix which should be used for all resources."
+  default = "ud"
+}
+
+variable "vm_count" {
+  description = "Number of virtual machines to be deployed."
+  default = 1
+}
+
+variable "tag_name" {
+  description = "Tag name required on all resources."
+  default = "project"
+}
+
+variable "tag_value" {
+  description = "Tag value required on all resources."
+  default = "project_3"
+}
+
+variable "admin_username" {
+  description = "The administrator username for the virtual machines."
+  default = "adminuser"
+}
+
+variable "public_key" {
+  description = "The public SSH key for the administrator user."
+}
 

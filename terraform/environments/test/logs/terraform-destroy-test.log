@@ -1,0 +1,402 @@
+(myvenv) masonkeresty@Masons-MacBook-Pro test % terraform state rm azurerm_resource_group.main
+
+Acquiring state lock. This may take a few moments...
+Removed azurerm_resource_group.main
+Successfully removed 1 resource instance(s).
+Releasing state lock. This may take a few moments...
+(myvenv) masonkeresty@Masons-MacBook-Pro test % terraform destroy                             
+Acquiring state lock. This may take a few moments...
+module.appservice.azurerm_service_plan.test: Refreshing state... [id=/subscriptions/a785336a-35d8-4efd-80be-93d34a9e4b66/resourceGroups/Azuredevops/providers/Microsoft.Web/serverFarms/myApplication-AppService]
+module.publicip.azurerm_public_ip.test: Refreshing state... [id=/subscriptions/a785336a-35d8-4efd-80be-93d34a9e4b66/resourceGroups/Azuredevops/providers/Microsoft.Network/publicIPAddresses/myApplication-publicip-pubip]
+module.network.azurerm_virtual_network.test: Refreshing state... [id=/subscriptions/a785336a-35d8-4efd-80be-93d34a9e4b66/resourceGroups/Azuredevops/providers/Microsoft.Network/virtualNetworks/myApplication-NET]
+module.nsg-test.azurerm_network_security_group.nsg: Refreshing state... [id=/subscriptions/a785336a-35d8-4efd-80be-93d34a9e4b66/resourceGroups/Azuredevops/providers/Microsoft.Network/networkSecurityGroups/myApplication-NSG]
+module.network.azurerm_subnet.test: Refreshing state... [id=/subscriptions/a785336a-35d8-4efd-80be-93d34a9e4b66/resourceGroups/Azuredevops/providers/Microsoft.Network/virtualNetworks/myApplication-NET/subnets/myApplication-NET-sub]
+module.appservice.azurerm_linux_web_app.test: Refreshing state... [id=/subscriptions/a785336a-35d8-4efd-80be-93d34a9e4b66/resourceGroups/Azuredevops/providers/Microsoft.Web/sites/myApplication-AppService]
+module.nsg-test.azurerm_subnet_network_security_group_association.test: Refreshing state... [id=/subscriptions/a785336a-35d8-4efd-80be-93d34a9e4b66/resourceGroups/Azuredevops/providers/Microsoft.Network/virtualNetworks/myApplication-NET/subnets/myApplication-NET-sub]
+module.vm.azurerm_network_interface.main[0]: Refreshing state... [id=/subscriptions/a785336a-35d8-4efd-80be-93d34a9e4b66/resourceGroups/Azuredevops/providers/Microsoft.Network/networkInterfaces/ud-nic-0]
+module.vm.azurerm_linux_virtual_machine.main[0]: Refreshing state... [id=/subscriptions/a785336a-35d8-4efd-80be-93d34a9e4b66/resourceGroups/Azuredevops/providers/Microsoft.Compute/virtualMachines/ud-vm-0]
+
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the
+following symbols:
+  - destroy
+
+Terraform will perform the following actions:
+
+  # module.appservice.azurerm_linux_web_app.test will be destroyed
+  - resource "azurerm_linux_web_app" "test" {
+      - app_settings                                   = {
+          - "WEBSITE_RUN_FROM_PACKAGE" = "0"
+        } -> null
+      - client_affinity_enabled                        = false -> null
+      - client_certificate_enabled                     = false -> null
+      - client_certificate_mode                        = "Required" -> null
+      - custom_domain_verification_id                  = (sensitive value) -> null
+      - default_hostname                               = "myapplication-appservice.azurewebsites.net" -> null
+      - enabled                                        = true -> null
+      - ftp_publish_basic_authentication_enabled       = true -> null
+      - https_only                                     = false -> null
+      - id                                             = "/subscriptions/a785336a-35d8-4efd-80be-93d34a9e4b66/resourceGroups/Azuredevops/providers/Microsoft.Web/sites/myApplication-AppService" -> null
+      - key_vault_reference_identity_id                = "SystemAssigned" -> null
+      - kind                                           = "app,linux" -> null
+      - location                                       = "eastus" -> null
+      - name                                           = "myApplication-AppService" -> null
+      - outbound_ip_address_list                       = [
+          - "20.81.28.26",
+          - "20.81.28.252",
+          - "20.81.31.248",
+          - "20.88.184.6",
+          - "20.88.184.15",
+          - "20.88.184.16",
+          - "20.119.0.4",
+        ] -> null
+      - outbound_ip_addresses                          = "20.81.28.26,20.81.28.252,20.81.31.248,20.88.184.6,20.88.184.15,20.88.184.16,20.119.0.4" -> null
+      - possible_outbound_ip_address_list              = [
+          - "20.81.28.26",
+          - "20.81.28.252",
+          - "20.81.31.248",
+          - "20.88.184.6",
+          - "20.88.184.15",
+          - "20.88.184.16",
+          - "20.88.184.34",
+          - "20.88.184.42",
+          - "20.88.184.47",
+          - "20.88.184.102",
+          - "20.88.184.107",
+          - "20.88.184.112",
+          - "20.88.184.170",
+          - "20.88.184.172",
+          - "20.88.184.229",
+          - "20.88.184.242",
+          - "20.88.185.6",
+          - "20.88.185.30",
+          - "20.88.185.78",
+          - "20.88.185.98",
+          - "20.88.185.106",
+          - "20.88.185.171",
+          - "20.88.185.185",
+          - "20.88.185.209",
+          - "20.119.0.4",
+        ] -> null
+      - possible_outbound_ip_addresses                 = "20.81.28.26,20.81.28.252,20.81.31.248,20.88.184.6,20.88.184.15,20.88.184.16,20.88.184.34,20.88.184.42,20.88.184.47,20.88.184.102,20.88.184.107,20.88.184.112,20.88.184.170,20.88.184.172,20.88.184.229,20.88.184.242,20.88.185.6,20.88.185.30,20.88.185.78,20.88.185.98,20.88.185.106,20.88.185.171,20.88.185.185,20.88.185.209,20.119.0.4" -> null
+      - public_network_access_enabled                  = true -> null
+      - resource_group_name                            = "Azuredevops" -> null
+      - service_plan_id                                = "/subscriptions/a785336a-35d8-4efd-80be-93d34a9e4b66/resourceGroups/Azuredevops/providers/Microsoft.Web/serverFarms/myApplication-AppService" -> null
+      - site_credential                                = (sensitive value) -> null
+      - tags                                           = {} -> null
+      - virtual_network_backup_restore_enabled         = false -> null
+      - vnet_image_pull_enabled                        = false -> null
+      - webdeploy_publish_basic_authentication_enabled = true -> null
+        # (4 unchanged attributes hidden)
+
+      - site_config {
+          - always_on                                     = false -> null
+          - container_registry_use_managed_identity       = false -> null
+          - default_documents                             = [
+              - "Default.htm",
+              - "Default.html",
+              - "Default.asp",
+              - "index.htm",
+              - "index.html",
+              - "iisstart.htm",
+              - "default.aspx",
+              - "index.php",
+              - "hostingstart.html",
+            ] -> null
+          - detailed_error_logging_enabled                = false -> null
+          - ftps_state                                    = "Disabled" -> null
+          - health_check_eviction_time_in_min             = 0 -> null
+          - http2_enabled                                 = false -> null
+          - ip_restriction_default_action                 = "Allow" -> null
+          - load_balancing_mode                           = "LeastRequests" -> null
+          - local_mysql_enabled                           = false -> null
+          - managed_pipeline_mode                         = "Integrated" -> null
+          - minimum_tls_version                           = "1.2" -> null
+          - remote_debugging_enabled                      = false -> null
+          - remote_debugging_version                      = "VS2022" -> null
+          - scm_ip_restriction_default_action             = "Allow" -> null
+          - scm_minimum_tls_version                       = "1.2" -> null
+          - scm_type                                      = "None" -> null
+          - scm_use_main_ip_restriction                   = false -> null
+          - use_32_bit_worker                             = true -> null
+          - vnet_route_all_enabled                        = false -> null
+          - websockets_enabled                            = false -> null
+          - worker_count                                  = 1 -> null
+            # (6 unchanged attributes hidden)
+
+          - application_stack {
+                # (13 unchanged attributes hidden)
+            }
+        }
+    }
+
+  # module.appservice.azurerm_service_plan.test will be destroyed
+  - resource "azurerm_service_plan" "test" {
+      - id                              = "/subscriptions/a785336a-35d8-4efd-80be-93d34a9e4b66/resourceGroups/Azuredevops/providers/Microsoft.Web/serverFarms/myApplication-AppService" -> null
+      - kind                            = "linux" -> null
+      - location                        = "eastus" -> null
+      - maximum_elastic_worker_count    = 1 -> null
+      - name                            = "myApplication-AppService" -> null
+      - os_type                         = "Linux" -> null
+      - per_site_scaling_enabled        = false -> null
+      - premium_plan_auto_scale_enabled = false -> null
+      - reserved                        = true -> null
+      - resource_group_name             = "Azuredevops" -> null
+      - sku_name                        = "F1" -> null
+      - tags                            = {} -> null
+      - worker_count                    = 1 -> null
+      - zone_balancing_enabled          = false -> null
+        # (1 unchanged attribute hidden)
+    }
+
+  # module.network.azurerm_subnet.test will be destroyed
+  - resource "azurerm_subnet" "test" {
+      - address_prefixes                              = [
+          - "10.5.1.0/24",
+        ] -> null
+      - default_outbound_access_enabled               = true -> null
+      - id                                            = "/subscriptions/a785336a-35d8-4efd-80be-93d34a9e4b66/resourceGroups/Azuredevops/providers/Microsoft.Network/virtualNetworks/myApplication-NET/subnets/myApplication-NET-sub" -> null
+      - name                                          = "myApplication-NET-sub" -> null
+      - private_endpoint_network_policies             = "Disabled" -> null
+      - private_link_service_network_policies_enabled = true -> null
+      - resource_group_name                           = "Azuredevops" -> null
+      - service_endpoint_policy_ids                   = [] -> null
+      - service_endpoints                             = [] -> null
+      - virtual_network_name                          = "myApplication-NET" -> null
+    }
+
+  # module.network.azurerm_virtual_network.test will be destroyed
+  - resource "azurerm_virtual_network" "test" {
+      - address_space                  = [
+          - "10.5.0.0/16",
+        ] -> null
+      - dns_servers                    = [] -> null
+      - flow_timeout_in_minutes        = 0 -> null
+      - guid                           = "a2daf8a5-c979-498b-a9dd-3246226b0dd3" -> null
+      - id                             = "/subscriptions/a785336a-35d8-4efd-80be-93d34a9e4b66/resourceGroups/Azuredevops/providers/Microsoft.Network/virtualNetworks/myApplication-NET" -> null
+      - location                       = "eastus" -> null
+      - name                           = "myApplication-NET" -> null
+      - private_endpoint_vnet_policies = "Disabled" -> null
+      - resource_group_name            = "Azuredevops" -> null
+      - subnet                         = [
+          - {
+              - address_prefixes                              = [
+                  - "10.5.1.0/24",
+                ]
+              - default_outbound_access_enabled               = true
+              - delegation                                    = []
+              - id                                            = "/subscriptions/a785336a-35d8-4efd-80be-93d34a9e4b66/resourceGroups/Azuredevops/providers/Microsoft.Network/virtualNetworks/myApplication-NET/subnets/myApplication-NET-sub"
+              - name                                          = "myApplication-NET-sub"
+              - private_endpoint_network_policies             = "Disabled"
+              - private_link_service_network_policies_enabled = true
+              - security_group                                = "/subscriptions/a785336a-35d8-4efd-80be-93d34a9e4b66/resourceGroups/Azuredevops/providers/Microsoft.Network/networkSecurityGroups/myApplication-NSG"
+              - service_endpoint_policy_ids                   = []
+              - service_endpoints                             = []
+                # (1 unchanged attribute hidden)
+            },
+        ] -> null
+      - tags                           = {} -> null
+        # (2 unchanged attributes hidden)
+    }
+
+  # module.nsg-test.azurerm_network_security_group.nsg will be destroyed
+  - resource "azurerm_network_security_group" "nsg" {
+      - id                  = "/subscriptions/a785336a-35d8-4efd-80be-93d34a9e4b66/resourceGroups/Azuredevops/providers/Microsoft.Network/networkSecurityGroups/myApplication-NSG" -> null
+      - location            = "eastus" -> null
+      - name                = "myApplication-NSG" -> null
+      - resource_group_name = "Azuredevops" -> null
+      - security_rule       = [
+          - {
+              - access                                     = "Allow"
+              - destination_address_prefix                 = "*"
+              - destination_address_prefixes               = []
+              - destination_application_security_group_ids = []
+              - destination_port_range                     = "22"
+              - destination_port_ranges                    = []
+              - direction                                  = "Inbound"
+              - name                                       = "SSH"
+              - priority                                   = 1001
+              - protocol                                   = "Tcp"
+              - source_address_prefix                      = "*"
+              - source_address_prefixes                    = []
+              - source_application_security_group_ids      = []
+              - source_port_range                          = "*"
+              - source_port_ranges                         = []
+                # (1 unchanged attribute hidden)
+            },
+          - {
+              - access                                     = "Allow"
+              - destination_address_prefix                 = "*"
+              - destination_address_prefixes               = []
+              - destination_application_security_group_ids = []
+              - destination_port_range                     = "5000"
+              - destination_port_ranges                    = []
+              - direction                                  = "Inbound"
+              - name                                       = "myApplication-NSG-5000"
+              - priority                                   = 100
+              - protocol                                   = "Tcp"
+              - source_address_prefix                      = "10.5.1.0/24"
+              - source_address_prefixes                    = []
+              - source_application_security_group_ids      = []
+              - source_port_range                          = "*"
+              - source_port_ranges                         = []
+                # (1 unchanged attribute hidden)
+            },
+        ] -> null
+      - tags                = {} -> null
+    }
+
+  # module.nsg-test.azurerm_subnet_network_security_group_association.test will be destroyed
+  - resource "azurerm_subnet_network_security_group_association" "test" {
+      - id                        = "/subscriptions/a785336a-35d8-4efd-80be-93d34a9e4b66/resourceGroups/Azuredevops/providers/Microsoft.Network/virtualNetworks/myApplication-NET/subnets/myApplication-NET-sub" -> null
+      - network_security_group_id = "/subscriptions/a785336a-35d8-4efd-80be-93d34a9e4b66/resourceGroups/Azuredevops/providers/Microsoft.Network/networkSecurityGroups/myApplication-NSG" -> null
+      - subnet_id                 = "/subscriptions/a785336a-35d8-4efd-80be-93d34a9e4b66/resourceGroups/Azuredevops/providers/Microsoft.Network/virtualNetworks/myApplication-NET/subnets/myApplication-NET-sub" -> null
+    }
+
+  # module.publicip.azurerm_public_ip.test will be destroyed
+  - resource "azurerm_public_ip" "test" {
+      - allocation_method       = "Static" -> null
+      - ddos_protection_mode    = "VirtualNetworkInherited" -> null
+      - id                      = "/subscriptions/a785336a-35d8-4efd-80be-93d34a9e4b66/resourceGroups/Azuredevops/providers/Microsoft.Network/publicIPAddresses/myApplication-publicip-pubip" -> null
+      - idle_timeout_in_minutes = 4 -> null
+      - ip_address              = "172.178.34.107" -> null
+      - ip_tags                 = {} -> null
+      - ip_version              = "IPv4" -> null
+      - location                = "eastus" -> null
+      - name                    = "myApplication-publicip-pubip" -> null
+      - resource_group_name     = "Azuredevops" -> null
+      - sku                     = "Standard" -> null
+      - sku_tier                = "Regional" -> null
+      - tags                    = {} -> null
+      - zones                   = [] -> null
+        # (1 unchanged attribute hidden)
+    }
+
+  # module.vm.azurerm_linux_virtual_machine.main[0] will be destroyed
+  - resource "azurerm_linux_virtual_machine" "main" {
+      - admin_username                                         = "adminuser" -> null
+      - allow_extension_operations                             = true -> null
+      - bypass_platform_safety_checks_on_user_schedule_enabled = false -> null
+      - computer_name                                          = "ud-vm-0" -> null
+      - disable_password_authentication                        = true -> null
+      - encryption_at_host_enabled                             = false -> null
+      - extensions_time_budget                                 = "PT1H30M" -> null
+      - id                                                     = "/subscriptions/a785336a-35d8-4efd-80be-93d34a9e4b66/resourceGroups/Azuredevops/providers/Microsoft.Compute/virtualMachines/ud-vm-0" -> null
+      - location                                               = "eastus" -> null
+      - max_bid_price                                          = -1 -> null
+      - name                                                   = "ud-vm-0" -> null
+      - network_interface_ids                                  = [
+          - "/subscriptions/a785336a-35d8-4efd-80be-93d34a9e4b66/resourceGroups/Azuredevops/providers/Microsoft.Network/networkInterfaces/ud-nic-0",
+        ] -> null
+      - patch_assessment_mode                                  = "ImageDefault" -> null
+      - patch_mode                                             = "ImageDefault" -> null
+      - platform_fault_domain                                  = -1 -> null
+      - priority                                               = "Regular" -> null
+      - private_ip_address                                     = "10.5.1.4" -> null
+      - private_ip_addresses                                   = [
+          - "10.5.1.4",
+        ] -> null
+      - provision_vm_agent                                     = true -> null
+      - public_ip_addresses                                    = [] -> null
+      - resource_group_name                                    = "Azuredevops" -> null
+      - secure_boot_enabled                                    = false -> null
+      - size                                                   = "Standard_B1s" -> null
+      - tags                                                   = {} -> null
+      - virtual_machine_id                                     = "5ce35d01-bea1-4e2a-aff8-122c94e24113" -> null
+      - vm_agent_platform_updates_enabled                      = false -> null
+      - vtpm_enabled                                           = false -> null
+        # (15 unchanged attributes hidden)
+
+      - admin_ssh_key {
+          - public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDfy9OZMaglxczcucEIXRS/t2MEZvpi34YxcQaFlsYyoYqNKyGaJLeCaaCWWRE12LphaEi9+NOxgtgczluZcQFqoCue+lM0utuZWISv1A1oSuEsiPM92kdHsEvnbM6kEku4LkFFgT/w62ig2iZmQhDXip4/7H0JSbdYIx+xoDM4AQBHI9KWM/5TzkmT5njdN5xzmqxuDM4yy5apjuJbuhf63hj4Z3EMec095tgRFSv0K3uAaslW9c7woadTzLVEjqjJ8/cTfX1m1P92KI+a1w5vzDc5AIYJgI3yWNq/j/8XL3e62fZ8igFgoDIsH8DkXhHCjizWsz0o2Gd2Hsm4BHgRbltOPEX8SPW40OWQb+ytmywjqdmaGI6w4N9sNprB7qSMeTDLVO3jYr3olmG85/cJc/5MKKloOcdW4ZObUOgZxuNONO4SdOXGHh2ASC5mOsJ1g1VuwhYigt/e9InRIFnpVuoDkQ94NSaXej0tLqoQHHx9ZcF4LzOcxPcr7j6XysU= masonkeresty@Masons-MacBook-Pro.local" -> null
+          - username   = "adminuser" -> null
+        }
+
+      - os_disk {
+          - caching                          = "ReadWrite" -> null
+          - disk_size_gb                     = 30 -> null
+          - id                               = "/subscriptions/a785336a-35d8-4efd-80be-93d34a9e4b66/resourceGroups/Azuredevops/providers/Microsoft.Compute/disks/ud-vm-0_OsDisk_1_4acfbd4cd5ea4fffb9b3473ba9620a07" -> null
+          - name                             = "ud-vm-0_OsDisk_1_4acfbd4cd5ea4fffb9b3473ba9620a07" -> null
+          - storage_account_type             = "Standard_LRS" -> null
+          - write_accelerator_enabled        = false -> null
+            # (3 unchanged attributes hidden)
+        }
+
+      - source_image_reference {
+          - offer     = "UbuntuServer" -> null
+          - publisher = "Canonical" -> null
+          - sku       = "18.04-LTS" -> null
+          - version   = "latest" -> null
+        }
+    }
+
+  # module.vm.azurerm_network_interface.main[0] will be destroyed
+  - resource "azurerm_network_interface" "main" {
+      - accelerated_networking_enabled = false -> null
+      - applied_dns_servers            = [] -> null
+      - dns_servers                    = [] -> null
+      - id                             = "/subscriptions/a785336a-35d8-4efd-80be-93d34a9e4b66/resourceGroups/Azuredevops/providers/Microsoft.Network/networkInterfaces/ud-nic-0" -> null
+      - internal_domain_name_suffix    = "ux2nvitzzgfutko3gjdce0yn0d.bx.internal.cloudapp.net" -> null
+      - ip_forwarding_enabled          = false -> null
+      - location                       = "eastus" -> null
+      - mac_address                    = "00-22-48-2F-21-F0" -> null
+      - name                           = "ud-nic-0" -> null
+      - private_ip_address             = "10.5.1.4" -> null
+      - private_ip_addresses           = [
+          - "10.5.1.4",
+        ] -> null
+      - resource_group_name            = "Azuredevops" -> null
+      - tags                           = {
+          - "project" = "project_3"
+        } -> null
+      - virtual_machine_id             = "/subscriptions/a785336a-35d8-4efd-80be-93d34a9e4b66/resourceGroups/Azuredevops/providers/Microsoft.Compute/virtualMachines/ud-vm-0" -> null
+        # (4 unchanged attributes hidden)
+
+      - ip_configuration {
+          - name                                               = "internal" -> null
+          - primary                                            = true -> null
+          - private_ip_address                                 = "10.5.1.4" -> null
+          - private_ip_address_allocation                      = "Dynamic" -> null
+          - private_ip_address_version                         = "IPv4" -> null
+          - subnet_id                                          = "/subscriptions/a785336a-35d8-4efd-80be-93d34a9e4b66/resourceGroups/Azuredevops/providers/Microsoft.Network/virtualNetworks/myApplication-NET/subnets/myApplication-NET-sub" -> null
+            # (2 unchanged attributes hidden)
+        }
+    }
+
+Plan: 0 to add, 0 to change, 9 to destroy.
+
+Do you really want to destroy all resources?
+  Terraform will destroy all your managed infrastructure, as shown above.
+  There is no undo. Only 'yes' will be accepted to confirm.
+
+  Enter a value: yes
+
+module.nsg-test.azurerm_subnet_network_security_group_association.test: Destroying... [id=/subscriptions/a785336a-35d8-4efd-80be-93d34a9e4b66/resourceGroups/Azuredevops/providers/Microsoft.Network/virtualNetworks/myApplication-NET/subnets/myApplication-NET-sub]
+module.publicip.azurerm_public_ip.test: Destroying... [id=/subscriptions/a785336a-35d8-4efd-80be-93d34a9e4b66/resourceGroups/Azuredevops/providers/Microsoft.Network/publicIPAddresses/myApplication-publicip-pubip]
+module.vm.azurerm_linux_virtual_machine.main[0]: Destroying... [id=/subscriptions/a785336a-35d8-4efd-80be-93d34a9e4b66/resourceGroups/Azuredevops/providers/Microsoft.Compute/virtualMachines/ud-vm-0]
+module.appservice.azurerm_linux_web_app.test: Destroying... [id=/subscriptions/a785336a-35d8-4efd-80be-93d34a9e4b66/resourceGroups/Azuredevops/providers/Microsoft.Web/sites/myApplication-AppService]
+module.nsg-test.azurerm_subnet_network_security_group_association.test: Destruction complete after 4s
+module.nsg-test.azurerm_network_security_group.nsg: Destroying... [id=/subscriptions/a785336a-35d8-4efd-80be-93d34a9e4b66/resourceGroups/Azuredevops/providers/Microsoft.Network/networkSecurityGroups/myApplication-NSG]
+module.appservice.azurerm_linux_web_app.test: Destruction complete after 9s
+module.appservice.azurerm_service_plan.test: Destroying... [id=/subscriptions/a785336a-35d8-4efd-80be-93d34a9e4b66/resourceGroups/Azuredevops/providers/Microsoft.Web/serverFarms/myApplication-AppService]
+module.publicip.azurerm_public_ip.test: Still destroying... [id=/subscriptions/a785336a-35d8-4efd-80be-...Addresses/myApplication-publicip-pubip, 10s elapsed]
+module.vm.azurerm_linux_virtual_machine.main[0]: Still destroying... [id=/subscriptions/a785336a-35d8-4efd-80be-...rosoft.Compute/virtualMachines/ud-vm-0, 10s elapsed]
+module.publicip.azurerm_public_ip.test: Destruction complete after 11s
+module.appservice.azurerm_service_plan.test: Destruction complete after 5s
+module.nsg-test.azurerm_network_security_group.nsg: Still destroying... [id=/subscriptions/a785336a-35d8-4efd-80be-...etworkSecurityGroups/myApplication-NSG, 10s elapsed]
+module.nsg-test.azurerm_network_security_group.nsg: Destruction complete after 12s
+module.vm.azurerm_linux_virtual_machine.main[0]: Still destroying... [id=/subscriptions/a785336a-35d8-4efd-80be-...rosoft.Compute/virtualMachines/ud-vm-0, 20s elapsed]
+module.vm.azurerm_linux_virtual_machine.main[0]: Still destroying... [id=/subscriptions/a785336a-35d8-4efd-80be-...rosoft.Compute/virtualMachines/ud-vm-0, 30s elapsed]
+module.vm.azurerm_linux_virtual_machine.main[0]: Destruction complete after 34s
+module.vm.azurerm_network_interface.main[0]: Destroying... [id=/subscriptions/a785336a-35d8-4efd-80be-93d34a9e4b66/resourceGroups/Azuredevops/providers/Microsoft.Network/networkInterfaces/ud-nic-0]
+module.vm.azurerm_network_interface.main[0]: Still destroying... [id=/subscriptions/a785336a-35d8-4efd-80be-...oft.Network/networkInterfaces/ud-nic-0, 10s elapsed]
+module.vm.azurerm_network_interface.main[0]: Destruction complete after 12s
+module.network.azurerm_subnet.test: Destroying... [id=/subscriptions/a785336a-35d8-4efd-80be-93d34a9e4b66/resourceGroups/Azuredevops/providers/Microsoft.Network/virtualNetworks/myApplication-NET/subnets/myApplication-NET-sub]
+module.network.azurerm_subnet.test: Still destroying... [id=/subscriptions/a785336a-35d8-4efd-80be-...tion-NET/subnets/myApplication-NET-sub, 10s elapsed]
+module.network.azurerm_subnet.test: Destruction complete after 11s
+module.network.azurerm_virtual_network.test: Destroying... [id=/subscriptions/a785336a-35d8-4efd-80be-93d34a9e4b66/resourceGroups/Azuredevops/providers/Microsoft.Network/virtualNetworks/myApplication-NET]
+module.network.azurerm_virtual_network.test: Still destroying... [id=/subscriptions/a785336a-35d8-4efd-80be-...work/virtualNetworks/myApplication-NET, 10s elapsed]
+module.network.azurerm_virtual_network.test: Destruction complete after 11s
+Releasing state lock. This may take a few moments...
+
+Destroy complete! Resources: 9 destroyed.
+(myvenv) masonkeresty@Masons-MacBook-Pro test % 
