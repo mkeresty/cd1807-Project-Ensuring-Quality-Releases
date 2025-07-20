@@ -7,7 +7,7 @@ pool: myAgentPool
 
 variables:
   python.version: '3.7.6'
-  azureServiceConnectionId: 'myServiceConnection'
+  azureServiceConnectionId: 'ba1f65f8-c5a0-4d5f-a5ff-48220b228776'
   projectRoot: $(System.DefaultWorkingDirectory)
   environmentName: 'test'
 
