@@ -12,7 +12,7 @@ variables:
   environmentName: 'test'
 
 jobs:
-- job: Test Job
+- job: Test
   steps:
     - script: echo "Hello world!"
       displayName: 'Step 1'
