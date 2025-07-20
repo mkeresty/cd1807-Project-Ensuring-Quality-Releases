@@ -12,7 +12,7 @@ variables:
   environmentName: 'test-vm'
   subscriptionId: 'c9f1e8cb-24a3-405b-9046-bf2b34125d0c'
   resourceGroupName: 'Azuredevops'
-  armBackendStorageAccountName: 'tfstate1192918862'
+  armBackendStorageAccountName: 'tfstate330213523'
   armBackendContainerName: 'tfstate'
 
 stages:
@@ -40,8 +40,8 @@ stages:
         workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environments/test'
         backendServiceArm: '$(azureServiceConnectionId)'
         backendAzureRmResourceGroupName: '$(resourceGroupName)'
-        backendAzureRmStorageAccountName: 'tfstate1192918862'
-        backendAzureRmContainerName: 'tfstate'
+        backendAzureRmStorageAccountName: '$(armBackendStorageAccountName)'
+        backendAzureRmContainerName: '$(armBackendContainerName)'
         backendAzureRmKey: 'test.terraform.tfstate'
 
 
