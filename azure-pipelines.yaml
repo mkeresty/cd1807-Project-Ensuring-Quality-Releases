@@ -9,7 +9,7 @@ variables:
   python.version: '3.7.6'
   azureServiceConnectionId: 'ba1f65f8-c5a0-4d5f-a5ff-48220b228776'
   projectRoot: $(System.DefaultWorkingDirectory)
-  environmentName: 'test'
+  environmentName: 'test-vm'
   subscriptionId: 'c9f1e8cb-24a3-405b-9046-bf2b34125d0c'
   resourceGroupName: 'Azuredevops'
   armBackendStorageAccountName: 'tfstate1192918862'
