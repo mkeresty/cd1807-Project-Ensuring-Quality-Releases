@@ -11,8 +11,10 @@ variables:
   projectRoot: $(System.DefaultWorkingDirectory)
   environmentName: 'test'
   subscriptionId: 'c9f1e8cb-24a3-405b-9046-bf2b34125d0c'
-
-
+  resourceGroupName: 'Azuredevops'
+  armBackendStorageAccountName: 'tfstate1192918862'
+  armBackendContainerName: 'tfstate'
+  backendArmKey: $(ARM_ACCESS_KEY) 
 
 stages:
 #--------------------------------------------#  
@@ -38,10 +40,10 @@ stages:
         command: 'init'
         workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environments/test'
         backendServiceArm: '$(azureServiceConnectionId)'
-        backendAzureRmResourceGroupName: 'Azuredevops'
-        backendAzureRmStorageAccountName: 'tfstate1192918862'
-        backendAzureRmContainerName: 'tfstate'
-        backendAzureRmKey: 'test.terraform.tfstate'
+        backendAzureRmResourceGroupName: '$(resourceGroupName)'
+        backendAzureRmStorageAccountName: '$(armBackendStorageAccountName)'
+        backendAzureRmContainerName: '$(armBackendContainerName)'
+        backendAzureRmKey: '$(armBackendKey)'
 
     - task: ms-devlabs.custom-terraform-tasks.custom-terraform-release-task.TerraformTaskV3@3
       displayName: Terraform validate

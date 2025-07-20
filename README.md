@@ -94,3 +94,10 @@ terraform destroy
 
 *Note: In ```main.tf``` you will see the resource group location hard coded as ```southcentralus``` and that is because the Udacity Azure Cloud Portal set the location of the resource group, but the other resources would not deploy in the same location, so I used ```East US``` for all other resources.*
 
+
+
+## Do all steps from project 2
+
+## Then
+1. Install terraform extension
+2. add storage account key in variables
