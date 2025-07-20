@@ -1,17 +1,31 @@
-az vm create --resource-group Azuredevops\
-    --name myLinuxVM --image "Ubuntu Server 20.04 LTS - Gen1"\
-    --generate-ssh-keys --admin-username azureuser\
-    --public-ip-sku Standard --size Standard_DS1_v2
+az vm create \
+  --resource-group Azuredevops \
+  --name myLinuxVM \
+  --image Ubuntu2204 \
+  --admin-username devopsagent \
+  --admin-password 'DevOpsAgent@123' \
+  --public-ip-sku Standard \
+  --size Standard_DS1_v2
+  --ssh
 
-ssh azureuser@<publicIp>
+az vm open-port \
+  --resource-group Azuredevops \
+  --name myLinuxVM \
+  --port 22
+
+
+ssh devopsagent@<publicIp>
+sudo snap install docker
+python3 --version
 sudo groupadd docker
 sudo usermod -aG docker $USER
+
 # go to dev portal then click new agent in the pool settings
-curl -O https://vstsagentpackage.azureedge.net/agent/4.254.0/vsts-agent-linux-x64-4.254.0.tar.gz
+curl -O https://download.agent.dev.azure.com/agent/4.258.1/vsts-agent-linux-x64-4.258.1.tar.gz
 mkdir myagent && cd myagent
-tar -xzvf ../vsts-agent-linux-x64-4.254.0.tar.gz
+tar -xzvf ../vsts-agent-linux-x64-4.258.1.tar.gz
 ./config.sh
-# enter dev portal url
+# enter dev portal url : https://dev.azure.com/odluser284835
 # enter access token
 # enter myPool name
 # use default vm myLinuxVM
