@@ -73,7 +73,7 @@ Example:
               storage_account_name = "tstate9592"
               container_name       = "tfstate"
               key                  = "test.terraform.tfstate"
-              access_key           = "oBRnD6GLGNHDNORfrWOIx/xESUNfIk3zN0XLutDlH0X+QNue9qsTCxeV5P/EzxZgUpiw8FwTln+6+AStznWiEQ=="
+              access_key           = "xxxxxx"
         }
 	}
 ```
