@@ -14,7 +14,7 @@ variables:
   resourceGroupName: 'Azuredevops'
   armBackendStorageAccountName: 'tfstate1192918862'
   armBackendContainerName: 'tfstate'
-  backendArmKey: $(ARM_ACCESS_KEY) 
+  ARM_ACCESS_KEY: $(ARM_ACCESS_KEY) 
 
 stages:
 #--------------------------------------------#  
@@ -43,7 +43,7 @@ stages:
         backendAzureRmResourceGroupName: '$(resourceGroupName)'
         backendAzureRmStorageAccountName: '$(armBackendStorageAccountName)'
         backendAzureRmContainerName: '$(armBackendContainerName)'
-        backendAzureRmKey: '$(armBackendKey)'
+        backendAzureRmKey: 'test.terraform.tfstate'
 
     - task: ms-devlabs.custom-terraform-tasks.custom-terraform-release-task.TerraformTaskV3@3
       displayName: Terraform validate
