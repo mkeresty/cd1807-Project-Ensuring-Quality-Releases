@@ -1,0 +1,45 @@
+{
+	"variables": {
+		"client_id": "{{env `ARM_CLIENT_ID`}}",
+		"client_secret": "{{env `ARM_CLIENT_SECRET`}}",
+		"subscription_id": "{{env `ARM_SUBSCRIPTION_ID`}}"
+	},
+    "builders": [{
+		"type": "azure-arm",
+	 
+        "client_id": "{{user `client_id`}}",
+        "client_secret": "{{user `client_secret`}}",
+        "subscription_id": "{{user `subscription_id`}}",
+	 
+		"os_type": "Linux",
+		"image_publisher": "Canonical",
+		"image_offer": "UbuntuServer",
+		"image_sku": "18.04-LTS",
+	 
+		
+        "managed_image_resource_group_name": "Azuredevops",
+        "managed_image_name": "ud_project",
+	 
+		"location": "eastus",
+		"vm_size": "Standard_B1s",
+
+		"azure_tags": {
+			"project": "project_1"
+		  }
+
+		  
+
+	  }],
+	"provisioners": [{
+		"inline": [
+			"echo 'Running provisioning script'",
+			"apt-get update",
+            "apt-get install -y zip unzip chromium-browser",
+            "apt-get install -y python3-pip python3.10-venv python3.10-distutils",
+            "pip3 install --upgrade pip",
+            "pip3 install selenium"
+		],
+		"inline_shebang": "/bin/sh -x",
+		"type": "shell"
+	}]
+}

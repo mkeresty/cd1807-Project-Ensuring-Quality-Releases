@@ -1,5 +1,5 @@
 **/*.tfstate
-**/*.json
+
 **/*.exe
 # Local .terraform directories
 **/.terraform/*
@@ -31,4 +31,3 @@ myvenv/
 
 # Secrets
 .env
-terraform.tfvars
