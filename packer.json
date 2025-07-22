@@ -2,7 +2,10 @@
 	"variables": {
 		"client_id": "{{env `ARM_CLIENT_ID`}}",
 		"client_secret": "{{env `ARM_CLIENT_SECRET`}}",
-		"subscription_id": "{{env `ARM_SUBSCRIPTION_ID`}}"
+		"subscription_id": "{{env `ARM_SUBSCRIPTION_ID`}}",
+		"location": "{{env `ARM_LOCATION`}}",
+		"resource_group_name": "{{env `ARM_RESOURCE_GROUP_NAME`}}",
+		"managed_image_name": "{{ env `ARM_MANAGED_IMAGE_NAME` }}"
 	},
     "builders": [{
 		"type": "azure-arm",
@@ -17,14 +20,14 @@
 		"image_sku": "18.04-LTS",
 	 
 		
-        "managed_image_resource_group_name": "Azuredevops",
-        "managed_image_name": "ud_project",
+        "managed_image_resource_group_name": "{{user `resource_group_name`}}",
+        "managed_image_name": "{{user `managed_image_name`}}",
 	 
-		"location": "eastus",
+		"location": "{{user `location`}}",
 		"vm_size": "Standard_B1s",
 
 		"azure_tags": {
-			"project": "project_1"
+			"project": "project_3"
 		  }
 
 		  
@@ -33,11 +36,15 @@
 	"provisioners": [{
 		"inline": [
 			"echo 'Running provisioning script'",
-			"apt-get update",
-            "apt-get install -y zip unzip chromium-browser",
-            "apt-get install -y python3-pip python3.10-venv python3.10-distutils",
-            "pip3 install --upgrade pip",
-            "pip3 install selenium"
+			"sudo apt-get update",
+            "sudo apt-get install -y zip unzip chromium-browser",
+            "sudo apt-get install -y python3-pip python3-venv python3-distutils",
+            "python3 -m pip install --upgrade pip",
+            "python3 -m pip install selenium",
+			"wget https://apache.mirrors.lucidnetworks.net//jmeter/binaries/apache-jmeter-5.2.1.tgz",
+			"tar -xf apache-jmeter-5.2.1.tgz",
+			"sudo mv apache-jmeter-5.2.1 /opt/jmeter",
+			"sudo ln -s /opt/jmeter/bin/jmeter /usr/local/bin/jmeter"
 		],
 		"inline_shebang": "/bin/sh -x",
 		"type": "shell"

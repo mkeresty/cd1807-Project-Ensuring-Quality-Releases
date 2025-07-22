@@ -8,7 +8,7 @@ provider "azurerm" {
 
 resource "azurerm_resource_group" "main" {
   name     = var.resource_group_name
-  location = "southcentralus"
+  location = var.location
   lifecycle {
     prevent_destroy = true
   }
@@ -17,16 +17,16 @@ resource "azurerm_resource_group" "main" {
 
 terraform {
   backend "azurerm" {
-    storage_account_name = "tfstate223265080"
+    storage_account_name = "tfstate809429345"
     container_name       = "tfstate"
     key                  = "test.terraform.tfstate"
-    access_key           = "+aY1kZ3ClE5TlMXNC6Lvt2wXNXoSWP5t6f6GqIrIg1m8jfBK5vE5RRT9Q82Qykoq2SVMVqV9iWMR+AStx1uBUg=="
+    #access_key          = <defined with $ARM_ACCESS_KEY environment variable>
   }
 }
 
 module "network" {
   source               = "../../modules/network"
-  address_space        = "${var.address_space}"
+  address_space        = var.address_space
   location             = "${var.location}"
   virtual_network_name = "${var.virtual_network_name}"
   application_type     = "${var.application_type}"

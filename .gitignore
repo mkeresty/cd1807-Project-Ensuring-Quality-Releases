@@ -31,3 +31,5 @@ myvenv/
 
 # Secrets
 .env
+load_env.sh
+terraform.tfvars

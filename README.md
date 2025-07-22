@@ -57,6 +57,12 @@ admin_ssh_key {
 }
 ```
 
+## Env variables
+Fill in load.sh
+```zsh
+source load_env.sh
+```
+
 
 ## Storage Account
 ```zsh
@@ -92,7 +98,12 @@ terraform state rm azurerm_resource_group.main
 terraform destroy
 ```
 
-*Note: In ```main.tf``` you will see the resource group location hard coded as ```southcentralus``` and that is because the Udacity Azure Cloud Portal set the location of the resource group, but the other resources would not deploy in the same location, so I used ```East US``` for all other resources.*
+~~*Note: In ```main.tf``` you will see the resource group location hard coded as ```southcentralus``` and that is because the Udacity Azure Cloud Portal set the location of the resource group, but the other resources would not deploy in the same location, so I used ```East US``` for all other resources.*~~
+
+
+## Create Packer Image
+Edit vars in ```packer.json```
+ ```packer build ./packer.json```
 
 
 

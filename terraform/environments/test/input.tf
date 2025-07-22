@@ -37,6 +37,7 @@ variable virtual_network_name {
 variable address_space {
     description = "Value for address space"
     default = ["10.5.0.0/16"]
+    type = list(string)
 }
 
 variable address_prefix_test {

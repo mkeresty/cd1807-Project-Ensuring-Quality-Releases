@@ -1,3 +1,6 @@
+# You don't need a terraform.tfvars file in the variables 
+# are defined as env variables with the TF_VAR_ prefix.
+
 # Azure subscription vars
 subscription_id = ""
 client_id = ""
@@ -15,3 +18,5 @@ address_space = ["10.5.0.0/16"]
 address_prefix_test = "10.5.1.0/24"
 
 public_key = "ssh-rsa AAAAB3Nz..."
+
+

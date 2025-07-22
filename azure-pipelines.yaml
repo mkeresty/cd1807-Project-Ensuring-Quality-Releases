@@ -9,11 +9,11 @@ variables:
   python.version: '3.7.6'
   azureServiceConnectionId: 'ba1f65f8-c5a0-4d5f-a5ff-48220b228776'
   projectRoot: $(System.DefaultWorkingDirectory)
-  environmentName: 'test-vm'
   subscriptionId: 'c9f1e8cb-24a3-405b-9046-bf2b34125d0c'
   resourceGroupName: 'Azuredevops'
   armBackendStorageAccountName: 'tfstate330213523'
   armBackendContainerName: 'tfstate'
+  packerImageName: 'myPackerImage'
 
 stages:
 #--------------------------------------------#  
@@ -171,7 +171,7 @@ stages:
   # Deploy FakeRestAPI Web App
   - deployment: FakeRestAPI
     pool:
-      vmImage: 'Ubuntu-18.04'      
+      vmImage: '$(vmImageName)'      
     environment: 'Project 3 - Ensuring Quality Releases'
     strategy:
       runOnce:
@@ -183,18 +183,18 @@ stages:
               azureSubscription: $(azureServiceConnectionId)
               appName: 'myWebApp'
               appType: webApp
-              package: $(Pipeline.Workspace)/<artifact>/<archiveFile>       # ToDo: Use the published zip artifact. 
+              package: $(Pipeline.Workspace)/drop-fakerestapi/$(Build.BuildId)-fakerestapi.zip
           #--------------------------------------------#    
           # Run JMeter test suite against the App Service
           - task: CmdLine@2
             inputs:
               script: |
-                wget "https://apache.mirrors.lucidnetworks.net//jmeter/binaries/apache-jmeter-5.2.1.tgz"
-                tar -xf apache-jmeter-5.2.1.tgz
+                # wget "https://apache.mirrors.lucidnetworks.net//jmeter/binaries/apache-jmeter-5.2.1.tgz"
+                # tar -xf apache-jmeter-5.2.1.tgz
                 unzip -o $(Build.BuildId)-perftests.zip
-                ./apache-jmeter-5.2.1/bin/jmeter -n -t PerformanceTestSuite.jmx -j jmeter.log -f
-                cat jmeter.log                                                                           # ToDo: Write your commands
-              workingDirectory: $(Pipeline.Workspace)/<artifact>            # ToDo: Use the artifact name from the task above
+                jmeter -n -t PerformanceTestSuite.jmx -j jmeter.log -f
+                cat jmeter.log                                  # ToDo: Write your commands
+              workingDirectory: $(Pipeline.Workspace)/drop-perftests
               
   #--------------------------------------------#  
   # Selenium | Functional UI Tests
@@ -218,11 +218,11 @@ stages:
               script: |           
                 #! /bin/bash
                 
-                sudo apt-get upgrade -y
-                sudo apt-get install python3-pip -y
-                sudo apt-get install unzip -y
-                sudo apt-get install -y chromium-browser
-                pip3 install selenium
+                # sudo apt-get upgrade -y
+                # sudo apt-get install python3-pip -y
+                # sudo apt-get install unzip -y
+                # sudo apt-get install -y chromium-browser
+                # pip3 install selenium
                 cd ~/
                 DIR=/home/testuser/app
                 if [ ! -d "$DIR" ]; then
