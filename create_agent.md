@@ -1,3 +1,4 @@
+```zsh
 az vm create \
   --resource-group Azuredevops \
   --name myLinuxVM \
@@ -6,7 +7,6 @@ az vm create \
   --admin-password 'DevOpsAgent@123' \
   --public-ip-sku Standard \
   --size Standard_DS1_v2
-  --ssh
 
 az vm open-port \
   --resource-group Azuredevops \
@@ -14,7 +14,7 @@ az vm open-port \
   --port 22
 
 
-ssh devopsagent@<publicIp>
+ssh devopsagent@<publicIp> #51.136.37.71
 sudo snap install docker
 python3 --version
 sudo groupadd docker
@@ -25,7 +25,7 @@ curl -O https://download.agent.dev.azure.com/agent/4.258.1/vsts-agent-linux-x64-
 mkdir myagent && cd myagent
 tar -xzvf ../vsts-agent-linux-x64-4.258.1.tar.gz
 ./config.sh
-# enter dev portal url : https://dev.azure.com/odluser284835
+# enter dev portal url : ex: https://dev.azure.com/odluser284835
 # enter access token
 # enter myPool name
 # use default vm myLinuxVM
@@ -45,3 +45,4 @@ sudo apt-get install python3.10-distutils
 sudo apt-get -y install zip
 pip install pylint==3.2.6
 export PATH=$HOME/.local/bin:$PATH
+```

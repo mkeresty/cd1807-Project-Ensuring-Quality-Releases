@@ -1,7 +1,7 @@
 az vm create \
   --resource-group Azuredevops \
   --name myTestVM \
-  --image Ubuntu2204 \
+  --image myPackerImage \
   --generate-ssh-keys \
   --admin-username azureuser \
   --public-ip-sku Standard

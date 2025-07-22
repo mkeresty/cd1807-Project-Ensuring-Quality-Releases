@@ -106,7 +106,6 @@ Edit vars in ```packer.json```
  ```packer build ./packer.json```
 
 
-
 ## Do all steps from project 2
 
 ## Then
