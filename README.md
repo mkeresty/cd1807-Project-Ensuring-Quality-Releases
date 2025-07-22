@@ -110,4 +110,4 @@ Edit vars in ```packer.json```
 
 ## Then
 1. Install terraform extension
-2. add storage account key in variables
+2. add storage account key in pipeline variables NOT library
