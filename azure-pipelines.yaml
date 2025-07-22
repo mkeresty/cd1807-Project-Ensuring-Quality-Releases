@@ -14,6 +14,7 @@ variables:
   armBackendStorageAccountName: 'tfstate809429345'
   armBackendContainerName: 'tfstate'
   packerImageName: 'myPackerImage'
+  ARM_ACCESS_KEY: $(armAccessKey)
 
 stages:
 #--------------------------------------------#  
