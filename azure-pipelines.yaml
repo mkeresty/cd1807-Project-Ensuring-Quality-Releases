@@ -35,6 +35,10 @@ stages:
     # Run Terraform Init on the pipeline agent 
     - task: ms-devlabs.custom-terraform-tasks.custom-terraform-release-task.TerraformTaskV3@3
       displayName: 'Terrafom init'
+      - script: |
+        echo "ARM_ACCESS_KEY is set: ${ARM_ACCESS_KEY:+yes}"
+      env:
+        ARM_ACCESS_KEY: $(ARM_ACCESS_KEY)
       inputs:
         provider: 'azurerm'
         command: 'init'
