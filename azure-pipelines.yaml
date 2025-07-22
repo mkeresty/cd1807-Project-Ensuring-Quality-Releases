@@ -39,11 +39,11 @@ stages:
         provider: 'azurerm'
         command: 'init'
         workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environments/test'
-        backendServiceArm: '$(azureServiceConnectionId)'
-        backendAzureRmResourceGroupName: '$(resourceGroupName)'
-        backendAzureRmStorageAccountName: '$(armBackendStorageAccountName)'
-        backendAzureRmContainerName: '$(armBackendContainerName)'
-        backendAzureRmKey: 'test.terraform.tfstate'
+        # backendServiceArm: '$(azureServiceConnectionId)'
+        # backendAzureRmResourceGroupName: '$(resourceGroupName)'
+        # backendAzureRmStorageAccountName: '$(armBackendStorageAccountName)'
+        # backendAzureRmContainerName: '$(armBackendContainerName)'
+        # backendAzureRmKey: 'test.terraform.tfstate'
 
 
     - task: ms-devlabs.custom-terraform-tasks.custom-terraform-release-task.TerraformTaskV3@3
