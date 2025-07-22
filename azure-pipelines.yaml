@@ -3,7 +3,7 @@ name: Azure Pipelines
 trigger:
 - main
 
-pool: myAgentPool
+pool: myPool
 
 variables:
   python.version: '3.7.6'
