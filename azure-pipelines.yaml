@@ -43,11 +43,11 @@ stages:
         provider: 'azurerm'
         command: 'init'
         workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environments/test'
-        # backendServiceArm: '$(azureServiceConnectionId)'
-        # backendAzureRmResourceGroupName: '$(resourceGroupName)'
-        # backendAzureRmStorageAccountName: '$(armBackendStorageAccountName)'
-        # backendAzureRmContainerName: '$(armBackendContainerName)'
-        # backendAzureRmKey: 'test.terraform.tfstate'
+        backendServiceArm: '$(azureServiceConnectionId)'
+        backendAzureRmResourceGroupName: '$(resourceGroupName)'
+        backendAzureRmStorageAccountName: '$(armBackendStorageAccountName)'
+        backendAzureRmContainerName: '$(armBackendContainerName)'
+        backendAzureRmKey: 'test.terraform.tfstate'
       env:
         ARM_ACCESS_KEY: $(ARM_ACCESS_KEY)
 
