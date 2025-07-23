@@ -113,5 +113,5 @@ Edit vars in ```packer.json```
 - Follow the steps in ```create_agent.md```. You will now see your agent online in the Dev Portal ![Agent Online](./screenshots/12_agent_online.png)
 - Install Terraform extension from the marketplace
 - Click **Create Pipeline** and then **Existing Azure Pipelines YAML file**
-- Add ```ARM_ACCESS_KEY ARM_CLIENT_ID ARM_CLIENT_SECRET ARM_SUBSCRIPTION_ID ARM_LOCATION ARM_RESOURCE_GROUP_NAME ARM_MANAGED_IMAGE_NAME``` storage account key in pipeline variables NOT library
+- Add ```all ARM_* and TF_VAR_*``` variables into the pipeline, NOT library
 - Create a new pipeline environment virtual Linux machine and copy the command it provides, then follow the steps in ```create_test_vm.md```
