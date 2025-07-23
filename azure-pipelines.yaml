@@ -94,16 +94,16 @@ stages:
 
     
     # Run Terraform Apply
-    - task: ms-devlabs.custom-terraform-tasks.custom-terraform-release-task.TerraformTaskV3@3
-      displayName: Terraform apply
-      inputs:
-        provider: 'azurerm'
-        command: 'apply'
-        commandOptions: 'azure.plan'
-        workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environments/test'
-        environmentServiceNameAzureRM: '$(azureServiceConnectionId)'
-      env:
-        ARM_ACCESS_KEY: $(ARM_ACCESS_KEY)
+    # - task: ms-devlabs.custom-terraform-tasks.custom-terraform-release-task.TerraformTaskV3@3
+    #   displayName: Terraform apply
+    #   inputs:
+    #     provider: 'azurerm'
+    #     command: 'apply'
+    #     commandOptions: 'azure.plan'
+    #     workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environments/test'
+    #     environmentServiceNameAzureRM: '$(azureServiceConnectionId)'
+    #   env:
+    #     ARM_ACCESS_KEY: $(ARM_ACCESS_KEY)
 
     # ToDo: Change the workingDirectory path, as applicable to you
     # Destroy the resources in Azure by running a separate pipeline. 
@@ -114,40 +114,6 @@ stages:
     #     command: 'destroy'
     #     workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environments/test'
     #     environmentServiceNameAzureRM: '$(azureServiceConnectionId)'
-
-#--------------------------------------------#    
-    # Postman - Install Newman    
-    # ToDo: Update the command and verify the working directory
-    - task: CmdLine@2
-      displayName: Install Newman
-      inputs:
-        script: |
-          sudo apt install nodejs -y
-          sudo apt install npm -y
-          sudo npm install -g newman
-        workingDirectory: $(System.DefaultWorkingDirectory)
-    # Postman Data Validation Test Suite    
-    - task: CmdLine@2
-      displayName: Run Data Validation Tests
-      continueOnError: true
-      inputs:
-        script: 'newman run TestSuite.Data-Validation.json -e Test.environment.json --reporters cli,junit --reporter-junit-export TEST-DataValidation.xml'
-        workingDirectory: '$(System.DefaultWorkingDirectory)/automatedtesting/postman'
-    # Postman Regression Test Suite    
-    - task: CmdLine@2
-      displayName: Run Regression Tests
-      continueOnError: true
-      inputs:
-        script: 'newman run TestSuite.Regression.json -e Test.environment.json --reporters cli,junit --reporter-junit-export TEST-Regression.xml'
-        workingDirectory: '$(System.DefaultWorkingDirectory)/automatedtesting/postman'
-    # Postman - Publish Results 
-    - task: PublishTestResults@2
-      inputs:
-        testResultsFormat: 'JUnit'
-        testResultsFiles: '**/TEST-*.xml'
-        searchFolder: '$(System.DefaultWorkingDirectory)/automatedtesting/postman'
-        mergeTestResults: true
-        testRunTitle: test-run-$(Build.BuildId)
 
     #--------------------------------------------#
     # Selenium (UI) Test Suite - Archive the package  
@@ -162,7 +128,7 @@ stages:
     # Selenium Test Suite - Publish the package  
     - publish: $(Build.ArtifactStagingDirectory)/$(Build.BuildId)-uitests.zip   # Same as the archiveFile artifact above. 
       displayName: 'Upload Package'
-      artifact: drop-uitests
+      artifact: drop-ui-tests
 
     #--------------------------------------------#    
     # FakeRestAPI - Archive
@@ -170,7 +136,7 @@ stages:
     - task: ArchiveFiles@2
       displayName: 'Archive FakeRestAPI'
       inputs:
-        rootFolderOrFile: $(System.DefaultWorkingDirectory)/automatedtesting/fakerestapi
+        rootFolderOrFile: $(System.DefaultWorkingDirectory)/automatedtesting/jmeter/fakerestapi
         includeRootFolder: false
         archiveType: 'zip'
         archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId)-fakerestapi.zip'
@@ -193,6 +159,47 @@ stages:
       displayName: 'Upload Package'
       artifact: drop-perftests
 
+
+    # Postman - Install Newman    
+    # ToDo: Update the command and verify the working directory
+  # - job: AutomatedTesting
+  #   displayName: Automated Testing
+  #   pool:
+  #     vmImage: 'ubuntu-20.04'
+  #   - task: CmdLine@2
+  #     displayName: Install Newman
+  #     inputs:
+  #       script: |
+  #         sudo apt install nodejs -y
+  #         sudo apt install npm -y
+  #         sudo npm install -g newman
+  #       workingDirectory: $(System.DefaultWorkingDirectory)
+  #   # Postman Data Validation Test Suite    
+  #   - task: CmdLine@2
+  #     displayName: Run Data Validation Tests
+  #     continueOnError: true
+  #     inputs:
+  #       script: 'newman run TestSuite.Data-Validation.json -e Test.environment.json --reporters cli,junit --reporter-junit-export TEST-DataValidation.xml'
+  #       workingDirectory: '$(System.DefaultWorkingDirectory)/automatedtesting/postman'
+  #   # Postman Regression Test Suite    
+  #   - task: CmdLine@2
+  #     displayName: Run Regression Tests
+  #     continueOnError: true
+  #     inputs:
+  #       script: 'newman run TestSuite.Regression.json -e Test.environment.json --reporters cli,junit --reporter-junit-export TEST-Regression.xml'
+  #       workingDirectory: '$(System.DefaultWorkingDirectory)/automatedtesting/postman'
+  #   # Postman - Publish Results 
+  #   - task: PublishTestResults@2
+  #     inputs:
+  #       testResultsFormat: 'JUnit'
+  #       testResultsFiles: '**/TEST-*.xml'
+  #       searchFolder: '$(System.DefaultWorkingDirectory)/automatedtesting/postman'
+  #       mergeTestResults: true
+  #       testRunTitle: test-run-$(Build.BuildId)
+
+
+
+
 #--------------------------------------------#  
 # DEPLOYMENT STAGE
 #--------------------------------------------#    
@@ -208,24 +215,40 @@ stages:
       runOnce:
         deploy:
           steps:
-          - task: AzureWebApp@1
-            displayName: 'Deploy Azure Web App'
-            inputs:
-              azureSubscription: $(azureServiceConnectionId)
-              appName: 'myWebApp'
-              appType: webApp
-              package: $(Pipeline.Workspace)/drop-fakerestapi/$(Build.BuildId)-fakerestapi.zip
+          # - task: AzureWebApp@1
+          #   displayName: 'Deploy Azure Web App'
+          #   inputs:
+          #     azureSubscription: $(azureServiceConnectionId)
+          #     appName: 'myWebApp'
+          #     appType: webApp
+          #     package: $(Pipeline.Workspace)/drop-fakerestapi/$(Build.BuildId)-fakerestapi.zip
           #--------------------------------------------#    
           # Run JMeter test suite against the App Service
           - task: CmdLine@2
+            displayName: 'Summary - Starting standalone test @ endurance.jmx'
             inputs:
               script: |
-                # wget "https://apache.mirrors.lucidnetworks.net//jmeter/binaries/apache-jmeter-5.2.1.tgz"
-                # tar -xf apache-jmeter-5.2.1.tgz
-                unzip -o $(Build.BuildId)-perftests.zip
-                jmeter -n -t PerformanceTestSuite.jmx -j jmeter.log -f
-                cat jmeter.log                                  # ToDo: Write your commands
-              workingDirectory: $(Pipeline.Workspace)/drop-perftests
+              cd automatedtesting/jmeter/endurance
+              rm -rf html
+              rm -rf test-results.csv
+              jmeter -n \      
+                -t endurance.jmx \
+                -JbaseUrl=fakerestapi.azurewebsites.net \
+                -l test-results.csv \
+                -e -o html
+
+          - task: CmdLine@2
+            displayName: 'Summary - Starting standalone test @ stress.jmx'
+            inputs:
+              script: |
+              cd automatedtesting/jmeter/stress-test
+              rm -rf html
+              rm -rf test-results.csv
+              jmeter -n \      
+                -t stress.jmx \
+                -JbaseUrl=fakerestapi.azurewebsites.net \
+                -l test-results.csv \
+                -e -o html
               
 #--------------------------------------------#  
 # Selenium Tests Stage
@@ -242,7 +265,7 @@ stages:
         deploy:
           steps:
           - download: current
-            artifact: drop-uitests
+            artifact: drop-ui-tests
           - task: Bash@3
             inputs:
               targetType: 'inline'
@@ -271,5 +294,5 @@ stages:
                 fi
                 export PATH=$PATH:/home/testuser/app
                 echo "Starting Selenium Tests"
-                python3 add_remove_from_cart.py >> selenium.log
+                python3 main.py >> selenium.log
                 echo "Completed Selenium Tests. Check selenium.log for results."

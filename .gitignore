@@ -34,3 +34,5 @@ myvenv/
 load_env.sh
 terraform.tfvars
 .DS_Store
+
+html/
