@@ -70,4 +70,5 @@ module "vm" {
   tag_value        = "${var.tag_value}"
   admin_username   = "${var.admin_username}"
   public_key       = "${var.public_key}" 
+  image_name       = "${var.image_name}" 
 }

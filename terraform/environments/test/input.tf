@@ -77,5 +77,6 @@ variable "public_key" {
 
 variable "image_name" {
   description = "The ID of the source image to use for the virtual machines."
+  default = "/subscriptions/456cc604-544c-45f8-99d0-c1b73aeec440/resourceGroups/AZUREDEVOPS/providers/Microsoft.Compute/images/myPackerImage"
 }
 
