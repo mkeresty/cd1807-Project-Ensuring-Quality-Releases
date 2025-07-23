@@ -181,7 +181,7 @@ stages:
   - deployment: FakeRestAPI
     pool:
       vmImage: 'ubuntu-20.04'     
-    environment: '${environmentName}'
+    environment: 'myEnvironment'
     strategy:
       runOnce:
         deploy:
@@ -214,10 +214,7 @@ stages:
     pool:
       vmImage: '$(myPackerImage)'     
     displayName: Selenium Tests
-    environment:
-      name: '${environmentName}'
-      resourceType: VirtualMachine
-      tags: selenium
+    environment: 'myEnvironment'
     strategy:
       runOnce:
         deploy:
