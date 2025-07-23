@@ -100,7 +100,7 @@ stages:
       inputs:
         provider: 'azurerm'
         command: 'apply'
-        commandOptions: '"azure.plan" -auto-approve'
+        commandOptions: 'azure.plan -auto-approve'
         workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environments/test'
         environmentServiceNameAzureRM: '$(azureServiceConnectionId)'
       env:
