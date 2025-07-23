@@ -7,14 +7,13 @@ pool: myPool
 
 variables:
   python.version: '3.7.6'
-  azureServiceConnectionId: '6e517549-23bc-49a3-a8ab-0c31578a5a7c'
+  azureServiceConnectionId: '7309f336-b783-44d5-8bac-ad4974116f0c'
   projectRoot: $(System.DefaultWorkingDirectory)
   subscriptionId: '456cc604-544c-45f8-99d0-c1b73aeec440'
   resourceGroupName: 'Azuredevops'
-  armBackendStorageAccountName: 'tfstate809429345'
+  armBackendStorageAccountName: 'tfstate321820361'
   armBackendContainerName: 'tfstate'
   packerImageName: 'myPackerImage'
-  # ARM_ACCESS_KEY: $(armAccessKey)
 
 stages:
 #--------------------------------------------#  
