@@ -76,7 +76,7 @@ stages:
       inputs:
         knownHostsEntry: 'KNOWN_HOSTS_STRING'
         sshPublicKey: 'PUBLIC_KEY'
-        sshKeySecureFile: 'id_rsa'
+        sshKeySecureFile: 'udacity_rsa'
 
     - task: DownloadSecureFile@1
       condition: false
