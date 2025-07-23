@@ -180,7 +180,7 @@ stages:
   # Deploy FakeRestAPI Web App
   - deployment: FakeRestAPI
     pool:
-      vmImage: '$(vmImageName)'      
+      vmImage: 'ubuntu-20.04'     
     environment: '${environmentName}'
     strategy:
       runOnce:
@@ -205,12 +205,14 @@ stages:
                 cat jmeter.log                                  # ToDo: Write your commands
               workingDirectory: $(Pipeline.Workspace)/drop-perftests
               
-  #--------------------------------------------#  
-  # Selenium | Functional UI Tests
-  # ToDo: 
+#--------------------------------------------#  
+# Selenium Tests Stage
+#--------------------------------------------#    
+- stage: SeleniumTests
+  jobs:
   - deployment: VMDeploy
     pool:
-      vmImage: '$(vmImageName)'   
+      vmImage: '$(myPackerImage)'     
     displayName: Selenium Tests
     environment:
       name: '${environmentName}'
@@ -222,7 +224,6 @@ stages:
           steps:
           - download: current
             artifact: drop-ui-tests
-            
           - task: Bash@3
             inputs:
               targetType: 'inline'

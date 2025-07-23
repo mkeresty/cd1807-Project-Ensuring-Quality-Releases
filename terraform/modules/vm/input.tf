@@ -7,3 +7,4 @@ variable tag_name {}
 variable tag_value {}
 variable admin_username {}
 variable public_key {}
+variable image_name{}

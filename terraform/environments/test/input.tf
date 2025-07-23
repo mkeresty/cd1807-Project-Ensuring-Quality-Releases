@@ -75,3 +75,7 @@ variable "public_key" {
   description = "The public SSH key for the administrator user."
 }
 
+variable "image_name" {
+  description = "The ID of the source image to use for the virtual machines."
+}
+

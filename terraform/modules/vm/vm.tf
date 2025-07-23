@@ -19,7 +19,8 @@ resource "azurerm_linux_virtual_machine" "main" {
   name                            = "${var.prefix}-vm-${count.index}"
   resource_group_name             = "${var.resource_group}"
   location                        = "${var.location}"
-  size                = "Standard_B1s"
+  size                            = "Standard_B1s"
+  source_image_id                 =  "${var.image_name}"
   admin_username      = "${var.admin_username}"
   network_interface_ids = [
     azurerm_network_interface.main[count.index].id,
@@ -32,10 +33,5 @@ resource "azurerm_linux_virtual_machine" "main" {
     caching           = "ReadWrite"
     storage_account_type = "Standard_LRS"
   }
-  source_image_reference {
-    publisher = "Canonical"
-    offer     = "UbuntuServer"
-    sku       = "18.04-LTS"
-    version   = "latest"
-  }
+
 }
