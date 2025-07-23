@@ -120,7 +120,10 @@ stages:
     - task: CmdLine@2
       displayName: Install Newman
       inputs:
-        script: 'sudo npm install -g newman'
+        script: |
+          sudo apt install nodejs -y
+          sudo apt install npm -y
+          sudo npm install -g newman
         workingDirectory: $(System.DefaultWorkingDirectory)
     # Postman Data Validation Test Suite    
     - task: CmdLine@2
@@ -198,7 +201,7 @@ stages:
   # Deploy FakeRestAPI Web App
   - deployment: FakeRestAPI
     pool:
-      vmImage: 'ubuntu-20.04'     
+      vmImage: '$(packerImageName)'
     environment: 'myEnvironment'
     strategy:
       runOnce:
@@ -230,7 +233,7 @@ stages:
   jobs:
   - deployment: VMDeploy
     pool:
-      vmImage: '$(myPackerImage)'     
+      vmImage: '$(packerImageName)'     
     displayName: Selenium Tests
     environment: 'myEnvironment'
     strategy:
