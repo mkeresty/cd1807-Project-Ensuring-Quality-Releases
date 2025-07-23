@@ -238,10 +238,10 @@ stages:
                   -JbaseUrl=fakerestapi.azurewebsites.net \
                   -l test-results.csv \
                   -e -o html
-            - script: |
-                echo "==== END: Files at DEPLOY end ===="
-                find . -type f
-              displayName: 'Log files at end of DEPLOY stage'
+          - script: |
+              echo "==== END: Files at DEPLOY end ===="
+              find . -type f
+            displayName: 'Log files at end of DEPLOY stage'
 #--------------------------------------------#  
 # SELENIUM TESTS STAGE
 #--------------------------------------------#    
