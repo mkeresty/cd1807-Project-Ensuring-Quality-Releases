@@ -114,4 +114,4 @@ Edit vars in ```packer.json```
 - Install Terraform extension from the marketplace
 - Click **Create Pipeline** and then **Existing Azure Pipelines YAML file**
 - Add ```ARM_ACCESS_KEY``` storage account key in pipeline variables NOT library
-- Create a new pipeline environment
+- Create a new pipeline environment virtual Linux machine and copy the command it provides, then follow the steps in ```create_test_vm.md```
