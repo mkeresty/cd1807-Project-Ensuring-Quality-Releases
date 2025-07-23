@@ -71,19 +71,19 @@ stages:
       env:
         ARM_ACCESS_KEY: $(ARM_ACCESS_KEY)
 
-    - task: InstallSSHKey@0
-      condition: false
-      inputs:
-        knownHostsEntry: 'KNOWN_HOSTS_STRING'
-        sshPublicKey: 'PUBLIC_KEY'
-        sshKeySecureFile: 'udacity_rsa'
+    # - task: InstallSSHKey@0
+    #   condition: false
+    #   inputs:
+    #     knownHostsEntry: 'KNOWN_HOSTS_STRING'
+    #     sshPublicKey: 'PUBLIC_KEY'
+    #     sshKeySecureFile: 'udacity_rsa'
 
-    - task: DownloadSecureFile@1
-      condition: false
-      name: udacity_public_key
-      displayName: 'Download public key'
-      inputs:
-        secureFile: 'public.key'
+    # - task: DownloadSecureFile@1
+    #   condition: false
+    #   name: udacity_public_key
+    #   displayName: 'Download public key'
+    #   inputs:
+    #     secureFile: 'public.key'
 
     - task: DownloadSecureFile@1
       displayName: 'Download tfvars from Azure Files'
