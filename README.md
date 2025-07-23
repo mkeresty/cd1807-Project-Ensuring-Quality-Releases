@@ -7,6 +7,7 @@ This repo ..............
 ### Dependencies
 - Azure account
 - Azure CLI
+- [Azure DevOps Portal](https://app.vssps.visualstudio.com/_signin)
 - Terraform CLI
 - JMeter
 - Postman
@@ -31,6 +32,10 @@ pip install selenium
 brew install chromium --no-quarantine
 ```
 
+
+
+# Production
+
 ## Azure
 ```zsh
 az login
@@ -42,14 +47,6 @@ ssh-keygen -t rsa -f ~/.ssh/udacity_rsa
 cat ~/.ssh/udacity_rsa.pub
 ```
 Then update ```terraform/modules/vm.tf``` as follows:
-Local development
-```zsh
-admin_ssh_key {
-  username = "adminuser"
-  public_key = file("~/.ssh/id_rsa.pub")
-}
-```
-Within the pipeline
 ```zsh
 admin_ssh_key {
   username = "adminuser"
@@ -57,11 +54,15 @@ admin_ssh_key {
 }
 ```
 
+## 
+
+
 ## Env variables
-Fill in load.sh
+Fill in ``load_env.sh`` and rerun this command whenever you modify variables in it
 ```zsh
 source load_env.sh
 ```
+*Note the ``Azuredevops`` resource group location in the Azure developer portal*
 
 
 ## Storage Account
@@ -71,7 +72,7 @@ source load_env.sh
 chmod +x configure-tfstate-storage-account.sh
 ./configure-tfstate-storage-account.sh
 ```
-Then copy the output values over to ```main.tf```
+Then copy the output values over to ```main.tf``` and to ```load_env.sh```
 Example:
 ```zsh
     terraform {
@@ -79,7 +80,6 @@ Example:
               storage_account_name = "tstate9592"
               container_name       = "tfstate"
               key                  = "test.terraform.tfstate"
-              access_key           = "xxxxxx"
         }
 	}
 ```
@@ -89,8 +89,8 @@ Example:
 Ensure all variables are set in ```terraform.tfvars``` then:
 ```zsh
 ## Assuming you are in the terraform/environments/test/ directory
-terraform init
-terraform import azurerm_resource_group.main /subscriptions/<subsription_id>/resourceGroups/Azuredevops
+terraform init # add -reconfigure if you need to restart
+terraform import azurerm_resource_group.main "/subscriptions/${SUBSCRIPTION_ID}/resourceGroups/${RESOURCE_GROUP_NAME}"
 ## Run "terraform init -upgrade" if you have changed the file contents/path
 terraform plan -out "solution.plan"
 terraform apply "solution.plan"
@@ -98,15 +98,27 @@ terraform state rm azurerm_resource_group.main
 terraform destroy
 ```
 
-~~*Note: In ```main.tf``` you will see the resource group location hard coded as ```southcentralus``` and that is because the Udacity Azure Cloud Portal set the location of the resource group, but the other resources would not deploy in the same location, so I used ```East US``` for all other resources.*~~
-
 
 ## Create Packer Image
 Edit vars in ```packer.json```
  ```packer build ./packer.json```
 
 
-## Do all steps from project 2
+## Azure DevOps Setup
+- Go to [dev.azure.com](https://go.microsoft.com/fwlink/?LinkId=307137) and create a new project called `udacity_project`
+- Click **Create Pipeline** and then **Existing Azure Pipelines YAML file**
+- Go to **Project Settings** then **Service Connections** and **Azure Resource Manager**
+- Click **App registration (automatic)** and fill in the required fields. Make sure you grant it access to all pipelines.
+- In **User Settings** create a Personal Access Token and give it full access, then fill in and reload ```load_env.sh```
+- Create new agent pool in **Project Settings > Agent pools** with type **self-hosted** and check **grant access permissions to all pipelines**
+
+### Set up agent VM
+Follow the steps in ```create_agent.md```
+
+You will now see your agent online in the Dev Portal
+![Agent Online](./screenshots/12_agent_online.png)
+
+
 
 ## Then
 1. Install terraform extension

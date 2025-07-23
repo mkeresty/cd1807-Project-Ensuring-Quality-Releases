@@ -21,9 +21,9 @@ export TF_VAR_location=""
 # Storage account variables
 export STORAGE_ACCOUNT_NAME=""
 export CONTAINER_NAME=""
-export ARM_ACCESS_KEY=""
+export ARM_ACCESS_KEY="" # aka ACCOUNT_KEY
 
-# Azure DevOps Service Connection variables
+# Azure DevOps access token
 export AZURE_TOKEN=""
 export AZURE_TOKEN_NAME=""
 

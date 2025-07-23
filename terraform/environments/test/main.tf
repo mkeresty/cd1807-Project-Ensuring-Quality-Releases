@@ -17,7 +17,7 @@ resource "azurerm_resource_group" "main" {
 
 terraform {
   backend "azurerm" {
-    storage_account_name = "tfstate809429345"
+    storage_account_name = "tfstate321820361"
     container_name       = "tfstate"
     key                  = "test.terraform.tfstate"
     #access_key          = <defined with $ARM_ACCESS_KEY environment variable>
