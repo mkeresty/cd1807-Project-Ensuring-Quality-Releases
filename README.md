@@ -106,20 +106,12 @@ Edit vars in ```packer.json```
 
 ## Azure DevOps Setup
 - Go to [dev.azure.com](https://go.microsoft.com/fwlink/?LinkId=307137) and create a new project called `udacity_project`
-- Click **Create Pipeline** and then **Existing Azure Pipelines YAML file**
 - Go to **Project Settings** then **Service Connections** and **Azure Resource Manager**
 - Click **App registration (automatic)** and fill in the required fields. Make sure you grant it access to all pipelines.
 - In **User Settings** create a Personal Access Token and give it full access, then fill in and reload ```load_env.sh```
 - Create new agent pool in **Project Settings > Agent pools** with type **self-hosted** and check **grant access permissions to all pipelines**
-
-### Set up agent VM
-Follow the steps in ```create_agent.md```
-
-You will now see your agent online in the Dev Portal
-![Agent Online](./screenshots/12_agent_online.png)
-
-
-
-## Then
-1. Install terraform extension
-2. add storage account key in pipeline variables NOT library
+- Follow the steps in ```create_agent.md```. You will now see your agent online in the Dev Portal ![Agent Online](./screenshots/12_agent_online.png)
+- Install Terraform extension from the marketplace
+- Click **Create Pipeline** and then **Existing Azure Pipelines YAML file**
+- Add ```ARM_ACCESS_KEY``` storage account key in pipeline variables NOT library
+- Create a new pipeline environment
