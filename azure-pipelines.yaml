@@ -14,6 +14,7 @@ variables:
   armBackendStorageAccountName: 'tfstate321820361'
   armBackendContainerName: 'tfstate'
   packerImageName: 'myPackerImage'
+  environmentName: 'myEnvironment'
 
 stages:
 #--------------------------------------------#  
@@ -180,7 +181,7 @@ stages:
   - deployment: FakeRestAPI
     pool:
       vmImage: '$(vmImageName)'      
-    environment: 'Project 3 - Ensuring Quality Releases'
+    environment: '${environmentName}'
     strategy:
       runOnce:
         deploy:
@@ -208,9 +209,11 @@ stages:
   # Selenium | Functional UI Tests
   # ToDo: 
   - deployment: VMDeploy
+    pool:
+      vmImage: '$(vmImageName)'   
     displayName: Selenium Tests
     environment:
-      name: seleniumTests
+      name: '${environmentName}'
       resourceType: VirtualMachine
       tags: selenium
     strategy:
