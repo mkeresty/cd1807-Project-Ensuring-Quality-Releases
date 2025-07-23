@@ -63,7 +63,8 @@ stages:
       displayName: Terraform check vars
       inputs:
         provider: 'azurerm'
-        command: 'plan -out "azure.plan"'
+        command: 'plan'
+        commandOptions: '-out="azure.plan"'
         workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environments/test'
         environmentServiceNameAzureRM: '$(azureServiceConnectionId)'
       env:
@@ -98,7 +99,8 @@ stages:
       displayName: Terraform apply
       inputs:
         provider: 'azurerm'
-        command: 'apply "azure.plan" -auto-approve'
+        command: 'apply'
+        commandOptions: '"azure.plan" -auto-approve'
         workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environments/test'
         environmentServiceNameAzureRM: '$(azureServiceConnectionId)'
       env:
