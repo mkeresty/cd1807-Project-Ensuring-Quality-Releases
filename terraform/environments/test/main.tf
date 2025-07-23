@@ -23,9 +23,7 @@ terraform {
     #access_key          = <defined with $ARM_ACCESS_KEY environment variable>
   }
 }
-output "debug_service_plan_name" {
-  value = "${var.application_type}-AppService"
-}
+
 module "network" {
   source               = "../../modules/network"
   address_space        = var.address_space
