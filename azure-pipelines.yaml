@@ -86,7 +86,7 @@ stages:
     #  inputs:
     #   secureFile: 
 
-    - task: DownloadTFVars@0
+    - task: DownloadSecureFile@1
       displayName: 'Download tfvars from Azure Files'
       inputs:
         secureFile: 'terraform.tfvars'
