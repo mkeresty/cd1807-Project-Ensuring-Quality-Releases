@@ -6,12 +6,8 @@ provider "azurerm" {
   features {}
 }
 
-resource "azurerm_resource_group" "main" {
+data "azurerm_resource_group" "main" {
   name     = var.resource_group_name
-  location = var.location
-  lifecycle {
-    prevent_destroy = true
-  }
 }
 
 
@@ -31,7 +27,7 @@ module "network" {
   virtual_network_name = "${var.virtual_network_name}"
   application_type     = "${var.application_type}"
   resource_type        = "NET"
-  resource_group       = azurerm_resource_group.main.name
+  resource_group       = data.azurerm_resource_group.main.name
   address_prefix_test  = "${var.address_prefix_test}"
 }
 
@@ -40,7 +36,7 @@ module "nsg-test" {
   location         = "${var.location}"
   application_type = "${var.application_type}"
   resource_type    = "NSG"
-  resource_group   = azurerm_resource_group.main.name
+  resource_group   = data.azurerm_resource_group.main.name
   subnet_id        = "${module.network.subnet_id_test}"
   address_prefix_test = "${var.address_prefix_test}"
 }
@@ -49,20 +45,20 @@ module "appservice" {
   location         = "${var.location}"
   application_type = "${var.application_type}"
   resource_type    = "AppService"
-  resource_group   = azurerm_resource_group.main.name
+  resource_group   = data.azurerm_resource_group.main.name
 }
 module "publicip" {
   source           = "../../modules/publicip"
   location         = "${var.location}"
   application_type = "${var.application_type}"
   resource_type    = "publicip"
-  resource_group   = azurerm_resource_group.main.name
+  resource_group   = data.azurerm_resource_group.main.name
 }
 
 module "vm" {
   source           = "../../modules/vm"
   location         = "${var.location}"
-  resource_group   = azurerm_resource_group.main.name
+  resource_group   = data.azurerm_resource_group.main.name
   subnet_id        = "${module.network.subnet_id_test}" 
   vm_count         = "${var.vm_count}"
   prefix           = "${var.prefix}"

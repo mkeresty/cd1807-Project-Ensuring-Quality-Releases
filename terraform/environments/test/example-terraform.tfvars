@@ -18,5 +18,5 @@ address_space = ["10.5.0.0/16"]
 address_prefix_test = "10.5.1.0/24"
 
 public_key = "ssh-rsa AAAAB3Nz..."
-
+image_name="/subscriptions/4123456/resourceGroups/AZUREDEVOPS/providers/Microsoft.Compute/images/myPackerImage"
 
