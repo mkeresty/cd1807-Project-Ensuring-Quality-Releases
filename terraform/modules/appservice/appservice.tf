@@ -7,7 +7,7 @@ resource "azurerm_service_plan" "test" {
 }
 
 resource "azurerm_linux_web_app" "test" {
-  name                = "webapp-${random_string.suffix.result}"
+  name                = "webapp-0254563185"
   location            = "${var.location}"
   resource_group_name = "${var.resource_group}"
   service_plan_id     = azurerm_service_plan.test.id
