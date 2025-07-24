@@ -1,110 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="Udacity" tests="27" time="2.829">
-  <testsuite name="api / Activities / std / /api/Activities" id="5b2e1dbc-5485-42f8-9c5c-09a4feb21ab6" timestamp="2025-07-24T20:21:33.786Z" tests="1" failures="1" errors="0" time="0.309">
-    <testcase name="GET /Activities returns valid data" time="0.309" classname="ApiActivitiesStdApiActivities">
-      <failure type="AssertionFailure" message="expected response to have status code 200 but got 404">
-        <![CDATA[Failed 1 times.]]>
-        <![CDATA[Collection JSON ID: 8f7943a5-4bad-4182-baf0-6bfb67641575.]]>
-        <![CDATA[Collection name: Udacity.]]>
-        <![CDATA[Request name: api / Activities / std / /api/Activities.]]>
-        <![CDATA[Test description: GET /Activities returns valid data.]]>
-        <![CDATA[Error message: expected response to have status code 200 but got 404.]]>
-        <![CDATA[Stacktrace: AssertionError: expected response to have status code 200 but got 404
-   at Object.eval sandbox-script.js:1:1).]]>
-      </failure>
-    </testcase>
+<testsuites name="Udacity" tests="27" time="3.210">
+  <testsuite name="api / Activities / std / /api/Activities" id="5a4e1cad-a962-4708-9ee2-b071e5320d03" timestamp="2025-07-24T20:59:46.598Z" tests="1" failures="0" errors="0" time="0.310">
+    <testcase name="GET /Activities returns valid data" time="0.310" classname="ApiActivitiesStdApiActivities"/>
   </testsuite>
-  <testsuite name="api / Activities / std / /api/Activities" id="f43c77a1-83a2-4e2a-ad7e-b834d95e033e" timestamp="2025-07-24T20:21:33.786Z" tests="1" failures="1" errors="0" time="0.100">
-    <testcase name="Activity created" time="0.100" classname="ApiActivitiesStdApiActivities">
-      <failure type="AssertionFailure" message="expected response to have status code 200 but got 404">
-        <![CDATA[Failed 1 times.]]>
-        <![CDATA[Collection JSON ID: 8f7943a5-4bad-4182-baf0-6bfb67641575.]]>
-        <![CDATA[Collection name: Udacity.]]>
-        <![CDATA[Request name: api / Activities / std / /api/Activities.]]>
-        <![CDATA[Test description: Activity created.]]>
-        <![CDATA[Error message: expected response to have status code 200 but got 404.]]>
-        <![CDATA[Stacktrace: AssertionError: expected response to have status code 200 but got 404
-   at Object.eval sandbox-script.js:1:2).]]>
-      </failure>
-    </testcase>
+  <testsuite name="api / Activities / std / /api/Activities" id="ad088854-efeb-4419-a5c5-1ff0458f73ad" timestamp="2025-07-24T20:59:46.598Z" tests="1" failures="0" errors="0" time="0.095">
+    <testcase name="Activity created" time="0.095" classname="ApiActivitiesStdApiActivities"/>
   </testsuite>
-  <testsuite name="api / Activities / {id} / /api/Activities/:id" id="ba4f3fcf-036f-4325-a157-1a889f6aa452" timestamp="2025-07-24T20:21:33.786Z" tests="1" failures="1" errors="0" time="0.096">
-    <testcase name="Activity has correct id." time="0.096" classname="ApiActivitiesIdApiActivitiesId">
-      <failure type="AssertionFailure" message="expected response to have status code 200 but got 404">
-        <![CDATA[Failed 1 times.]]>
-        <![CDATA[Collection JSON ID: 8f7943a5-4bad-4182-baf0-6bfb67641575.]]>
-        <![CDATA[Collection name: Udacity.]]>
-        <![CDATA[Request name: api / Activities / {id} / /api/Activities/:id.]]>
-        <![CDATA[Test description: Activity has correct id..]]>
-        <![CDATA[Error message: expected response to have status code 200 but got 404.]]>
-        <![CDATA[Stacktrace: AssertionError: expected response to have status code 200 but got 404
-   at Object.eval sandbox-script.js:1:3).]]>
-      </failure>
-    </testcase>
+  <testsuite name="api / Activities / {ID} / /api/Activities/:ID" id="45d63b9a-3038-4536-9d69-ff2045d24255" timestamp="2025-07-24T20:59:46.598Z" tests="1" failures="0" errors="0" time="0.096">
+    <testcase name="Activity has correct ID." time="0.096" classname="ApiActivitiesIdApiActivitiesId"/>
   </testsuite>
-  <testsuite name="api / Activities / {id} / /api/Activities/:id" id="b5ff6fff-b407-466b-b667-4bdc26e802f1" timestamp="2025-07-24T20:21:33.786Z" tests="1" failures="1" errors="0" time="0.102">
-    <testcase name="Activity has title." time="0.102" classname="ApiActivitiesIdApiActivitiesId">
-      <failure type="AssertionFailure" message="expected response to have status code 200 but got 404">
-        <![CDATA[Failed 1 times.]]>
-        <![CDATA[Collection JSON ID: 8f7943a5-4bad-4182-baf0-6bfb67641575.]]>
-        <![CDATA[Collection name: Udacity.]]>
-        <![CDATA[Request name: api / Activities / {id} / /api/Activities/:id.]]>
-        <![CDATA[Test description: Activity has title..]]>
-        <![CDATA[Error message: expected response to have status code 200 but got 404.]]>
-        <![CDATA[Stacktrace: AssertionError: expected response to have status code 200 but got 404
-   at Object.eval sandbox-script.js:1:4).]]>
-      </failure>
-    </testcase>
+  <testsuite name="api / Activities / {ID} / /api/Activities/:ID" id="afbd386f-a34f-4b78-94e5-8ca644599ef2" timestamp="2025-07-24T20:59:46.598Z" tests="1" failures="0" errors="0" time="0.093">
+    <testcase name="Activity has Title." time="0.093" classname="ApiActivitiesIdApiActivitiesId"/>
   </testsuite>
-  <testsuite name="api / Activities / {id} / /api/Activities/:id" id="1fc75ebb-5598-4640-8602-d37f8f7b3d51" timestamp="2025-07-24T20:21:33.786Z" tests="1" failures="1" errors="0" time="0.099">
-    <testcase name="Activity deleted." time="0.099" classname="ApiActivitiesIdApiActivitiesId">
-      <failure type="AssertionFailure" message="expected response to have status code 200 but got 404">
-        <![CDATA[Failed 1 times.]]>
-        <![CDATA[Collection JSON ID: 8f7943a5-4bad-4182-baf0-6bfb67641575.]]>
-        <![CDATA[Collection name: Udacity.]]>
-        <![CDATA[Request name: api / Activities / {id} / /api/Activities/:id.]]>
-        <![CDATA[Test description: Activity deleted..]]>
-        <![CDATA[Error message: expected response to have status code 200 but got 404.]]>
-        <![CDATA[Stacktrace: AssertionError: expected response to have status code 200 but got 404
-   at Object.eval sandbox-script.js:1:5).]]>
-      </failure>
-    </testcase>
+  <testsuite name="api / Activities / {ID} / /api/Activities/:ID" id="35e8aa45-c7b2-4690-866f-66d1af1ec2f6" timestamp="2025-07-24T20:59:46.598Z" tests="1" failures="0" errors="0" time="0.098">
+    <testcase name="Activity deleted." time="0.098" classname="ApiActivitiesIdApiActivitiesId"/>
   </testsuite>
-  <testsuite name="api / Authors / std / /api/Authors" id="c21e9d8f-2863-43cd-bae5-741e28f095bd" timestamp="2025-07-24T20:21:33.786Z" tests="1" failures="1" errors="0" time="0.095">
-    <testcase name="Author created" time="0.095" classname="ApiAuthorsStdApiAuthors">
-      <failure type="AssertionFailure" message="expected response to have status code 200 but got 404">
-        <![CDATA[Failed 1 times.]]>
-        <![CDATA[Collection JSON ID: 8f7943a5-4bad-4182-baf0-6bfb67641575.]]>
-        <![CDATA[Collection name: Udacity.]]>
-        <![CDATA[Request name: api / Authors / std / /api/Authors.]]>
-        <![CDATA[Test description: Author created.]]>
-        <![CDATA[Error message: expected response to have status code 200 but got 404.]]>
-        <![CDATA[Stacktrace: AssertionError: expected response to have status code 200 but got 404
-   at Object.eval sandbox-script.js:1:6).]]>
-      </failure>
-    </testcase>
+  <testsuite name="api / Authors / std / /api/Authors" id="ae11621f-9c24-4f95-8fff-71095a15e5b3" timestamp="2025-07-24T20:59:46.598Z" tests="1" failures="0" errors="0" time="0.098">
+    <testcase name="Author created" time="0.098" classname="ApiAuthorsStdApiAuthors"/>
   </testsuite>
-  <testsuite name="api / Authors / std / /api/Authors" id="d9fc7935-4242-4bfa-8121-af31fb7957c3" timestamp="2025-07-24T20:21:33.786Z" tests="1" failures="1" errors="0" time="0.107">
-    <testcase name="GET /Authors returns valid data" time="0.107" classname="ApiAuthorsStdApiAuthors">
-      <failure type="AssertionFailure" message="expected response to have status code 200 but got 404">
-        <![CDATA[Failed 1 times.]]>
-        <![CDATA[Collection JSON ID: 8f7943a5-4bad-4182-baf0-6bfb67641575.]]>
-        <![CDATA[Collection name: Udacity.]]>
-        <![CDATA[Request name: api / Authors / std / /api/Authors.]]>
-        <![CDATA[Test description: GET /Authors returns valid data.]]>
-        <![CDATA[Error message: expected response to have status code 200 but got 404.]]>
-        <![CDATA[Stacktrace: AssertionError: expected response to have status code 200 but got 404
-   at Object.eval sandbox-script.js:1:7).]]>
-      </failure>
-    </testcase>
+  <testsuite name="api / Authors / std / /api/Authors" id="af737c69-5522-4c97-b6d4-9255fafc36eb" timestamp="2025-07-24T20:59:46.598Z" tests="1" failures="0" errors="0" time="0.101">
+    <testcase name="GET /Authors returns valid data" time="0.101" classname="ApiAuthorsStdApiAuthors"/>
   </testsuite>
-  <testsuite name="api / Authors / authors / books / {idBook} / /api/Authors/authors/books/:idBook" id="f4648fbc-853a-4afe-a181-b50511488a42" timestamp="2025-07-24T20:21:33.786Z" tests="1" failures="1" errors="0" time="0.111">
-    <testcase name="GET /Authors/authors/books returns valid data" time="0.111" classname="ApiAuthorsAuthorsBooksIdBookApiAuthorsAuthorsBooksIdBook">
+  <testsuite name="api / Authors / authors / books / {IDBook} / /api/Authors/authors/books/:IDBook" id="f2a97987-0fc3-4aae-ab82-a6aa392ddb6e" timestamp="2025-07-24T20:59:46.598Z" tests="1" failures="1" errors="0" time="0.092">
+    <testcase name="GET /Authors/authors/books returns valid data" time="0.092" classname="ApiAuthorsAuthorsBooksIdBookApiAuthorsAuthorsBooksIdBook">
       <failure type="AssertionFailure" message="expected response to have status code 200 but got 404">
         <![CDATA[Failed 1 times.]]>
         <![CDATA[Collection JSON ID: 8f7943a5-4bad-4182-baf0-6bfb67641575.]]>
         <![CDATA[Collection name: Udacity.]]>
-        <![CDATA[Request name: api / Authors / authors / books / {idBook} / /api/Authors/authors/books/:idBook.]]>
+        <![CDATA[Request name: api / Authors / authors / books / {IDBook} / /api/Authors/authors/books/:IDBook.]]>
         <![CDATA[Test description: GET /Authors/authors/books returns valid data.]]>
         <![CDATA[Error message: expected response to have status code 200 but got 404.]]>
         <![CDATA[Stacktrace: AssertionError: expected response to have status code 200 but got 404
@@ -112,257 +35,92 @@
       </failure>
     </testcase>
   </testsuite>
-  <testsuite name="api / Authors / {id} / /api/Authors/:id" id="f3a668dd-a069-4aa0-a2f3-2a8fa88091e1" timestamp="2025-07-24T20:21:33.786Z" tests="1" failures="1" errors="0" time="0.101">
-    <testcase name="Author has correct id." time="0.101" classname="ApiAuthorsIdApiAuthorsId">
-      <failure type="AssertionFailure" message="expected response to have status code 200 but got 404">
-        <![CDATA[Failed 1 times.]]>
-        <![CDATA[Collection JSON ID: 8f7943a5-4bad-4182-baf0-6bfb67641575.]]>
-        <![CDATA[Collection name: Udacity.]]>
-        <![CDATA[Request name: api / Authors / {id} / /api/Authors/:id.]]>
-        <![CDATA[Test description: Author has correct id..]]>
-        <![CDATA[Error message: expected response to have status code 200 but got 404.]]>
-        <![CDATA[Stacktrace: AssertionError: expected response to have status code 200 but got 404
-   at Object.eval sandbox-script.js:1:9).]]>
-      </failure>
-    </testcase>
+  <testsuite name="api / Authors / {ID} / /api/Authors/:ID" id="24999f1f-bd8b-4a46-a4b1-e57b97441fd7" timestamp="2025-07-24T20:59:46.598Z" tests="1" failures="0" errors="0" time="0.093">
+    <testcase name="Author has correct ID." time="0.093" classname="ApiAuthorsIdApiAuthorsId"/>
   </testsuite>
-  <testsuite name="api / Authors / {id} / /api/Authors/:id" id="78c15317-b2af-491b-81f8-a606282ff150" timestamp="2025-07-24T20:21:33.786Z" tests="1" failures="1" errors="0" time="0.098">
-    <testcase name="Author has name." time="0.098" classname="ApiAuthorsIdApiAuthorsId">
-      <failure type="AssertionFailure" message="expected response to have status code 200 but got 404">
-        <![CDATA[Failed 1 times.]]>
-        <![CDATA[Collection JSON ID: 8f7943a5-4bad-4182-baf0-6bfb67641575.]]>
-        <![CDATA[Collection name: Udacity.]]>
-        <![CDATA[Request name: api / Authors / {id} / /api/Authors/:id.]]>
-        <![CDATA[Test description: Author has name..]]>
-        <![CDATA[Error message: expected response to have status code 200 but got 404.]]>
-        <![CDATA[Stacktrace: AssertionError: expected response to have status code 200 but got 404
-   at Object.eval sandbox-script.js:1:10).]]>
-      </failure>
-    </testcase>
+  <testsuite name="api / Authors / {ID} / /api/Authors/:ID" id="c82f619f-7493-4b63-aece-568d4b4b065c" timestamp="2025-07-24T20:59:46.598Z" tests="1" failures="0" errors="0" time="0.092">
+    <testcase name="Author has name." time="0.092" classname="ApiAuthorsIdApiAuthorsId"/>
   </testsuite>
-  <testsuite name="api / Authors / {id} / /api/Authors/:id" id="22080d55-e625-4931-9660-99c06ac92d19" timestamp="2025-07-24T20:21:33.786Z" tests="1" failures="1" errors="0" time="0.111">
-    <testcase name="Author deleted." time="0.111" classname="ApiAuthorsIdApiAuthorsId">
-      <failure type="AssertionFailure" message="expected response to have status code 200 but got 404">
-        <![CDATA[Failed 1 times.]]>
-        <![CDATA[Collection JSON ID: 8f7943a5-4bad-4182-baf0-6bfb67641575.]]>
-        <![CDATA[Collection name: Udacity.]]>
-        <![CDATA[Request name: api / Authors / {id} / /api/Authors/:id.]]>
-        <![CDATA[Test description: Author deleted..]]>
-        <![CDATA[Error message: expected response to have status code 200 but got 404.]]>
-        <![CDATA[Stacktrace: AssertionError: expected response to have status code 200 but got 404
-   at Object.eval sandbox-script.js:1:11).]]>
-      </failure>
-    </testcase>
+  <testsuite name="api / Authors / {ID} / /api/Authors/:ID" id="717eb431-72a1-45fb-afa1-d0cbd23ec755" timestamp="2025-07-24T20:59:46.598Z" tests="1" failures="0" errors="0" time="0.096">
+    <testcase name="Author deleted." time="0.096" classname="ApiAuthorsIdApiAuthorsId"/>
   </testsuite>
-  <testsuite name="api / Books / std / /api/Books" id="5b8121ba-dc3f-4eb6-aaa9-6fc150caa64b" timestamp="2025-07-24T20:21:33.786Z" tests="1" failures="1" errors="0" time="0.095">
-    <testcase name="Book created" time="0.095" classname="ApiBooksStdApiBooks">
-      <failure type="AssertionFailure" message="expected response to have status code 200 but got 404">
-        <![CDATA[Failed 1 times.]]>
-        <![CDATA[Collection JSON ID: 8f7943a5-4bad-4182-baf0-6bfb67641575.]]>
-        <![CDATA[Collection name: Udacity.]]>
-        <![CDATA[Request name: api / Books / std / /api/Books.]]>
-        <![CDATA[Test description: Book created.]]>
-        <![CDATA[Error message: expected response to have status code 200 but got 404.]]>
-        <![CDATA[Stacktrace: AssertionError: expected response to have status code 200 but got 404
-   at Object.eval sandbox-script.js:1:12).]]>
-      </failure>
-    </testcase>
+  <testsuite name="api / Books / std / /api/Books" id="0c41d312-5772-45e9-a130-18ce03d8b03f" timestamp="2025-07-24T20:59:46.598Z" tests="1" failures="0" errors="0" time="0.105">
+    <testcase name="Book created" time="0.105" classname="ApiBooksStdApiBooks"/>
   </testsuite>
-  <testsuite name="api / Books / std / /api/Books" id="18a0912d-9ae1-4af1-9dd7-b8b8251e045e" timestamp="2025-07-24T20:21:33.786Z" tests="1" failures="1" errors="0" time="0.092">
-    <testcase name="GET /Books returns valid data" time="0.092" classname="ApiBooksStdApiBooks">
-      <failure type="AssertionFailure" message="expected response to have status code 200 but got 404">
+  <testsuite name="api / Books / std / /api/Books" id="8093707a-4f8f-4d51-b32e-322998769402" timestamp="2025-07-24T20:59:46.598Z" tests="1" failures="1" errors="0" time="0.490">
+    <testcase name="GET /Books returns valid data" time="0.490" classname="ApiBooksStdApiBooks">
+      <failure type="AssertionFailure" message="expected { ID: 1, Title: 'Book 1', …(4) } to have property 'description'">
         <![CDATA[Failed 1 times.]]>
         <![CDATA[Collection JSON ID: 8f7943a5-4bad-4182-baf0-6bfb67641575.]]>
         <![CDATA[Collection name: Udacity.]]>
         <![CDATA[Request name: api / Books / std / /api/Books.]]>
         <![CDATA[Test description: GET /Books returns valid data.]]>
-        <![CDATA[Error message: expected response to have status code 200 but got 404.]]>
-        <![CDATA[Stacktrace: AssertionError: expected response to have status code 200 but got 404
+        <![CDATA[Error message: expected { ID: 1, Title: 'Book 1', …(4) } to have property 'description'.]]>
+        <![CDATA[Stacktrace: AssertionError: expected { ID: 1, Title: 'Book 1', …(4) } to have property 'description'
    at Object.eval sandbox-script.js:1:13).]]>
       </failure>
     </testcase>
   </testsuite>
-  <testsuite name="api / Books / {id} / /api/Books/:id" id="f1ea8802-6073-4aaa-b81e-d476219eaabf" timestamp="2025-07-24T20:21:33.786Z" tests="1" failures="1" errors="0" time="0.095">
-    <testcase name="Activity has title." time="0.095" classname="ApiBooksIdApiBooksId">
-      <failure type="AssertionFailure" message="expected response to have status code 200 but got 404">
-        <![CDATA[Failed 1 times.]]>
-        <![CDATA[Collection JSON ID: 8f7943a5-4bad-4182-baf0-6bfb67641575.]]>
-        <![CDATA[Collection name: Udacity.]]>
-        <![CDATA[Request name: api / Books / {id} / /api/Books/:id.]]>
-        <![CDATA[Test description: Activity has title..]]>
-        <![CDATA[Error message: expected response to have status code 200 but got 404.]]>
-        <![CDATA[Stacktrace: AssertionError: expected response to have status code 200 but got 404
-   at Object.eval sandbox-script.js:1:14).]]>
-      </failure>
-    </testcase>
+  <testsuite name="api / Books / {ID} / /api/Books/:ID" id="3febadc5-1e16-48d9-b2a0-3495d14ffb46" timestamp="2025-07-24T20:59:46.598Z" tests="1" failures="0" errors="0" time="0.090">
+    <testcase name="Activity has Title." time="0.090" classname="ApiBooksIdApiBooksId"/>
   </testsuite>
-  <testsuite name="api / Books / {id} / /api/Books/:id" id="0727067e-63fd-495c-b092-debd0e30fcf3" timestamp="2025-07-24T20:21:33.786Z" tests="1" failures="1" errors="0" time="0.095">
-    <testcase name="Book has correct id." time="0.095" classname="ApiBooksIdApiBooksId">
-      <failure type="AssertionFailure" message="expected response to have status code 200 but got 404">
-        <![CDATA[Failed 1 times.]]>
-        <![CDATA[Collection JSON ID: 8f7943a5-4bad-4182-baf0-6bfb67641575.]]>
-        <![CDATA[Collection name: Udacity.]]>
-        <![CDATA[Request name: api / Books / {id} / /api/Books/:id.]]>
-        <![CDATA[Test description: Book has correct id..]]>
-        <![CDATA[Error message: expected response to have status code 200 but got 404.]]>
-        <![CDATA[Stacktrace: AssertionError: expected response to have status code 200 but got 404
-   at Object.eval sandbox-script.js:1:15).]]>
-      </failure>
-    </testcase>
+  <testsuite name="api / Books / {ID} / /api/Books/:ID" id="329376f4-9585-4269-ad3d-0addaf1830e6" timestamp="2025-07-24T20:59:46.598Z" tests="1" failures="0" errors="0" time="0.120">
+    <testcase name="Book has correct ID." time="0.120" classname="ApiBooksIdApiBooksId"/>
   </testsuite>
-  <testsuite name="api / Books / {id} / /api/Books/:id" id="e58dcb35-529c-47a1-a12c-411d367f1f91" timestamp="2025-07-24T20:21:33.786Z" tests="1" failures="1" errors="0" time="0.096">
-    <testcase name="Book deleted." time="0.096" classname="ApiBooksIdApiBooksId">
-      <failure type="AssertionFailure" message="expected response to have status code 200 but got 404">
-        <![CDATA[Failed 1 times.]]>
-        <![CDATA[Collection JSON ID: 8f7943a5-4bad-4182-baf0-6bfb67641575.]]>
-        <![CDATA[Collection name: Udacity.]]>
-        <![CDATA[Request name: api / Books / {id} / /api/Books/:id.]]>
-        <![CDATA[Test description: Book deleted..]]>
-        <![CDATA[Error message: expected response to have status code 200 but got 404.]]>
-        <![CDATA[Stacktrace: AssertionError: expected response to have status code 200 but got 404
-   at Object.eval sandbox-script.js:1:16).]]>
-      </failure>
-    </testcase>
+  <testsuite name="api / Books / {ID} / /api/Books/:ID" id="5bbf5cf0-0ae7-4742-b693-02eb24d936f2" timestamp="2025-07-24T20:59:46.598Z" tests="1" failures="0" errors="0" time="0.091">
+    <testcase name="Book deleted." time="0.091" classname="ApiBooksIdApiBooksId"/>
   </testsuite>
-  <testsuite name="api / CoverPhotos / std / /api/CoverPhotos" id="d3ac8dfe-c8d1-453f-ac23-71820ab52570" timestamp="2025-07-24T20:21:33.786Z" tests="1" failures="1" errors="0" time="0.092">
-    <testcase name="GET /Activities returns valid data" time="0.092" classname="ApiCoverPhotosStdApiCoverPhotos">
-      <failure type="AssertionFailure" message="expected response to have status code 200 but got 404">
-        <![CDATA[Failed 1 times.]]>
-        <![CDATA[Collection JSON ID: 8f7943a5-4bad-4182-baf0-6bfb67641575.]]>
-        <![CDATA[Collection name: Udacity.]]>
-        <![CDATA[Request name: api / CoverPhotos / std / /api/CoverPhotos.]]>
-        <![CDATA[Test description: GET /Activities returns valid data.]]>
-        <![CDATA[Error message: expected response to have status code 200 but got 404.]]>
-        <![CDATA[Stacktrace: AssertionError: expected response to have status code 200 but got 404
-   at Object.eval sandbox-script.js:1:17).]]>
-      </failure>
-    </testcase>
+  <testsuite name="api / CoverPhotos / std / /api/CoverPhotos" id="14024298-4a2f-4c5a-b36d-ad5dbdb15b81" timestamp="2025-07-24T20:59:46.598Z" tests="1" failures="0" errors="0" time="0.101">
+    <testcase name="GET /Activities returns valid data" time="0.101" classname="ApiCoverPhotosStdApiCoverPhotos"/>
   </testsuite>
-  <testsuite name="api / CoverPhotos / std / /api/CoverPhotos" id="de17344e-2afa-45ea-be38-5dbf32846d54" timestamp="2025-07-24T20:21:33.786Z" tests="1" failures="1" errors="0" time="0.094">
-    <testcase name="Photo created" time="0.094" classname="ApiCoverPhotosStdApiCoverPhotos">
-      <failure type="AssertionFailure" message="expected response to have status code 200 but got 404">
-        <![CDATA[Failed 1 times.]]>
-        <![CDATA[Collection JSON ID: 8f7943a5-4bad-4182-baf0-6bfb67641575.]]>
-        <![CDATA[Collection name: Udacity.]]>
-        <![CDATA[Request name: api / CoverPhotos / std / /api/CoverPhotos.]]>
-        <![CDATA[Test description: Photo created.]]>
-        <![CDATA[Error message: expected response to have status code 200 but got 404.]]>
-        <![CDATA[Stacktrace: AssertionError: expected response to have status code 200 but got 404
-   at Object.eval sandbox-script.js:1:18).]]>
-      </failure>
-    </testcase>
+  <testsuite name="api / CoverPhotos / std / /api/CoverPhotos" id="b1ff1b8b-5350-45b7-a913-cba813c34e2a" timestamp="2025-07-24T20:59:46.598Z" tests="1" failures="0" errors="0" time="0.093">
+    <testcase name="Photo created" time="0.093" classname="ApiCoverPhotosStdApiCoverPhotos"/>
   </testsuite>
-  <testsuite name="api / CoverPhotos / books / covers / {idBook} / /api/CoverPhotos/books/covers/:idBook" id="5180a0ad-601e-475b-89cd-439e8d0bbc98" timestamp="2025-07-24T20:21:33.786Z" tests="1" failures="1" errors="0" time="0.091">
-    <testcase name="GET //api/CoverPhotos/books/covers/{idBook} returns valid data" time="0.091" classname="ApiCoverPhotosBooksCoversIdBookApiCoverPhotosBooksCoversIdBook">
+  <testsuite name="api / CoverPhotos / books / covers / {IDBook} / /api/CoverPhotos/books/covers/:IDBook" id="137083a6-49f4-48ca-b1f1-9efa8d55c937" timestamp="2025-07-24T20:59:46.598Z" tests="1" failures="1" errors="0" time="0.098">
+    <testcase name="GET //api/CoverPhotos/books/covers/{IDBook} returns valid data" time="0.098" classname="ApiCoverPhotosBooksCoversIdBookApiCoverPhotosBooksCoversIdBook">
       <failure type="AssertionFailure" message="expected response to have status code 200 but got 404">
         <![CDATA[Failed 1 times.]]>
         <![CDATA[Collection JSON ID: 8f7943a5-4bad-4182-baf0-6bfb67641575.]]>
         <![CDATA[Collection name: Udacity.]]>
-        <![CDATA[Request name: api / CoverPhotos / books / covers / {idBook} / /api/CoverPhotos/books/covers/:idBook.]]>
-        <![CDATA[Test description: GET //api/CoverPhotos/books/covers/{idBook} returns valid data.]]>
+        <![CDATA[Request name: api / CoverPhotos / books / covers / {IDBook} / /api/CoverPhotos/books/covers/:IDBook.]]>
+        <![CDATA[Test description: GET //api/CoverPhotos/books/covers/{IDBook} returns valid data.]]>
         <![CDATA[Error message: expected response to have status code 200 but got 404.]]>
         <![CDATA[Stacktrace: AssertionError: expected response to have status code 200 but got 404
    at Object.eval sandbox-script.js:1:19).]]>
       </failure>
     </testcase>
   </testsuite>
-  <testsuite name="api / CoverPhotos / {id} / /api/CoverPhotos/:id" id="d8ff0462-ebb1-47c9-81e8-a9d8e68520db" timestamp="2025-07-24T20:21:33.786Z" tests="1" failures="1" errors="0" time="0.092">
-    <testcase name="Photo has correct id." time="0.092" classname="ApiCoverPhotosIdApiCoverPhotosId">
-      <failure type="AssertionFailure" message="expected response to have status code 200 but got 404">
-        <![CDATA[Failed 1 times.]]>
-        <![CDATA[Collection JSON ID: 8f7943a5-4bad-4182-baf0-6bfb67641575.]]>
-        <![CDATA[Collection name: Udacity.]]>
-        <![CDATA[Request name: api / CoverPhotos / {id} / /api/CoverPhotos/:id.]]>
-        <![CDATA[Test description: Photo has correct id..]]>
-        <![CDATA[Error message: expected response to have status code 200 but got 404.]]>
-        <![CDATA[Stacktrace: AssertionError: expected response to have status code 200 but got 404
-   at Object.eval sandbox-script.js:1:20).]]>
-      </failure>
-    </testcase>
+  <testsuite name="api / CoverPhotos / {ID} / /api/CoverPhotos/:ID" id="93c523cd-e22e-4340-9ba3-1784c83d770a" timestamp="2025-07-24T20:59:46.598Z" tests="1" failures="0" errors="0" time="0.111">
+    <testcase name="Photo has correct ID." time="0.111" classname="ApiCoverPhotosIdApiCoverPhotosId"/>
   </testsuite>
-  <testsuite name="api / CoverPhotos / {id} / /api/CoverPhotos/:id" id="ccb82799-93d5-41f3-a31a-7856af59d7d4" timestamp="2025-07-24T20:21:33.786Z" tests="1" failures="1" errors="0" time="0.092">
-    <testcase name="Photo has url." time="0.092" classname="ApiCoverPhotosIdApiCoverPhotosId">
-      <failure type="AssertionFailure" message="expected response to have status code 200 but got 404">
+  <testsuite name="api / CoverPhotos / {ID} / /api/CoverPhotos/:ID" id="9510aeaa-b562-4ead-84f2-f305c1b52936" timestamp="2025-07-24T20:59:46.598Z" tests="1" failures="1" errors="0" time="0.089">
+    <testcase name="Photo has url." time="0.089" classname="ApiCoverPhotosIdApiCoverPhotosId">
+      <failure type="AssertionFailure" message="expected undefined to deeply equal 'https://test2.com'">
         <![CDATA[Failed 1 times.]]>
         <![CDATA[Collection JSON ID: 8f7943a5-4bad-4182-baf0-6bfb67641575.]]>
         <![CDATA[Collection name: Udacity.]]>
-        <![CDATA[Request name: api / CoverPhotos / {id} / /api/CoverPhotos/:id.]]>
+        <![CDATA[Request name: api / CoverPhotos / {ID} / /api/CoverPhotos/:ID.]]>
         <![CDATA[Test description: Photo has url..]]>
-        <![CDATA[Error message: expected response to have status code 200 but got 404.]]>
-        <![CDATA[Stacktrace: AssertionError: expected response to have status code 200 but got 404
+        <![CDATA[Error message: expected undefined to deeply equal 'https://test2.com'.]]>
+        <![CDATA[Stacktrace: AssertionError: expected undefined to deeply equal 'https://test2.com'
    at Object.eval sandbox-script.js:1:21).]]>
       </failure>
     </testcase>
   </testsuite>
-  <testsuite name="api / CoverPhotos / {id} / /api/CoverPhotos/:id" id="777cd170-785b-46a8-a124-4d2a2ab1dbc9" timestamp="2025-07-24T20:21:33.786Z" tests="1" failures="1" errors="0" time="0.091">
-    <testcase name="Photo deleted." time="0.091" classname="ApiCoverPhotosIdApiCoverPhotosId">
-      <failure type="AssertionFailure" message="expected response to have status code 200 but got 404">
-        <![CDATA[Failed 1 times.]]>
-        <![CDATA[Collection JSON ID: 8f7943a5-4bad-4182-baf0-6bfb67641575.]]>
-        <![CDATA[Collection name: Udacity.]]>
-        <![CDATA[Request name: api / CoverPhotos / {id} / /api/CoverPhotos/:id.]]>
-        <![CDATA[Test description: Photo deleted..]]>
-        <![CDATA[Error message: expected response to have status code 200 but got 404.]]>
-        <![CDATA[Stacktrace: AssertionError: expected response to have status code 200 but got 404
-   at Object.eval sandbox-script.js:1:22).]]>
-      </failure>
-    </testcase>
+  <testsuite name="api / CoverPhotos / {ID} / /api/CoverPhotos/:ID" id="0161d2f7-2a92-4b8f-8ac0-2c0276d58b31" timestamp="2025-07-24T20:59:46.598Z" tests="1" failures="0" errors="0" time="0.090">
+    <testcase name="Photo deleted." time="0.090" classname="ApiCoverPhotosIdApiCoverPhotosId"/>
   </testsuite>
-  <testsuite name="api / Users / std / /api/Users" id="9f3d2e3d-9d0a-496d-8189-e6736923de4e" timestamp="2025-07-24T20:21:33.786Z" tests="1" failures="1" errors="0" time="0.094">
-    <testcase name="GET /Activities returns valid data" time="0.094" classname="ApiUsersStdApiUsers">
-      <failure type="AssertionFailure" message="expected response to have status code 200 but got 404">
-        <![CDATA[Failed 1 times.]]>
-        <![CDATA[Collection JSON ID: 8f7943a5-4bad-4182-baf0-6bfb67641575.]]>
-        <![CDATA[Collection name: Udacity.]]>
-        <![CDATA[Request name: api / Users / std / /api/Users.]]>
-        <![CDATA[Test description: GET /Activities returns valid data.]]>
-        <![CDATA[Error message: expected response to have status code 200 but got 404.]]>
-        <![CDATA[Stacktrace: AssertionError: expected response to have status code 200 but got 404
-   at Object.eval sandbox-script.js:1:23).]]>
-      </failure>
-    </testcase>
+  <testsuite name="api / Users / std / /api/Users" id="c2c8415f-889c-424c-bc5a-4908f7c490f3" timestamp="2025-07-24T20:59:46.598Z" tests="1" failures="0" errors="0" time="0.090">
+    <testcase name="GET /Activities returns valid data" time="0.090" classname="ApiUsersStdApiUsers"/>
   </testsuite>
-  <testsuite name="api / Users / std / /api/Users" id="2784fcd5-aa2a-4fab-a539-7c3148ad04c1" timestamp="2025-07-24T20:21:33.786Z" tests="1" failures="1" errors="0" time="0.097">
-    <testcase name="User created" time="0.097" classname="ApiUsersStdApiUsers">
-      <failure type="AssertionFailure" message="expected response to have status code 200 but got 404">
-        <![CDATA[Failed 1 times.]]>
-        <![CDATA[Collection JSON ID: 8f7943a5-4bad-4182-baf0-6bfb67641575.]]>
-        <![CDATA[Collection name: Udacity.]]>
-        <![CDATA[Request name: api / Users / std / /api/Users.]]>
-        <![CDATA[Test description: User created.]]>
-        <![CDATA[Error message: expected response to have status code 200 but got 404.]]>
-        <![CDATA[Stacktrace: AssertionError: expected response to have status code 200 but got 404
-   at Object.eval sandbox-script.js:1:24).]]>
-      </failure>
-    </testcase>
+  <testsuite name="api / Users / std / /api/Users" id="fa54ca77-69bd-4c98-b7c9-a254ff39ce0d" timestamp="2025-07-24T20:59:46.598Z" tests="1" failures="0" errors="0" time="0.090">
+    <testcase name="User created" time="0.090" classname="ApiUsersStdApiUsers"/>
   </testsuite>
-  <testsuite name="api / Users / {id} / /api/Users/:id" id="5131f7da-e2f0-477c-85d7-73fa73c1ae01" timestamp="2025-07-24T20:21:33.786Z" tests="1" failures="1" errors="0" time="0.092">
-    <testcase name="User has correct id." time="0.092" classname="ApiUsersIdApiUsersId">
-      <failure type="AssertionFailure" message="expected response to have status code 200 but got 404">
-        <![CDATA[Failed 1 times.]]>
-        <![CDATA[Collection JSON ID: 8f7943a5-4bad-4182-baf0-6bfb67641575.]]>
-        <![CDATA[Collection name: Udacity.]]>
-        <![CDATA[Request name: api / Users / {id} / /api/Users/:id.]]>
-        <![CDATA[Test description: User has correct id..]]>
-        <![CDATA[Error message: expected response to have status code 200 but got 404.]]>
-        <![CDATA[Stacktrace: AssertionError: expected response to have status code 200 but got 404
-   at Object.eval sandbox-script.js:1:25).]]>
-      </failure>
-    </testcase>
+  <testsuite name="api / Users / {ID} / /api/Users/:ID" id="13c75f18-e2dc-49b6-9e0e-2c89d78e72a0" timestamp="2025-07-24T20:59:46.598Z" tests="1" failures="0" errors="0" time="0.092">
+    <testcase name="User has correct ID." time="0.092" classname="ApiUsersIdApiUsersId"/>
   </testsuite>
-  <testsuite name="api / Users / {id} / /api/Users/:id" id="c2950867-e4a5-413c-8452-270c983be5df" timestamp="2025-07-24T20:21:33.786Z" tests="1" failures="1" errors="0" time="0.100">
-    <testcase name="Activity has title." time="0.100" classname="ApiUsersIdApiUsersId">
-      <failure type="AssertionFailure" message="expected response to have status code 200 but got 404">
-        <![CDATA[Failed 1 times.]]>
-        <![CDATA[Collection JSON ID: 8f7943a5-4bad-4182-baf0-6bfb67641575.]]>
-        <![CDATA[Collection name: Udacity.]]>
-        <![CDATA[Request name: api / Users / {id} / /api/Users/:id.]]>
-        <![CDATA[Test description: Activity has title..]]>
-        <![CDATA[Error message: expected response to have status code 200 but got 404.]]>
-        <![CDATA[Stacktrace: AssertionError: expected response to have status code 200 but got 404
-   at Object.eval sandbox-script.js:1:26).]]>
-      </failure>
-    </testcase>
+  <testsuite name="api / Users / {ID} / /api/Users/:ID" id="df1e23ab-3a36-49a0-bc7d-25342e66f9ba" timestamp="2025-07-24T20:59:46.598Z" tests="1" failures="0" errors="0" time="0.094">
+    <testcase name="Activity has Title." time="0.094" classname="ApiUsersIdApiUsersId"/>
   </testsuite>
-  <testsuite name="api / Users / {id} / /api/Users/:id" id="38b9a9ed-1aa4-452f-8f0d-cd71fa18fe8f" timestamp="2025-07-24T20:21:33.786Z" tests="0" failures="0" errors="0" time="0.092"/>
+  <testsuite name="api / Users / {ID} / /api/Users/:ID" id="de5dc251-e7e3-46ee-b543-6f683bb59325" timestamp="2025-07-24T20:59:46.598Z" tests="0" failures="0" errors="0" time="0.102"/>
 </testsuites>
