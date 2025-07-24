@@ -1,0 +1,45 @@
+{
+	"id": "a255442c-d817-43d4-b845-8eaac5adbd88",
+	"name": "Udacity",
+	"values": [
+		{
+			"key": "baseUrl",
+			"value": "fakerestapi.azurewebsites.net",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "bookId",
+			"value": "1",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "activityId",
+			"value": "2",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "userId",
+			"value": "3",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "photoId",
+			"value": "4",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "authorId",
+			"value": "5",
+			"type": "default",
+			"enabled": true
+		}
+	],
+	"_postman_variable_scope": "environment",
+	"_postman_exported_at": "2025-07-24T02:19:42.442Z",
+	"_postman_exported_using": "Postman/11.53.5"
+}

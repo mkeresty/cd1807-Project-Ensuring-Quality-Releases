@@ -86,7 +86,7 @@ Example:
 *Note: You cannot use ```terraform.tfvars``` for these values.*
 
 ## Terraform
-Ensure all variables are set in ```terraform.tfvars``` then:
+Ensure all variables are set in ```terraform.tfvars``` or ```load_env.sh``` then:
 ```zsh
 ## Assuming you are in the terraform/environments/test/ directory
 terraform init # add -reconfigure if you need to restart
@@ -114,4 +114,4 @@ Edit vars in ```packer.json```
 - Install Terraform extension from the marketplace
 - Click **Create Pipeline** and then **Existing Azure Pipelines YAML file**
 - Add ```all ARM_* and TF_VAR_*``` variables into the pipeline, NOT library
-- Create a new pipeline environment virtual Linux machine and copy the command it provides, then follow the steps in ```create_test_vm.md```
+- Create a new pipeline environment virtual test Linux machine and copy the command it provides, then follow the steps in ```create_test_vm.md```

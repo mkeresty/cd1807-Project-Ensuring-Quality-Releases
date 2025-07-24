@@ -1,0 +1,1470 @@
+{
+	"info": {
+		"_postman_id": "8f7943a5-4bad-4182-baf0-6bfb67641575",
+		"name": "Udacity",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24570224"
+	},
+	"item": [
+		{
+			"name": "api",
+			"item": [
+				{
+					"name": "v1",
+					"item": [
+						{
+							"name": "Activities",
+							"item": [
+								{
+									"name": "std",
+									"item": [
+										{
+											"name": "/api/v1/Activities",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"pm.test(\"GET /Activities returns valid data\", function () {",
+															"    pm.response.to.have.status(200);",
+															"",
+															"    const jsonData = pm.response.json();",
+															"",
+															"    // Check it's an array and not empty",
+															"    pm.expect(jsonData).to.be.an(\"array\");",
+															"    pm.expect(jsonData.length).to.be.above(0);",
+															"",
+															"    jsonData.forEach(activity => {",
+															"        pm.expect(activity).to.have.property(\"id\");",
+															"        pm.expect(activity).to.have.property(\"title\");",
+															"        pm.expect(activity).to.have.property(\"dueDate\");",
+															"        pm.expect(activity).to.have.property(\"completed\");",
+															"    });",
+															"});",
+															""
+														],
+														"type": "text/javascript",
+														"packages": {}
+													}
+												}
+											],
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "text/plain; v=1.0"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/v1/Activities",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"v1",
+														"Activities"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "/api/v1/Activities",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"pm.test(\"Activity created\", function () {",
+															"    pm.response.to.have.status(200);",
+															"    const jsonData = pm.response.json();",
+															"    pm.expect(jsonData.id).to.eql(parseInt(pm.environment.get(\"activityId\")));",
+															"});",
+															""
+														],
+														"type": "text/javascript",
+														"packages": {}
+													}
+												}
+											],
+											"request": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json; v=1.0"
+													},
+													{
+														"key": "Accept",
+														"value": "text/plain; v=1.0"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"id\": {{activityId}},\n  \"title\": \"Title\",\n  \"dueDate\": \"2025-01-01T00:00:00\",\n  \"completed\": false\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/v1/Activities",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"v1",
+														"Activities"
+													]
+												}
+											},
+											"response": []
+										}
+									]
+								},
+								{
+									"name": "{id}",
+									"item": [
+										{
+											"name": "/api/v1/Activities/:id",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"pm.test(\"Activity has correct id.\", function () {",
+															"    pm.response.to.have.status(200);",
+															"    const jsonData = pm.response.json();",
+															"    pm.expect(jsonData.id).to.eql(parseInt(pm.environment.get(\"activityId\")));",
+															"});",
+															""
+														],
+														"type": "text/javascript",
+														"packages": {}
+													}
+												}
+											],
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "text/plain; v=1.0"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/v1/Activities/{{activityId}}",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"v1",
+														"Activities",
+														"{{activityId}}"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "/api/v1/Activities/:id",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"pm.test(\"Activity has title.\", function () {",
+															"    pm.response.to.have.status(200);",
+															"    const jsonData = pm.response.json();",
+															"    pm.expect(jsonData.title).to.eql(\"New Title\");",
+															"});",
+															""
+														],
+														"type": "text/javascript",
+														"packages": {}
+													}
+												}
+											],
+											"request": {
+												"method": "PUT",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json; v=1.0"
+													},
+													{
+														"key": "Accept",
+														"value": "text/plain; v=1.0"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"id\": {{activityId}},\n  \"title\": \"New Title\",\n  \"dueDate\": \"2025-01-01\",\n  \"completed\": false\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/v1/Activities/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"v1",
+														"Activities",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "-31726222",
+															"description": "(Required) "
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "/api/v1/Activities/:id",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"pm.test(\"Activity deleted.\", function () {",
+															"    pm.response.to.have.status(200);",
+															"});",
+															""
+														],
+														"type": "text/javascript",
+														"packages": {}
+													}
+												}
+											],
+											"request": {
+												"method": "DELETE",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/v1/Activities/{{activityId}}",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"v1",
+														"Activities",
+														"{{activityId}}"
+													]
+												}
+											},
+											"response": []
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "Authors",
+							"item": [
+								{
+									"name": "std",
+									"item": [
+										{
+											"name": "/api/v1/Authors",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"pm.test(\"Author created\", function () {",
+															"    pm.response.to.have.status(200);",
+															"    const jsonData = pm.response.json();",
+															"    pm.expect(jsonData.id).to.eql(parseInt(pm.environment.get(\"authorId\")));",
+															"    });",
+															""
+														],
+														"type": "text/javascript",
+														"packages": {}
+													}
+												}
+											],
+											"request": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json; v=1.0"
+													},
+													{
+														"key": "Accept",
+														"value": "text/plain; v=1.0"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"id\": {{authorId}},\n  \"idBook\": {{bookId}},\n  \"firstName\": \"Bob\",\n  \"lastName\": \"Jones\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/v1/Authors",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"v1",
+														"Authors"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "/api/v1/Authors",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"pm.test(\"GET /Authors returns valid data\", function () {",
+															"    pm.response.to.have.status(200);",
+															"",
+															"    const jsonData = pm.response.json();",
+															"",
+															"    // Check it's an array and not empty",
+															"    pm.expect(jsonData).to.be.an(\"array\");",
+															"    pm.expect(jsonData.length).to.be.above(0);",
+															"",
+															"    jsonData.forEach(activity => {",
+															"        pm.expect(activity).to.have.property(\"id\");",
+															"        pm.expect(activity).to.have.property(\"idBook\");",
+															"        pm.expect(activity).to.have.property(\"firstName\");",
+															"        pm.expect(activity).to.have.property(\"lastName\");",
+															"    });",
+															"});",
+															""
+														],
+														"type": "text/javascript",
+														"packages": {}
+													}
+												}
+											],
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "text/plain; v=1.0"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/v1/Authors",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"v1",
+														"Authors"
+													]
+												}
+											},
+											"response": []
+										}
+									]
+								},
+								{
+									"name": "authors",
+									"item": [
+										{
+											"name": "books",
+											"item": [
+												{
+													"name": "{idBook}",
+													"item": [
+														{
+															"name": "/api/v1/Authors/authors/books/:idBook",
+															"event": [
+																{
+																	"listen": "test",
+																	"script": {
+																		"exec": [
+																			"pm.test(\"GET /Authors/authors/books returns valid data\", function () {",
+																			"    pm.response.to.have.status(200);",
+																			"",
+																			"    const jsonData = pm.response.json();",
+																			"",
+																			"    // Check it's an array and not empty",
+																			"    pm.expect(jsonData).to.be.an(\"array\");",
+																			"    pm.expect(jsonData.length).to.be.above(0);",
+																			"",
+																			"    jsonData.forEach(activity => {",
+																			"        pm.expect(activity).to.have.property(\"id\");",
+																			"        pm.expect(activity).to.have.property(\"idBook\");",
+																			"        pm.expect(activity).to.have.property(\"firstName\");",
+																			"        pm.expect(activity).to.have.property(\"lastName\");",
+																			"    });",
+																			"});",
+																			""
+																		],
+																		"type": "text/javascript",
+																		"packages": {}
+																	}
+																}
+															],
+															"request": {
+																"method": "GET",
+																"header": [
+																	{
+																		"key": "Accept",
+																		"value": "text/plain; v=1.0"
+																	}
+																],
+																"url": {
+																	"raw": "{{baseUrl}}/api/v1/Authors/authors/books/{{bookId}}",
+																	"host": [
+																		"{{baseUrl}}"
+																	],
+																	"path": [
+																		"api",
+																		"v1",
+																		"Authors",
+																		"authors",
+																		"books",
+																		"{{bookId}}"
+																	]
+																}
+															},
+															"response": []
+														}
+													]
+												}
+											]
+										}
+									]
+								},
+								{
+									"name": "{id}",
+									"item": [
+										{
+											"name": "/api/v1/Authors/:id",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"pm.test(\"Author has correct id.\", function () {",
+															"    pm.response.to.have.status(200);",
+															"    const jsonData = pm.response.json();",
+															"    pm.expect(jsonData.id).to.eql(parseInt(pm.environment.get(\"authorId\")));",
+															"});",
+															""
+														],
+														"type": "text/javascript",
+														"packages": {}
+													}
+												}
+											],
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "text/plain; v=1.0"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/v1/Authors/{{authorId}}",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"v1",
+														"Authors",
+														"{{authorId}}"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "/api/v1/Authors/:id",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"pm.test(\"Author has name.\", function () {",
+															"    pm.response.to.have.status(200);",
+															"    const jsonData = pm.response.json();",
+															"    pm.expect(jsonData.firstName).to.eql(\"Joe\");",
+															"});",
+															""
+														],
+														"type": "text/javascript",
+														"packages": {}
+													}
+												}
+											],
+											"request": {
+												"method": "PUT",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json; v=1.0"
+													},
+													{
+														"key": "Accept",
+														"value": "text/plain; v=1.0"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"id\": {{activityId}},\n  \"idBook\": {{bookId}},\n  \"firstName\": \"Joe\",\n  \"lastName\": \"Jones\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/v1/Authors/{{authorId}}",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"v1",
+														"Authors",
+														"{{authorId}}"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "/api/v1/Authors/:id",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"pm.test(\"Author deleted.\", function () {",
+															"    pm.response.to.have.status(200);",
+															"});",
+															""
+														],
+														"type": "text/javascript",
+														"packages": {}
+													}
+												}
+											],
+											"request": {
+												"method": "DELETE",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/v1/Authors/{{authorId}}",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"v1",
+														"Authors",
+														"{{authorId}}"
+													]
+												}
+											},
+											"response": []
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "Books",
+							"item": [
+								{
+									"name": "std",
+									"item": [
+										{
+											"name": "/api/v1/Books",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"pm.test(\"Book created\", function () {",
+															"    pm.response.to.have.status(200);",
+															"    const jsonData = pm.response.json();",
+															"    pm.expect(jsonData.id).to.eql(parseInt(pm.environment.get(\"bookId\")));",
+															"});",
+															""
+														],
+														"type": "text/javascript",
+														"packages": {}
+													}
+												}
+											],
+											"request": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json; v=1.0"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"id\": {{bookId}},\n  \"title\": \"Cat in the Hat\",\n  \"description\": \"cat is in a hat\",\n  \"pageCount\": 1234,\n  \"excerpt\": \"string\",\n  \"publishDate\": \"2025-01-01T00:00:00\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/v1/Books",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"v1",
+														"Books"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "/api/v1/Books",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"pm.test(\"GET /Books returns valid data\", function () {",
+															"    pm.response.to.have.status(200);",
+															"",
+															"    const jsonData = pm.response.json();",
+															"",
+															"    // Check it's an array and not empty",
+															"    pm.expect(jsonData).to.be.an(\"array\");",
+															"    pm.expect(jsonData.length).to.be.above(0);",
+															"",
+															"    jsonData.forEach(activity => {",
+															"        pm.expect(activity).to.have.property(\"id\");",
+															"        pm.expect(activity).to.have.property(\"title\");",
+															"        pm.expect(activity).to.have.property(\"description\");",
+															"        pm.expect(activity).to.have.property(\"pageCount\");",
+															"        pm.expect(activity).to.have.property(\"excerpt\");",
+															"        pm.expect(activity).to.have.property(\"publishDate\");",
+															"    });",
+															"});",
+															""
+														],
+														"type": "text/javascript",
+														"packages": {}
+													}
+												}
+											],
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "text/plain; v=1.0"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/v1/Books",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"v1",
+														"Books"
+													]
+												}
+											},
+											"response": []
+										}
+									]
+								},
+								{
+									"name": "{id}",
+									"item": [
+										{
+											"name": "/api/v1/Books/:id",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"pm.test(\"Activity has title.\", function () {",
+															"    pm.response.to.have.status(200);",
+															"    const jsonData = pm.response.json();",
+															"    pm.expect(jsonData.pageCount).to.eql(1235);",
+															"});",
+															""
+														],
+														"type": "text/javascript",
+														"packages": {}
+													}
+												}
+											],
+											"request": {
+												"method": "PUT",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json; v=1.0"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"id\": {{bookId}},\n  \"title\": \"Cat in the Hat\",\n  \"description\": \"cat is in a hat\",\n  \"pageCount\": 1235,\n  \"excerpt\": \"string\",\n  \"publishDate\": \"2025-01-01T00:00:00\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/v1/Books/{{bookId}}",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"v1",
+														"Books",
+														"{{bookId}}"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "/api/v1/Books/:id",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"pm.test(\"Book has correct id.\", function () {",
+															"    pm.response.to.have.status(200);",
+															"    const jsonData = pm.response.json();",
+															"    pm.expect(jsonData.id).to.eql(parseInt(pm.environment.get(\"bookId\")));",
+															"});",
+															""
+														],
+														"type": "text/javascript",
+														"packages": {}
+													}
+												}
+											],
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "text/plain; v=1.0"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/v1/Books/{{bookId}}",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"v1",
+														"Books",
+														"{{bookId}}"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "/api/v1/Books/:id",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"pm.test(\"Book deleted.\", function () {",
+															"    pm.response.to.have.status(200);",
+															"});",
+															""
+														],
+														"type": "text/javascript",
+														"packages": {}
+													}
+												}
+											],
+											"request": {
+												"method": "DELETE",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/v1/Books/{{bookId}}",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"v1",
+														"Books",
+														"{{bookId}}"
+													]
+												}
+											},
+											"response": []
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "CoverPhotos",
+							"item": [
+								{
+									"name": "std",
+									"item": [
+										{
+											"name": "/api/v1/CoverPhotos",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"pm.test(\"GET /Activities returns valid data\", function () {",
+															"    pm.response.to.have.status(200);",
+															"",
+															"    const jsonData = pm.response.json();",
+															"",
+															"    // Check it's an array and not empty",
+															"    pm.expect(jsonData).to.be.an(\"array\");",
+															"    pm.expect(jsonData.length).to.be.above(0);",
+															"",
+															"    jsonData.forEach(activity => {",
+															"        pm.expect(activity).to.have.property(\"id\");",
+															"        pm.expect(activity).to.have.property(\"idBook\");",
+															"        pm.expect(activity).to.have.property(\"url\");",
+															"    });",
+															"});",
+															""
+														],
+														"type": "text/javascript",
+														"packages": {}
+													}
+												}
+											],
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "text/plain; v=1.0"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/v1/CoverPhotos",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"v1",
+														"CoverPhotos"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "/api/v1/CoverPhotos",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"pm.test(\"Photo created\", function () {",
+															"    pm.response.to.have.status(200);",
+															"    const jsonData = pm.response.json();",
+															"    pm.expect(jsonData.id).to.eql(parseInt(pm.environment.get(\"photoId\")));",
+															"});",
+															""
+														],
+														"type": "text/javascript",
+														"packages": {}
+													}
+												}
+											],
+											"request": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json; v=1.0"
+													},
+													{
+														"key": "Accept",
+														"value": "text/plain; v=1.0"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"id\": {{photoId}},\n  \"idBook\": {{bookId}},\n  \"url\": \"https://test.com\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/v1/CoverPhotos",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"v1",
+														"CoverPhotos"
+													]
+												}
+											},
+											"response": []
+										}
+									]
+								},
+								{
+									"name": "books",
+									"item": [
+										{
+											"name": "covers",
+											"item": [
+												{
+													"name": "{idBook}",
+													"item": [
+														{
+															"name": "/api/v1/CoverPhotos/books/covers/:idBook",
+															"event": [
+																{
+																	"listen": "test",
+																	"script": {
+																		"exec": [
+																			"pm.test(\"GET //api/v1/CoverPhotos/books/covers/{idBook} returns valid data\", function () {",
+																			"    pm.response.to.have.status(200);",
+																			"",
+																			"    const jsonData = pm.response.json();",
+																			"",
+																			"    // Check it's an array and not empty",
+																			"    pm.expect(jsonData).to.be.an(\"array\");",
+																			"    pm.expect(jsonData.length).to.be.above(0);",
+																			"",
+																			"    jsonData.forEach(activity => {",
+																			"        pm.expect(activity).to.have.property(\"id\");",
+																			"        pm.expect(activity).to.have.property(\"idBook\");",
+																			"        pm.expect(activity).to.have.property(\"url\");",
+																			"    });",
+																			"});",
+																			""
+																		],
+																		"type": "text/javascript",
+																		"packages": {}
+																	}
+																}
+															],
+															"request": {
+																"method": "GET",
+																"header": [
+																	{
+																		"key": "Accept",
+																		"value": "text/plain; v=1.0"
+																	}
+																],
+																"url": {
+																	"raw": "{{baseUrl}}/api/v1/CoverPhotos/books/covers/{{bookId}}",
+																	"host": [
+																		"{{baseUrl}}"
+																	],
+																	"path": [
+																		"api",
+																		"v1",
+																		"CoverPhotos",
+																		"books",
+																		"covers",
+																		"{{bookId}}"
+																	]
+																}
+															},
+															"response": []
+														}
+													]
+												}
+											]
+										}
+									]
+								},
+								{
+									"name": "{id}",
+									"item": [
+										{
+											"name": "/api/v1/CoverPhotos/:id",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"pm.test(\"Photo has correct id.\", function () {",
+															"    pm.response.to.have.status(200);",
+															"    const jsonData = pm.response.json();",
+															"    pm.expect(jsonData.id).to.eql(parseInt(pm.environment.get(\"photoId\")));",
+															"});",
+															""
+														],
+														"type": "text/javascript",
+														"packages": {}
+													}
+												}
+											],
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "text/plain; v=1.0"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/v1/CoverPhotos/{{photoId}}",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"v1",
+														"CoverPhotos",
+														"{{photoId}}"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "/api/v1/CoverPhotos/:id",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"pm.test(\"Photo has url.\", function () {",
+															"    pm.response.to.have.status(200);",
+															"    const jsonData = pm.response.json();",
+															"    pm.expect(jsonData.url).to.eql(\"https://test2.com\");",
+															"});",
+															""
+														],
+														"type": "text/javascript",
+														"packages": {}
+													}
+												}
+											],
+											"request": {
+												"method": "PUT",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json; v=1.0"
+													},
+													{
+														"key": "Accept",
+														"value": "text/plain; v=1.0"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"id\": {{photoId}},\n  \"idBook\": {{bookId}},\n  \"url\": \"https://test2.com\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/v1/CoverPhotos/{{photoId}}",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"v1",
+														"CoverPhotos",
+														"{{photoId}}"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "/api/v1/CoverPhotos/:id",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"pm.test(\"Photo deleted.\", function () {",
+															"    pm.response.to.have.status(200);",
+															"});",
+															""
+														],
+														"type": "text/javascript",
+														"packages": {}
+													}
+												}
+											],
+											"request": {
+												"method": "DELETE",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/v1/CoverPhotos/{{photoId}}",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"v1",
+														"CoverPhotos",
+														"{{photoId}}"
+													]
+												}
+											},
+											"response": []
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "Users",
+							"item": [
+								{
+									"name": "std",
+									"item": [
+										{
+											"name": "/api/v1/Users",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"pm.test(\"GET /Activities returns valid data\", function () {",
+															"    pm.response.to.have.status(200);",
+															"",
+															"    const jsonData = pm.response.json();",
+															"",
+															"    // Check it's an array and not empty",
+															"    pm.expect(jsonData).to.be.an(\"array\");",
+															"    pm.expect(jsonData.length).to.be.above(0);",
+															"",
+															"    jsonData.forEach(activity => {",
+															"        pm.expect(activity).to.have.property(\"id\");",
+															"        pm.expect(activity).to.have.property(\"userName\");",
+															"        pm.expect(activity).to.have.property(\"password\");",
+															"    });",
+															"});",
+															""
+														],
+														"type": "text/javascript",
+														"packages": {}
+													}
+												}
+											],
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "text/plain; v=1.0"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/v1/Users",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"v1",
+														"Users"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "/api/v1/Users",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"pm.test(\"User created\", function () {",
+															"    pm.response.to.have.status(200);",
+															"    const jsonData = pm.response.json();",
+															"    pm.expect(jsonData.id).to.eql(parseInt(pm.environment.get(\"userId\")));",
+															"});",
+															""
+														],
+														"type": "text/javascript",
+														"packages": {}
+													}
+												}
+											],
+											"request": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json; v=1.0"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"id\": {{userId}},\n  \"userName\": \"Steve\",\n  \"password\": \"pa55word\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/v1/Users",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"v1",
+														"Users"
+													]
+												}
+											},
+											"response": []
+										}
+									]
+								},
+								{
+									"name": "{id}",
+									"item": [
+										{
+											"name": "/api/v1/Users/:id",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"pm.test(\"User has correct id.\", function () {",
+															"    pm.response.to.have.status(200);",
+															"    const jsonData = pm.response.json();",
+															"    pm.expect(jsonData.id).to.eql(parseInt(pm.environment.get(\"userId\")));",
+															"});",
+															""
+														],
+														"type": "text/javascript",
+														"packages": {}
+													}
+												}
+											],
+											"request": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/v1/Users/{{userId}}",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"v1",
+														"Users",
+														"{{userId}}"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "/api/v1/Users/:id",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"pm.test(\"Activity has title.\", function () {",
+															"    pm.response.to.have.status(200);",
+															"    const jsonData = pm.response.json();",
+															"    pm.expect(jsonData.userName).to.eql(\"John\");",
+															"});",
+															""
+														],
+														"type": "text/javascript",
+														"packages": {}
+													}
+												}
+											],
+											"request": {
+												"method": "PUT",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json; v=1.0"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"id\": {{userId}},\n  \"userName\": \"John\",\n  \"password\": \"pa55word\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/v1/Users/{{userId}}",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"v1",
+														"Users",
+														"{{userId}}"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "/api/v1/Users/:id",
+											"request": {
+												"method": "DELETE",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/v1/Users/:{{userId}}",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"v1",
+														"Users",
+														":{{userId}}"
+													],
+													"variable": [
+														{
+															"key": "{{userId}}",
+															"value": ""
+														}
+													]
+												}
+											},
+											"response": []
+										}
+									]
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "fakerestapi.azurewebsites.net",
+			"disabled": true
+		},
+		{
+			"key": "activityId",
+			"value": "11941",
+			"type": "string",
+			"disabled": true
+		},
+		{
+			"key": "authorId",
+			"value": "11942",
+			"type": "string",
+			"disabled": true
+		},
+		{
+			"key": "bookId",
+			"value": "11943",
+			"type": "string",
+			"disabled": true
+		},
+		{
+			"key": "photoId",
+			"value": "11944",
+			"type": "string",
+			"disabled": true
+		},
+		{
+			"key": "userId",
+			"value": "11945",
+			"type": "string",
+			"disabled": true
+		}
+	]
+}

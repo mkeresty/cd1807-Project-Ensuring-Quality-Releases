@@ -7,15 +7,15 @@ pool: myPool
 
 variables:
   python.version: '3.7.6'
-  azureServiceConnectionId: '7309f336-b783-44d5-8bac-ad4974116f0c'
+  azureServiceConnectionId: 'ab43008d-e2a5-42e0-a87d-5fdbd6912c81'
   projectRoot: $(System.DefaultWorkingDirectory)
-  subscriptionId: '456cc604-544c-45f8-99d0-c1b73aeec440'
+  subscriptionId: 'a785336a-35d8-4efd-80be-93d34a9e4b66'
   resourceGroupName: 'Azuredevops'
-  armBackendStorageAccountName: 'tfstate321820361'
+  armBackendStorageAccountName: 'tfstate91224001'
   armBackendContainerName: 'tfstate'
   packerImageName: 'myPackerImage'
   environmentName: 'myEnvironment'
-  azureWebAppName: 'webapp-0254563185.azurewebsites.net'
+  azureWebAppName: 'webapp-0254563186.azurewebsites.net'
 
 stages:
 #--------------------------------------------#  
@@ -139,17 +139,17 @@ stages:
     - task: ArchiveFiles@2
       displayName: 'Archive PerformanceTestSuite'
       inputs:
-        rootFolderOrFile: '$(System.DefaultWorkingDirectory)/automatedtesting/'
+        rootFolderOrFile: '$(System.DefaultWorkingDirectory)/automatedtesting/jmeter/testsuite'
         includeRootFolder: false
         archiveType: 'zip'
-        archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId)-perftests.zip'
+        archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId)-jmeter-tests.zip'
 
-    - publish: $(Build.ArtifactStagingDirectory)/$(Build.BuildId)-perftests.zip
+    - publish: $(Build.ArtifactStagingDirectory)/$(Build.BuildId)-jmeter-tests.zip
       displayName: 'Upload Package'
-      artifact: drop-perftests
+      artifact: drop-jmeter-tests
 
   - job: AutomatedTesting
-    condition: false
+    condition: true
     displayName: Automated Testing
     pool:
       vmImage: 'ubuntu-20.04'
@@ -164,23 +164,16 @@ stages:
         workingDirectory: $(System.DefaultWorkingDirectory)
 
     - task: CmdLine@2
-      displayName: Run Data Validation Tests
+      displayName: Run Postman Tests
       continueOnError: true
       inputs:
-        script: 'newman run TestSuite.Data-Validation.json -e Test.environment.json --reporters cli,junit --reporter-junit-export TEST-DataValidation.xml'
-        workingDirectory: '$(System.DefaultWorkingDirectory)/automatedtesting/postman'
-
-    - task: CmdLine@2
-      displayName: Run Regression Tests
-      continueOnError: true
-      inputs:
-        script: 'newman run TestSuite.Regression.json -e Test.environment.json --reporters cli,junit --reporter-junit-export TEST-Regression.xml'
+        script: 'newman run Udacity.postman_collection.json -e environment.json --reporters cli,junit --reporter-junit-export postman.xml'
         workingDirectory: '$(System.DefaultWorkingDirectory)/automatedtesting/postman'
 
     - task: PublishTestResults@2
       inputs:
         testResultsFormat: 'JUnit'
-        testResultsFiles: '**/TEST-*.xml'
+        testResultsFiles: '**/postman.xml'
         searchFolder: '$(System.DefaultWorkingDirectory)/automatedtesting/postman'
         mergeTestResults: true
         testRunTitle: test-run-$(Build.BuildId)
@@ -202,7 +195,7 @@ stages:
         deploy:
           steps:
           - script: |
-              echo "==== END: Files at DEPLOY end ===="
+              echo "==== BEGIN: Files at DEPLOY end ===="
               find . -type f
             displayName: 'Log files at end of DEPLOY stage'
           - task: AzureWebApp@1
@@ -213,42 +206,6 @@ stages:
               appName: 'myWebApp'
               appType: webApp
               package: $(Pipeline.Workspace)/drop-fakerestapi/$(Build.BuildId)-fakerestapi.zip
-
-          - task: CmdLine@2
-            displayName: Install JMeter
-            inputs:
-              script: |
-                wget https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-5.2.1.tgz
-                tar -xf apache-jmeter-5.2.1.tgz
-                sudo mv apache-jmeter-5.2.1 /opt/jmeter
-                sudo ln -s /opt/jmeter/bin/jmeter /usr/local/bin/jmeter
-                jmeter -v
-
-          - task: CmdLine@2
-            displayName: 'Summary - Starting standalone test @ endurance.jmx'
-            inputs:
-              script: |
-                cd $(System.DefaultWorkingDirectory)
-                rm -rf html
-                rm -rf test-results.csv
-                jmeter -n \
-                  -t endurance.jmx \
-                  -JbaseUrl=fakerestapi.azurewebsites.net \
-                  -l test-results.csv \
-                  -e -o html
-
-          - task: CmdLine@2
-            displayName: 'Summary - Starting standalone test @ stress.jmx'
-            inputs:
-              script: |
-                cd $(System.DefaultWorkingDirectory)
-                rm -rf html
-                rm -rf test-results.csv
-                jmeter -n \
-                  -t stress.jmx \
-                  -JbaseUrl=fakerestapi.azurewebsites.net \
-                  -l test-results.csv \
-                  -e -o html
           - script: |
               echo "==== END: Files at DEPLOY end ===="
               find . -type f
@@ -270,7 +227,7 @@ stages:
           - download: current
             artifact: drop-ui-tests
           - script: |
-              echo "==== END: Files at TEST start ===="
+              echo "==== BEGIN: Files at TEST start ===="
               find . -type f
             displayName: 'Log files at end of TEST stage'
           - task: Bash@3
@@ -297,6 +254,57 @@ stages:
                 echo "Starting Selenium Tests"
                 python3 main.py >> selenium.log
                 echo "Completed Selenium Tests. Check selenium.log for results."
+          - script: |
+              echo "==== END: Files at TEST end ===="
+              find . -type f
+            displayName: 'Log files at end of TEST stage'
+
+
+
+#--------------------------------------------#  
+# JMETER TESTS STAGE
+#--------------------------------------------#    
+- stage: SeleniumTests
+  jobs:
+  - deployment: VMDeploy
+    pool:
+      name: 'myPool'
+    displayName: JMeter Tests
+    environment: 'myEnvironment'
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - download: current
+            artifact: drop-jmeter-tests
+          - script: |
+              unzip -o $(Pipeline.Workspace)/drop-jmeter-tests/$(Build.BuildId)-jmeter-tests.zip -d jmeter-tests
+            displayName: 'Unzip JMeter Tests'
+          - script: |
+              wget https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-5.2.1.tgz
+              tar -xf apache-jmeter-5.2.1.tgz
+              sudo mv apache-jmeter-5.2.1 /opt/jmeter
+              sudo ln -s /opt/jmeter/bin/jmeter /usr/local/bin/jmeter
+            displayName: 'Install JMeter'
+          - script: |
+              cd jmeter-tests/automatedtesting/jmeter
+              jmeter -n \
+                -t endurance.jmx \
+                -JbaseUrl=fakerestapi.azurewebsites.net \
+                -l test-results.csv \
+                -e -o html/endurance
+            displayName: 'Run endurance test'
+          - script: |
+              cd jmeter-tests/automatedtesting/jmeter
+              jmeter -n \
+                -t stress.jmx \
+                -JbaseUrl=fakerestapi.azurewebsites.net \
+                -l test-results.csv \
+                -e -o html/stress
+            displayName: 'Run stress test'
+          - publish: jmeter-tests/automatedtesting/jmeter/html
+            artifact: jmeter-report
+            displayName: 'Publish JMeter HTML Report'
           - script: |
               echo "==== END: Files at TEST end ===="
               find . -type f
