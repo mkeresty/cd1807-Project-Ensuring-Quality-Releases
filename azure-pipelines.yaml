@@ -225,7 +225,7 @@ stages:
           #   displayName: 'Install JMeter'
           - script: |
               rm-rf $(Pipeline.Workspace)/drop-jmeter-tests/jmeter-tests/results/endurance
-              mkdir -p $(Pipeline.Workspace)/drop-jmeter-tests/jmeter-tests/results/endurance
+              mkdir -p $(Pipeline.Workspace)/drop-jmeter-tests/jmeter-tests/results/endurance/html
               cd $(Pipeline.Workspace)/drop-jmeter-tests/jmeter-tests/endurance
               jmeter -n \
                 -t endurance.jmx \
@@ -235,7 +235,7 @@ stages:
             displayName: 'Run endurance test'
           - script: |
               rm -rf $(Pipeline.Workspace)/drop-jmeter-tests/jmeter-tests/results/stress-test
-              mkdir -p $(Pipeline.Workspace)/drop-jmeter-tests/jmeter-tests/results/stress-test
+              mkdir -p $(Pipeline.Workspace)/drop-jmeter-tests/jmeter-tests/results/stress-test/html
               cd $(Pipeline.Workspace)/drop-jmeter-tests/jmeter-tests/stress-test
               jmeter -n \
                 -t stress.jmx \
