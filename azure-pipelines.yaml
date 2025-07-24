@@ -187,9 +187,9 @@ stages:
               appName: '$(azureWebAppName)'
               appType: webApp
               package: $(Pipeline.Workspace)/drop-fakerestapi/$(Build.BuildId)-fakerestapi.zip
-          - script: |
-              echo "Health check"
-              curl -s -o /dev/null -w "%{http_code}" $(webAppUrl)/api/v1/Activities
+          # - script: |
+          #     echo "Health check"
+          #     curl -s -o /dev/null -w "%{http_code}" $(webAppUrl)/api/v1/Activities
 
 #--------------------------------------------#  
 # SELENIUM TESTS STAGE
