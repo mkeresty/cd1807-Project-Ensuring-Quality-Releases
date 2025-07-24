@@ -214,12 +214,19 @@ stages:
               unzip -o $(Pipeline.Workspace)/drop-postman-tests/$(Build.BuildId)-postman-tests.zip -d $(Pipeline.Workspace)/drop-postman-tests/postman-tests
             displayName: 'Unzip Postman Tests'
           - script: |
+              sudo apt-get remove -y libnode-dev nodejs npm || true
+              sudo apt-get autoremove -y || true
               curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
               sudo apt-get install -y nodejs
+
+              # Ensure old node binary isn't being used
+              echo "Before fix: $(which node) -> $(node -v)"
+              sudo ln -sf /usr/bin/node /usr/local/bin/node
+              sudo ln -sf /usr/bin/npm /usr/local/bin/npm
+
               which node
-              sudo update-alternatives --install /usr/bin/node node /usr/bin/nodejs 10
-              sudo update-alternatives --install /usr/bin/node node /usr/local/bin/node 20
-              sudo update-alternatives --set node /usr/local/bin/node
+              node -v
+              npm -v
               sudo apt install -y npm
               sudo npm install -g newman
               newman -v
