@@ -245,7 +245,7 @@ stages:
                 -t stress.jmx \
                 -JbaseUrl=fakerestapi.azurewebsites.net \
                 -l $(Pipeline.Workspace)/drop-jmeter-tests/jmeter-tests/results/stress-test/test-results.csv \
-                -e -o $(Pipeline.Workspace)/drop-jmeter-tests/jmeter-tests/results/stress-test
+                -e -o $(Pipeline.Workspace)/drop-jmeter-tests/jmeter-tests/results/stress-test/html
             displayName: 'Run stress test'
           - publish: $(Pipeline.Workspace)/drop-jmeter-tests/jmeter-tests/results
             artifact: jmeter-report
