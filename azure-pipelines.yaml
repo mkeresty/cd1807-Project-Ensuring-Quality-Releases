@@ -94,7 +94,7 @@ stages:
         secureFile: 'terraform.tfvars'
 
     - task: ms-devlabs.custom-terraform-tasks.custom-terraform-release-task.TerraformTaskV3@3
-      condition: true
+      condition: false
       displayName: Terraform apply
       inputs:
         provider: 'azurerm'
@@ -106,7 +106,7 @@ stages:
         ARM_ACCESS_KEY: $(ARM_ACCESS_KEY)
 
     - task: TerraformTaskV3@3
-      condition: true
+      condition: false
       displayName: Terraform destroy
       inputs:
         provider: 'azurerm'
