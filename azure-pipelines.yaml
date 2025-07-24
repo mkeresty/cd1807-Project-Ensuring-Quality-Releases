@@ -216,31 +216,24 @@ stages:
             inputs:
               targetType: 'inline'
               script: |
-                #! /bin/bash
-                sudo apt-get upgrade -y
-                sudo apt-get install python3-pip -y
-                sudo apt-get install unzip -y
-                sudo apt-get install -y chromium-browser
+                set -e
+                sudo apt-get update
+                sudo apt-get install -y wget unzip python3-pip
+
+                wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+                sudo apt-get install -y ./google-chrome-stable_current_amd64.deb
+
+                CHROME_VERSION=$(google-chrome --version | grep -oP '\d+\.\d+\.\d+' | head -n1)
+                CHROMEDRIVER_VERSION=$(wget -q -O - "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$CHROME_VERSION")
+                wget "https://chromedriver.storage.googleapis.com/${CHROMEDRIVER_VERSION}/chromedriver_linux64.zip"
+                unzip -o chromedriver_linux64.zip
+                sudo mv chromedriver /usr/local/bin/chromedriver
+                chmod +x /usr/local/bin/chromedriver
+
                 pip3 install selenium
-                cd ~/
-                DIR=/home/testuser/app
-                if [ ! -d "$DIR" ]; then
-                    mkdir app
-                fi
-                FILE=/home/testuser/app/chromedriver_linux64.zip
-                if [ ! -f "$FILE" ]; then
-                    LATEST=$(wget -q -O - http://chromedriver.storage.googleapis.com/LATEST_RELEASE)
-                    wget http://chromedriver.storage.googleapis.com/$LATEST/chromedriver_linux64.zip
-                    unzip -o chromedriver_linux64.zip
-                    sudo ln -s $PWD/chromedriver /usr/local/bin/chromedriver
-                fi
-                export PATH=$PATH:/home/testuser/app
-                pwd
-                ls -la
-                ls -la $(Pipeline.Workspace)/drop-ui-tests
+
                 cd $(Pipeline.Workspace)/drop-ui-tests/ui-tests
-                ls -la
-                python3 main.py --headless >> selenium.log
+                python3 main.py --headless
           - publish: $(Pipeline.Workspace)/drop-ui-tests/ui-tests/selenium.log
             artifact: selenium-report
             displayName: 'Publish JMeter HTML Reports'
