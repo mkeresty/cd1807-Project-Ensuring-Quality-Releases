@@ -229,17 +229,17 @@ stages:
                 -t endurance.jmx \
                 -JbaseUrl=fakerestapi.azurewebsites.net \
                 -l test-results.csv \
-                -e -o ../results/endurance
+                -e -o $(Pipeline.Workspace)/drop-jmeter-tests/jmeter-tests/results/endurance
             displayName: 'Run endurance test'
           - script: |
-              cd jmeter-tests/endurance
+              cd $(Pipeline.Workspace)/drop-jmeter-tests/jmeter-tests/stress-test
               jmeter -n \
                 -t stress.jmx \
                 -JbaseUrl=fakerestapi.azurewebsites.net \
                 -l test-results.csv \
-                -e -o ../results/stress
+                -e -o $(Pipeline.Workspace)/drop-jmeter-tests/jmeter-tests/results/stress-test
             displayName: 'Run stress test'
-          - publish: jmeter-tests/results/
+          - publish: $(Pipeline.Workspace)/drop-jmeter-tests/jmeter-tests/results/
             artifact: jmeter-report
             displayName: 'Publish JMeter HTML Reports'
 
@@ -275,7 +275,7 @@ stages:
               cd $(Pipeline.Workspace)/drop-postman-tests/postman-tests
               newman run Udacity.postman_collection.json -e environment.json --reporters cli,junit --reporter-junit-export postman.xml
             displayName: 'Run postman regressiona and validation tests'
-          - publish: postman-tests/postman.xml
+          - publish: $(Pipeline.Workspace)/drop-postman-tests/postman-tests/postman.xml
             artifact: postman-report
             displayName: 'Publish Postman Report'
 
