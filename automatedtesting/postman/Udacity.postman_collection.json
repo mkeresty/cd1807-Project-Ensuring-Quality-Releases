@@ -7,10 +7,7 @@
 	},
 	"item": [
 		{
-			"name": "api",
-			"item": [
-				{
-					"name": "v1",
+					"name": "api",
 					"item": [
 						{
 							"name": "Activities",
@@ -63,7 +60,7 @@
 													],
 													"path": [
 														"api",
-														"v1",
+														
 														"Activities"
 													]
 												}
@@ -118,7 +115,7 @@
 													],
 													"path": [
 														"api",
-														"v1",
+														
 														"Activities"
 													]
 												}
@@ -164,7 +161,7 @@
 													],
 													"path": [
 														"api",
-														"v1",
+														
 														"Activities",
 														"{{activityId}}"
 													]
@@ -220,7 +217,7 @@
 													],
 													"path": [
 														"api",
-														"v1",
+														
 														"Activities",
 														":id"
 													],
@@ -262,7 +259,7 @@
 													],
 													"path": [
 														"api",
-														"v1",
+														
 														"Activities",
 														"{{activityId}}"
 													]
@@ -328,7 +325,7 @@
 													],
 													"path": [
 														"api",
-														"v1",
+														
 														"Authors"
 													]
 												}
@@ -380,7 +377,7 @@
 													],
 													"path": [
 														"api",
-														"v1",
+														
 														"Authors"
 													]
 												}
@@ -443,7 +440,7 @@
 																	],
 																	"path": [
 																		"api",
-																		"v1",
+																		
 																		"Authors",
 																		"authors",
 																		"books",
@@ -496,7 +493,7 @@
 													],
 													"path": [
 														"api",
-														"v1",
+														
 														"Authors",
 														"{{authorId}}"
 													]
@@ -552,7 +549,7 @@
 													],
 													"path": [
 														"api",
-														"v1",
+														
 														"Authors",
 														"{{authorId}}"
 													]
@@ -587,7 +584,7 @@
 													],
 													"path": [
 														"api",
-														"v1",
+														
 														"Authors",
 														"{{authorId}}"
 													]
@@ -649,7 +646,7 @@
 													],
 													"path": [
 														"api",
-														"v1",
+														
 														"Books"
 													]
 												}
@@ -703,7 +700,7 @@
 													],
 													"path": [
 														"api",
-														"v1",
+														
 														"Books"
 													]
 												}
@@ -759,7 +756,7 @@
 													],
 													"path": [
 														"api",
-														"v1",
+														
 														"Books",
 														"{{bookId}}"
 													]
@@ -801,7 +798,7 @@
 													],
 													"path": [
 														"api",
-														"v1",
+														
 														"Books",
 														"{{bookId}}"
 													]
@@ -836,7 +833,7 @@
 													],
 													"path": [
 														"api",
-														"v1",
+														
 														"Books",
 														"{{bookId}}"
 													]
@@ -898,7 +895,7 @@
 													],
 													"path": [
 														"api",
-														"v1",
+														
 														"CoverPhotos"
 													]
 												}
@@ -953,7 +950,7 @@
 													],
 													"path": [
 														"api",
-														"v1",
+														
 														"CoverPhotos"
 													]
 												}
@@ -1015,7 +1012,7 @@
 																	],
 																	"path": [
 																		"api",
-																		"v1",
+																		
 																		"CoverPhotos",
 																		"books",
 																		"covers",
@@ -1068,7 +1065,7 @@
 													],
 													"path": [
 														"api",
-														"v1",
+														
 														"CoverPhotos",
 														"{{photoId}}"
 													]
@@ -1124,7 +1121,7 @@
 													],
 													"path": [
 														"api",
-														"v1",
+														
 														"CoverPhotos",
 														"{{photoId}}"
 													]
@@ -1159,7 +1156,7 @@
 													],
 													"path": [
 														"api",
-														"v1",
+														
 														"CoverPhotos",
 														"{{photoId}}"
 													]
@@ -1221,7 +1218,7 @@
 													],
 													"path": [
 														"api",
-														"v1",
+														
 														"Users"
 													]
 												}
@@ -1272,7 +1269,7 @@
 													],
 													"path": [
 														"api",
-														"v1",
+														
 														"Users"
 													]
 												}
@@ -1313,7 +1310,7 @@
 													],
 													"path": [
 														"api",
-														"v1",
+														
 														"Users",
 														"{{userId}}"
 													]
@@ -1365,7 +1362,7 @@
 													],
 													"path": [
 														"api",
-														"v1",
+														
 														"Users",
 														"{{userId}}"
 													]
@@ -1385,7 +1382,7 @@
 													],
 													"path": [
 														"api",
-														"v1",
+														
 														"Users",
 														":{{userId}}"
 													],
@@ -1404,8 +1401,7 @@
 							]
 						}
 					]
-				}
-			]
+
 		}
 	],
 	"event": [

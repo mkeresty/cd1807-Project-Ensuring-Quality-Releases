@@ -118,6 +118,13 @@ terraform destroy
 - Click **Run**
 
 
+### Alerts
+#### Azure Monitor
+Monitor to alert if a 404 error happens
+- In the Azure portal go to the web app service that was just deployed
+- Set the 
+
+
 
 ### Destroying Resources
 In your local cli at ```./terraform/environments/test```
