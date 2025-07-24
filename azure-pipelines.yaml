@@ -247,7 +247,7 @@ stages:
                 -l $(Pipeline.Workspace)/drop-jmeter-tests/jmeter-tests/results/stress-test/test-results.csv \
                 -e -o $(Pipeline.Workspace)/drop-jmeter-tests/jmeter-tests/results/stress-test
             displayName: 'Run stress test'
-          - publish: $(Pipeline.Workspace)/drop-jmeter-tests/jmeter-tests/results/html
+          - publish: $(Pipeline.Workspace)/drop-jmeter-tests/jmeter-tests/results
             artifact: jmeter-report
             displayName: 'Publish JMeter HTML Reports'
 
