@@ -217,15 +217,20 @@ stages:
               targetType: 'inline'
               script: |
                 set -e
-                sudo apt-get upgrade -y || [[ $? -eq 8 ]]
+
+                sudo apt-get update
+                sudo apt-get upgrade -y || EXIT_CODE=$?
+                if [ "$EXIT_CODE" != "" ] && [ "$EXIT_CODE" -ne 0 ] && [ "$EXIT_CODE" -ne 8 ]; then
+                  echo "apt-get upgrade failed $EXIT_CODE"
+                  exit $EXIT_CODE
+                fi
+
                 sudo apt-get install -y wget unzip python3-pip
-
-                wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-                sudo apt-get install -y ./google-chrome-stable_current_amd64.deb
-
+                wget -q https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+                sudo apt-get install -y ./google-chrome-stable_current_amd64.deb || true
                 CHROME_VERSION=$(google-chrome --version | grep -oP '\d+\.\d+\.\d+' | head -n1)
                 CHROMEDRIVER_VERSION=$(wget -q -O - "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$CHROME_VERSION")
-                wget "https://chromedriver.storage.googleapis.com/${CHROMEDRIVER_VERSION}/chromedriver_linux64.zip"
+                wget -q "https://chromedriver.storage.googleapis.com/${CHROMEDRIVER_VERSION}/chromedriver_linux64.zip"
                 unzip -o chromedriver_linux64.zip
                 sudo mv chromedriver /usr/local/bin/chromedriver
                 chmod +x /usr/local/bin/chromedriver
@@ -233,7 +238,12 @@ stages:
                 pip3 install selenium
 
                 cd $(Pipeline.Workspace)/drop-ui-tests/ui-tests
-                python3 main.py --headless
+                python3 main.py --headless || exit 1
+
+                pip3 install selenium
+
+                cd $(Pipeline.Workspace)/drop-ui-tests/ui-tests
+                python3 main.py --headless || exit 1
           - publish: $(Pipeline.Workspace)/drop-ui-tests/ui-tests/selenium.log
             artifact: selenium-report
             displayName: 'Publish Selenium Reports'
