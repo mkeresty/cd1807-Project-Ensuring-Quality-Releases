@@ -204,8 +204,10 @@ stages:
       runOnce:
         deploy:
           steps:
-          - download: current
-            artifact: drop-ui-tests
+          - task: DownloadPipelineArtifact@2
+            inputs:
+              artifact: drop-ui-tests
+              path: $(Pipeline.Workspace)/drop-ui-tests
           - script: |
               unzip -o $(Pipeline.Workspace)/drop-ui-tests/$(Build.BuildId)-ui-tests.zip -d ui-tests
             displayName: 'Unzip Selenium Tests'
@@ -244,8 +246,10 @@ stages:
       runOnce:
         deploy:
           steps:
-          - download: current
-            artifact: drop-jmeter-tests
+          - task: DownloadPipelineArtifact@2
+            inputs:
+              artifact: drop-jmeter-tests
+              path: $(Pipeline.Workspace)/drop-jmeter-tests
           - script: |
               unzip -o $(Pipeline.Workspace)/drop-jmeter-tests/$(Build.BuildId)-jmeter-tests.zip -d jmeter-tests
             displayName: 'Unzip JMeter Tests'
@@ -295,8 +299,10 @@ stages:
       runOnce:
         deploy:
           steps:
-          - download: current
-            artifact: drop-postman-tests
+          - task: DownloadPipelineArtifact@2
+            inputs:
+              artifact: drop-podman-tests
+              path: $(Pipeline.Workspace)/drop-podman-tests
           - script: |
               unzip -o $(Pipeline.Workspace)/drop-postman-tests/$(Build.BuildId)-postman-tests.zip -d postman-tests
             displayName: 'Unzip Postman Tests'
