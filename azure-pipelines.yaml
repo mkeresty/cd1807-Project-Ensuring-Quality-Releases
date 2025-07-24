@@ -175,10 +175,10 @@ stages:
       runOnce:
         deploy:
           steps:
-          - script: |
-              echo "==== BEGIN: Files at DEPLOY end ===="
-              find . -type f
-            displayName: 'Log files at end of DEPLOY stage'
+          - task: DownloadPipelineArtifact@2
+            inputs:
+              artifact: drop-fakerestapi
+              path: $(Pipeline.Workspace)/drop-fakerestapi
           - task: AzureWebApp@1
             condition: false
             displayName: 'Deploy Azure Web App'
@@ -187,10 +187,7 @@ stages:
               appName: '$(azureWebAppName)'
               appType: webApp
               package: $(Pipeline.Workspace)/drop-fakerestapi/$(Build.BuildId)-fakerestapi.zip
-          - script: |
-              echo "==== END: Files at DEPLOY end ===="
-              find . -type f
-            displayName: 'Log files at end of DEPLOY stage'
+
 #--------------------------------------------#  
 # SELENIUM TESTS STAGE
 #--------------------------------------------#    
@@ -212,15 +209,12 @@ stages:
           - script: |
               unzip -o $(Pipeline.Workspace)/drop-ui-tests/$(Build.BuildId)-ui-tests.zip -d ui-tests
             displayName: 'Unzip Selenium Tests'
-          - script: |
-              echo "==== BEGIN: Files at TEST start ===="
-              find . -type f
-            displayName: 'Log files at end of TEST stage'
           - task: Bash@3
             inputs:
               targetType: 'inline'
               script: |
                 cd ui-tests
+                python3 -m pip install selenium
                 python3 main.py >> selenium.log
           - script: |
               echo "==== END: Files at TEST end ===="
@@ -279,11 +273,6 @@ stages:
           - publish: jmeter-tests/results/
             artifact: jmeter-report
             displayName: 'Publish JMeter HTML Reports'
-          - script: |
-              echo "==== END: Files at TEST end ===="
-              find . -type f
-            displayName: 'Log files at end of TEST stage'
-
 
 
 #--------------------------------------------#  
@@ -320,7 +309,3 @@ stages:
           - publish: postman-tests/postman.xml
             artifact: postman-report
             displayName: 'Publish Postman Report'
-          - script: |
-              echo "==== END: Files at TEST end ===="
-              find . -type f
-            displayName: 'Log files at end of TEST stage'
