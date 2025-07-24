@@ -224,7 +224,9 @@ stages:
               export PATH=$JAVA_HOME/bin:$PATH
             displayName: 'Install JMeter'
           - script: |
-              rm- rf $(Pipeline.Workspace)/drop-jmeter-tests/jmeter-tests/results/endurance
+              export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
+              export PATH=$JAVA_HOME/bin:$PATH
+              rm -rf $(Pipeline.Workspace)/drop-jmeter-tests/jmeter-tests/results/endurance
               mkdir -p $(Pipeline.Workspace)/drop-jmeter-tests/jmeter-tests/results/endurance/html
               cd $(Pipeline.Workspace)/drop-jmeter-tests/jmeter-tests/endurance
               jmeter -n \
@@ -234,6 +236,8 @@ stages:
                 -e -o $(Pipeline.Workspace)/drop-jmeter-tests/jmeter-tests/results/endurance/html
             displayName: 'Run endurance test'
           - script: |
+              export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
+              export PATH=$JAVA_HOME/bin:$PATH
               rm -rf $(Pipeline.Workspace)/drop-jmeter-tests/jmeter-tests/results/stress-test
               mkdir -p $(Pipeline.Workspace)/drop-jmeter-tests/jmeter-tests/results/stress-test/html
               cd $(Pipeline.Workspace)/drop-jmeter-tests/jmeter-tests/stress-test
