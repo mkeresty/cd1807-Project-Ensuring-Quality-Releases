@@ -274,13 +274,15 @@ stages:
               unzip -o $(Pipeline.Workspace)/drop-postman-tests/$(Build.BuildId)-postman-tests.zip -d $(Pipeline.Workspace)/drop-postman-tests/postman-tests
             displayName: 'Unzip Postman Tests'
           - script: |
-              sudo apt install nodejs -y
-              sudo apt install npm -y
+              curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
+              sudo apt-get install -y nodejs
+              sudo apt install -y npm
               sudo npm install -g newman
               newman -v
             displayName: 'Install newman'
           - script: |
               cd $(Pipeline.Workspace)/drop-postman-tests/postman-tests
+              rm -rf postman.xml
               newman run Udacity.postman_collection.json -e environment.json --reporters cli,junit --reporter-junit-export postman.xml
             displayName: 'Run postman regressiona and validation tests'
           - publish: $(Pipeline.Workspace)/drop-postman-tests/postman-tests/postman.xml
@@ -339,6 +341,7 @@ stages:
                 pip3 install selenium
 
                 cd $(Pipeline.Workspace)/drop-ui-tests/ui-tests
+                rm -rf selenium.log
                 python3 main.py --headless || exit 1
 
                 pip3 install selenium
