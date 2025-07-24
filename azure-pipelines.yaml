@@ -224,23 +224,23 @@ stages:
               export PATH=$JAVA_HOME/bin:$PATH
             displayName: 'Install JMeter'
           - script: |
+              rm-rf $(Pipeline.Workspace)/drop-jmeter-tests/jmeter-tests/results/endurance
               mkdir -p $(Pipeline.Workspace)/drop-jmeter-tests/jmeter-tests/results/endurance
               cd $(Pipeline.Workspace)/drop-jmeter-tests/jmeter-tests/endurance
-              rm -f test-results.csv
               jmeter -n \
                 -t endurance.jmx \
                 -JbaseUrl=fakerestapi.azurewebsites.net \
-                -l test-results.csv \
+                -l $(Pipeline.Workspace)/drop-jmeter-tests/jmeter-tests/results/endurance/test-results.csv \
                 -e -o $(Pipeline.Workspace)/drop-jmeter-tests/jmeter-tests/results/endurance
             displayName: 'Run endurance test'
           - script: |
+              rm -rf $(Pipeline.Workspace)/drop-jmeter-tests/jmeter-tests/results/stress-test
               mkdir -p $(Pipeline.Workspace)/drop-jmeter-tests/jmeter-tests/results/stress-test
               cd $(Pipeline.Workspace)/drop-jmeter-tests/jmeter-tests/stress-test
-              rm -f test-results.csv
               jmeter -n \
                 -t stress.jmx \
                 -JbaseUrl=fakerestapi.azurewebsites.net \
-                -l test-results.csv \
+                -l $(Pipeline.Workspace)/drop-jmeter-tests/jmeter-tests/results/stress-test/test-results.csv \
                 -e -o $(Pipeline.Workspace)/drop-jmeter-tests/jmeter-tests/results/stress-test
             displayName: 'Run stress test'
           - publish: $(Pipeline.Workspace)/drop-jmeter-tests/jmeter-tests/results/
