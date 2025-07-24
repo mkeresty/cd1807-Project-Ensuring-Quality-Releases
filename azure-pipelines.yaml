@@ -210,7 +210,7 @@ stages:
               artifact: drop-ui-tests
               path: $(Pipeline.Workspace)/drop-ui-tests
           - script: |
-              unzip -o $(Pipeline.Workspace)/drop-ui-tests/$(Build.BuildId)-ui-tests.zip -d ui-tests
+              unzip -o $(Pipeline.Workspace)/drop-ui-tests/$(Build.BuildId)-ui-tests.zip -d $(Pipeline.Workspace)/drop-ui-tests/ui-tests
             displayName: 'Unzip Selenium Tests'
           - task: Bash@3
             inputs:
