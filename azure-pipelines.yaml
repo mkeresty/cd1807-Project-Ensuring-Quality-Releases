@@ -16,7 +16,7 @@ variables:
   packerImageName: 'myPackerImage'
   environmentName: 'myEnvironment'
   azureWebAppName: 'webapp-odluser284939'
-  webAppUrl: 'https://webapp-odluser284939.azurewebsites.net'
+  webAppUrl: 'fakerestapi.azurewebsites.net'
 
 stages:
 #--------------------------------------------#  
@@ -63,7 +63,7 @@ stages:
         workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environments/test'
 
     - task: ms-devlabs.custom-terraform-tasks.custom-terraform-release-task.TerraformTaskV3@3
-      condition: false
+      condition: true
       displayName: Terraform check vars
       inputs:
         provider: 'azurerm'
@@ -94,7 +94,7 @@ stages:
         secureFile: 'terraform.tfvars'
 
     - task: ms-devlabs.custom-terraform-tasks.custom-terraform-release-task.TerraformTaskV3@3
-      condition: false
+      condition: true
       displayName: Terraform apply
       inputs:
         provider: 'azurerm'
@@ -106,7 +106,7 @@ stages:
         ARM_ACCESS_KEY: $(ARM_ACCESS_KEY)
 
     - task: TerraformTaskV3@3
-      condition: false
+      condition: true
       displayName: Terraform destroy
       inputs:
         provider: 'azurerm'
@@ -181,7 +181,7 @@ stages:
               artifact: drop-fakerestapi
               path: $(Pipeline.Workspace)/drop-fakerestapi
           - task: AzureWebApp@1
-            condition: false
+            condition: true
             displayName: 'Deploy Azure Web App'
             inputs:
               azureSubscription: $(azureServiceConnectionId)
@@ -273,7 +273,11 @@ stages:
           - script: |
               cd $(Pipeline.Workspace)/drop-postman-tests/postman-tests
               rm -rf postman.xml
-              newman run Udacity.postman_collection.json -e environment.json --reporters cli,junit --reporter-junit-export postman.xml
+              newman run Udacity.postman_collection.json \
+                -e environment.json \
+                --env-var "baseUrl=${webAppUrl}" \
+                --reporters cli,junit \
+                --reporter-junit-export postman.xml
             displayName: 'Run postman regression and validation tests'
           - script: |
               cat $(Pipeline.Workspace)/drop-postman-tests/postman-tests/postman.xml
@@ -325,9 +329,9 @@ stages:
               cd $(Pipeline.Workspace)/drop-jmeter-tests/jmeter-tests/endurance
               jmeter -n \
                 -t endurance.jmx \
-                -JbaseUrl=fakerestapi.azurewebsites.net \
+                -JbaseUrl=$(webAppUrl) \
                 -l $(Pipeline.Workspace)/drop-jmeter-tests/jmeter-tests/results/endurance/test-results.csv \
-                -e -o $(Pipeline.Workspace)/drop-jmeter-tests/jmeter-tests/results/endurance/html
+                -e -o $(Pipeline.Workspace)/drop-jmeter-tests/jmeter-tests/results/endurance/html \
                 -j $(Pipeline.Workspace)/drop-jmeter-tests/jmeter-tests/results/endurance/jmeter.log
                 
               echo "Print Endurance JMeter log"
@@ -341,9 +345,9 @@ stages:
               cd $(Pipeline.Workspace)/drop-jmeter-tests/jmeter-tests/stress-test
               jmeter -n \
                 -t stress.jmx \
-                -JbaseUrl=fakerestapi.azurewebsites.net \
+                -JbaseUrl=$(webAppUrl) \
                 -l $(Pipeline.Workspace)/drop-jmeter-tests/jmeter-tests/results/stress-test/test-results.csv \
-                -e -o $(Pipeline.Workspace)/drop-jmeter-tests/jmeter-tests/results/stress-test/html
+                -e -o $(Pipeline.Workspace)/drop-jmeter-tests/jmeter-tests/results/stress-test/html \
                 -j $(Pipeline.Workspace)/drop-jmeter-tests/jmeter-tests/results/stress-test/jmeter.log
               
               echo "Print Stress JMeter log"
