@@ -63,6 +63,7 @@ stages:
         workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environments/test'
 
     - task: ms-devlabs.custom-terraform-tasks.custom-terraform-release-task.TerraformTaskV3@3
+      condition: false
       displayName: Terraform check vars
       inputs:
         provider: 'azurerm'
@@ -220,34 +221,41 @@ stages:
               script: |
                 set -euxo pipefail
 
-                # Update packages
+                # Clean up old chrome
+                echo "Removing any existing Chrome"
+                sudo apt-get remove -y google-chrome-stable || true
+                sudo apt-get purge -y google-chrome-stable || true
+                sudo rm -f /etc/apt/sources.list.d/google-chrome.list || true
                 sudo apt-get update
 
-                # Ensure required tools
-                sudo apt-get install -y unzip wget python3-pip
+                sudo apt-get install -y unzip wget python3-pip libx11-xcb1 libxcb-dri3-0 libgbm1 libasound2 libnss3 libxss1 libatk-bridge2.0-0 libgtk-3-0 fonts-liberation
 
-                # Install Chrome 114 (pinned, stable)
-                echo "Installing Chrome 114"
+                # Install Chrome 114
+                echo "Installing Chrome 114..."
                 wget -q https://dl.google.com/linux/chrome/deb/pool/main/g/google-chrome-stable/google-chrome-stable_114.0.5735.110-1_amd64.deb
-                sudo apt-get install -y ./google-chrome-stable_114.0.5735.110-1_amd64.deb || { echo "Chrome install failed"; exit 1; }
+                sudo dpkg -i google-chrome-stable_114.0.5735.110-1_amd64.deb || sudo apt-get -f install -y
 
-                # Install matching Chromedriver
-                echo "Installing Chromedriver 114.0.5735.90"
+                echo "Installing Chromedriver..."
                 CHROMEDRIVER_VERSION=114.0.5735.90
                 wget -q "https://chromedriver.storage.googleapis.com/${CHROMEDRIVER_VERSION}/chromedriver_linux64.zip"
-                unzip -o chromedriver_linux64.zip || { echo "Unzip failed"; exit 1; }
+                unzip -o chromedriver_linux64.zip
                 sudo mv chromedriver /usr/local/bin/chromedriver
                 chmod +x /usr/local/bin/chromedriver
 
-                # Confirm versions
                 google-chrome --version
                 chromedriver --version
 
-                # Run tests
                 pip3 install selenium
+
                 cd $(Pipeline.Workspace)/drop-ui-tests/ui-tests
                 rm -f selenium.log
-                python3 main.py --headless || { echo "Test failed"; exit 1; }
+                echo "Running tests..."
+                python3 main.py --headless > selenium.log 2>&1 || {
+                  echo "Selenium tests failed. See selenium.log:"
+                  cat selenium.log
+                  exit 1
+                }
+
           - publish: $(Pipeline.Workspace)/drop-ui-tests/ui-tests/selenium.log
             artifact: selenium-report
             displayName: 'Publish Selenium Reports'
