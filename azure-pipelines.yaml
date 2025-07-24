@@ -224,7 +224,7 @@ stages:
           #     export PATH=$JAVA_HOME/bin:$PATH
           #   displayName: 'Install JMeter'
           - script: |
-              rm-rf $(Pipeline.Workspace)/drop-jmeter-tests/jmeter-tests/results/endurance
+              rm- rf $(Pipeline.Workspace)/drop-jmeter-tests/jmeter-tests/results/endurance
               mkdir -p $(Pipeline.Workspace)/drop-jmeter-tests/jmeter-tests/results/endurance/html
               cd $(Pipeline.Workspace)/drop-jmeter-tests/jmeter-tests/endurance
               jmeter -n \
