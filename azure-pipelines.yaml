@@ -224,8 +224,9 @@ stages:
               export PATH=$JAVA_HOME/bin:$PATH
             displayName: 'Install JMeter'
           - script: |
-              cd $(Pipeline.Workspace)/drop-jmeter-tests/jmeter-tests/endurance
               mkdir -p $(Pipeline.Workspace)/drop-jmeter-tests/jmeter-tests/results/endurance
+              cd $(Pipeline.Workspace)/drop-jmeter-tests/jmeter-tests/endurance
+              rm -f test-results.csv
               jmeter -n \
                 -t endurance.jmx \
                 -JbaseUrl=fakerestapi.azurewebsites.net \
@@ -233,8 +234,9 @@ stages:
                 -e -o $(Pipeline.Workspace)/drop-jmeter-tests/jmeter-tests/results/endurance
             displayName: 'Run endurance test'
           - script: |
-              cd $(Pipeline.Workspace)/drop-jmeter-tests/jmeter-tests/stress-test
               mkdir -p $(Pipeline.Workspace)/drop-jmeter-tests/jmeter-tests/results/stress-test
+              cd $(Pipeline.Workspace)/drop-jmeter-tests/jmeter-tests/stress-test
+              rm -f test-results.csv
               jmeter -n \
                 -t stress.jmx \
                 -JbaseUrl=fakerestapi.azurewebsites.net \

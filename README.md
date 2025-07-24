@@ -108,10 +108,12 @@ terraform destroy
 - In **User Settings** create a Personal Access Token and give it full access, then fill in and reload ```load_env.sh```
 - Create new agent pool in **Project Settings > Agent pools** with type **self-hosted** and check **grant access permissions to all pipelines**
 - Follow the steps in ```create_agent.md```. You will now see your agent online in the Dev Portal ![Agent Online](./screenshots/12_agent_online.png)
-- Create a new pipeline environment virtual test Linux machine and copy the command it provides, then follow the steps in ```create_test_vm.md```
+- Create a new pipeline environment virtual test Linux machine and copy the command it provides, then follow the steps in ```create_test_vm.md```. You will now see your vm in your environment
+[Agent Online](./screenshots/18_test_vm_resource.png)
 - Install Terraform extension from the marketplace
+[Extension](./13_install_terraform_extension.png)
 - Upload ```terraform.tfvars``` to pipelines file library
 - Click **Create Pipeline** and then **Existing Azure Pipelines YAML file**
 - Add ```ARM_ACCESS_KEY``` variables into the pipeline, NOT library
-- Click "Run"
+- Click **Run**
 
