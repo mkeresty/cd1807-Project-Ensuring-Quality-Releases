@@ -275,7 +275,7 @@ stages:
               rm -rf postman.xml
               newman run Udacity.postman_collection.json \
                 -e environment.json \
-                --env-var "baseUrl=${webAppUrl}" \
+                --env-var "baseUrl=$(webAppUrl)" \
                 --reporters cli,junit \
                 --reporter-junit-export postman.xml
             displayName: 'Run postman regression and validation tests'
