@@ -15,6 +15,7 @@ variables:
   armBackendContainerName: 'tfstate'
   packerImageName: 'myPackerImage'
   environmentName: 'myEnvironment'
+  azureWebAppName: 'webapp-0254563185.azurewebsites.net'
 
 stages:
 #--------------------------------------------#  
@@ -138,7 +139,7 @@ stages:
     - task: ArchiveFiles@2
       displayName: 'Archive PerformanceTestSuite'
       inputs:
-        rootFolderOrFile: ''
+        rootFolderOrFile: '$(System.DefaultWorkingDirectory)/automatedtesting/'
         includeRootFolder: false
         archiveType: 'zip'
         archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId)-perftests.zip'
@@ -221,7 +222,7 @@ stages:
             displayName: 'Summary - Starting standalone test @ endurance.jmx'
             inputs:
               script: |
-                cd automatedtesting/jmeter/endurance
+                cd $(System.DefaultWorkingDirectory)
                 rm -rf html
                 rm -rf test-results.csv
                 jmeter -n \
@@ -234,7 +235,7 @@ stages:
             displayName: 'Summary - Starting standalone test @ stress.jmx'
             inputs:
               script: |
-                cd automatedtesting/jmeter/stress-test
+                cd $(System.DefaultWorkingDirectory)
                 rm -rf html
                 rm -rf test-results.csv
                 jmeter -n \
@@ -253,7 +254,7 @@ stages:
   jobs:
   - deployment: VMDeploy
     pool:
-      vmImage: '$(packerImageName)'
+      name: 'myPool'
     displayName: Selenium Tests
     environment: 'myEnvironment'
     strategy:
