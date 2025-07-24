@@ -202,6 +202,7 @@ stages:
   - deployment: SeleniumDeploy
     pool:
       name: 'myPool'
+      vmImage: 'ubuntu-22.04'
     displayName: Selenium Tests
     environment: 'myEnvironment'
     strategy:
@@ -219,39 +220,12 @@ stages:
             inputs:
               targetType: 'inline'
               script: |
-                set -euxo pipefail
-
-                # Clean up old chrome
-                echo "Removing any existing Chrome"
-                sudo apt-get remove -y google-chrome-stable || true
-                sudo apt-get purge -y google-chrome-stable || true
-                sudo rm -f /etc/apt/sources.list.d/google-chrome.list || true
-                sudo apt-get update
-
-                sudo apt-get install -y unzip wget python3-pip libx11-xcb1 libxcb-dri3-0 libgbm1 libasound2 libnss3 libxss1 libatk-bridge2.0-0 libgtk-3-0 fonts-liberation
-
-                # Install Chrome 114
-                echo "Installing Chrome 114..."
-                wget -q https://dl.google.com/linux/chrome/deb/pool/main/g/google-chrome-stable/google-chrome-stable_114.0.5735.110-1_amd64.deb
-                sudo dpkg -i google-chrome-stable_114.0.5735.110-1_amd64.deb || sudo apt-get -f install -y
-
-                echo "Installing Chromedriver..."
-                CHROMEDRIVER_VERSION=114.0.5735.90
-                wget -q "https://chromedriver.storage.googleapis.com/${CHROMEDRIVER_VERSION}/chromedriver_linux64.zip"
-                unzip -o chromedriver_linux64.zip
-                sudo mv chromedriver /usr/local/bin/chromedriver
-                chmod +x /usr/local/bin/chromedriver
-
-                google-chrome --version
-                chromedriver --version
-
                 pip3 install selenium
 
                 cd $(Pipeline.Workspace)/drop-ui-tests/ui-tests
                 rm -f selenium.log
                 echo "Running tests..."
                 python3 main.py --headless > selenium.log 2>&1 || {
-                  echo "Selenium tests failed. See selenium.log:"
                   cat selenium.log
                   exit 1
                 }
