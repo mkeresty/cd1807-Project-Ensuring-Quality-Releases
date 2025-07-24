@@ -44,8 +44,8 @@ module "appservice" {
   source           = "../../modules/appservice"
   location         = "${var.location}"
   application_type = "${var.application_type}"
-  resource_type    = "AppService"
   resource_group   = data.azurerm_resource_group.main.name
+  host_name        = "${var.host_name}"
 }
 module "publicip" {
   source           = "../../modules/publicip"

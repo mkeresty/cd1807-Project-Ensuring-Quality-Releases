@@ -160,6 +160,10 @@ stages:
           sudo apt install nodejs -y
           sudo apt install npm -y
           sudo npm install -g newman
+          wget https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-5.2.1.tgz
+          tar -xf apache-jmeter-5.2.1.tgz
+          sudo mv apache-jmeter-5.2.1 /opt/jmeter
+          sudo ln -s /opt/jmeter/bin/jmeter /usr/local/bin/jmeter
         workingDirectory: $(System.DefaultWorkingDirectory)
 
     - task: CmdLine@2
@@ -193,8 +197,8 @@ stages:
 - stage: Deploy
   jobs:
   - deployment: FakeRestAPI
-    # pool:
-    #   name: '$(packerImageName)'
+    pool:
+      name: 'myPool'
     environment: 'myEnvironment'
     strategy:
       runOnce:
