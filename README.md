@@ -4,10 +4,11 @@
 ### Description
 This repo ..............
 
-### Dependencies
+## Dependencies
 - Azure account
 - Azure CLI
 - [Azure DevOps Portal](https://app.vssps.visualstudio.com/_signin)
+- [Azure dashboard](https://portal.azure.com)
 - Terraform CLI
 - JMeter
 - Postman

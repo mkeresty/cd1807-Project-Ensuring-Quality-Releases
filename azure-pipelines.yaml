@@ -225,6 +225,7 @@ stages:
             displayName: 'Install JMeter'
           - script: |
               cd $(Pipeline.Workspace)/drop-jmeter-tests/jmeter-tests/endurance
+              mkdir -p $(Pipeline.Workspace)/drop-jmeter-tests/jmeter-tests/results/endurance
               jmeter -n \
                 -t endurance.jmx \
                 -JbaseUrl=fakerestapi.azurewebsites.net \
@@ -233,6 +234,7 @@ stages:
             displayName: 'Run endurance test'
           - script: |
               cd $(Pipeline.Workspace)/drop-jmeter-tests/jmeter-tests/stress-test
+              mkdir -p $(Pipeline.Workspace)/drop-jmeter-tests/jmeter-tests/results/stress-test
               jmeter -n \
                 -t stress.jmx \
                 -JbaseUrl=fakerestapi.azurewebsites.net \
