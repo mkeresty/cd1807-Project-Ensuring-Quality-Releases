@@ -264,8 +264,8 @@ stages:
           steps:
           - task: DownloadPipelineArtifact@2
             inputs:
-              artifact: drop-podman-tests
-              path: $(Pipeline.Workspace)/drop-podman-tests
+              artifact: drop-postman-tests
+              path: $(Pipeline.Workspace)/drop-postman-tests
           - script: |
               unzip -o $(Pipeline.Workspace)/drop-postman-tests/$(Build.BuildId)-postman-tests.zip -d $(Pipeline.Workspace)/drop-postman-tests/postman-tests
             displayName: 'Unzip Postman Tests'
