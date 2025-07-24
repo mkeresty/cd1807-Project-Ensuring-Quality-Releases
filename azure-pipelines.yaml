@@ -217,14 +217,17 @@ stages:
               targetType: 'inline'
               script: |
                 set -e
-
                 sudo apt-get update
-                sudo apt-get upgrade -y || EXIT_CODE=$?
-                if [ "$EXIT_CODE" != "" ] && [ "$EXIT_CODE" -ne 0 ] && [ "$EXIT_CODE" -ne 8 ]; then
-                  echo "apt-get upgrade failed $EXIT_CODE"
-                  exit $EXIT_CODE
-                fi
 
+                set +e
+                sudo apt-get upgrade -y
+                UPGRADE_CODE=$?
+                set -e
+
+                if [ "$UPGRADE_CODE" -ne 0 ] && [ "$UPGRADE_CODE" -ne 8 ]; then
+                  echo "apt-get upgrade failed $UPGRADE_CODE"
+                  exit $UPGRADE_CODE
+                fi
                 sudo apt-get install -y wget unzip python3-pip
                 wget -q https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
                 sudo apt-get install -y ./google-chrome-stable_current_amd64.deb || true
