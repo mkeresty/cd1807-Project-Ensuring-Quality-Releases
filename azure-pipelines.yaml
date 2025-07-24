@@ -192,6 +192,68 @@ stages:
           #     curl -s -o /dev/null -w "%{http_code}" $(webAppUrl)/api/v1/Activities
 
 
+
+#--------------------------------------------#  
+# SELENIUM TESTS STAGE
+#--------------------------------------------#    
+- stage: SeleniumTests
+  jobs:
+  - deployment: SeleniumDeploy
+    pool:
+      name: 'myPool'
+    displayName: Selenium Tests
+    environment: 'myEnvironment'
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - task: DownloadPipelineArtifact@2
+            inputs:
+              artifact: drop-ui-tests
+              path: $(Pipeline.Workspace)/drop-ui-tests
+          - script: |
+              unzip -o $(Pipeline.Workspace)/drop-ui-tests/$(Build.BuildId)-ui-tests.zip -d $(Pipeline.Workspace)/drop-ui-tests/ui-tests
+            displayName: 'Unzip Selenium Tests'
+          - task: Bash@3
+            inputs:
+              targetType: 'inline'
+              script: |
+                set -e
+                sudo apt-get update
+
+                set +e
+                sudo apt-get upgrade -y
+                UPGRADE_CODE=$?
+                set -e
+
+                if [ "$UPGRADE_CODE" -ne 0 ] && [ "$UPGRADE_CODE" -ne 8 ]; then
+                  echo "apt-get upgrade failed: $UPGRADE_CODE"
+                  exit $UPGRADE_CODE
+                else
+                  echo "apt-get upgrade code: $UPGRADE_CODE"
+                fi
+
+                sudo apt-get install -y wget unzip python3-pip
+                wget -q https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+                sudo apt-get install -y ./google-chrome-stable_current_amd64.deb || true
+                CHROME_VERSION=$(google-chrome --version | grep -oP '\d+\.\d+\.\d+' | head -n1)
+                CHROMEDRIVER_VERSION=$(wget -q -O - "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$CHROME_VERSION")
+                wget -q "https://chromedriver.storage.googleapis.com/${CHROMEDRIVER_VERSION}/chromedriver_linux64.zip"
+                unzip -o chromedriver_linux64.zip
+                sudo mv chromedriver /usr/local/bin/chromedriver
+                chmod +x /usr/local/bin/chromedriver
+                google-chrome --version
+                chromedriver --version
+
+                pip3 install selenium
+
+                cd $(Pipeline.Workspace)/drop-ui-tests/ui-tests
+                rm -rf selenium.log
+                python3 main.py --headless || exit 1
+          - publish: $(Pipeline.Workspace)/drop-ui-tests/ui-tests/selenium.log
+            artifact: selenium-report
+            displayName: 'Publish Selenium Reports'
+
 #--------------------------------------------#  
 # POSTMAN TESTS STAGE
 #--------------------------------------------#    
@@ -302,64 +364,3 @@ stages:
             displayName: 'Publish JMeter HTML Reports'
 
 
-
-#--------------------------------------------#  
-# SELENIUM TESTS STAGE
-#--------------------------------------------#    
-- stage: SeleniumTests
-  jobs:
-  - deployment: SeleniumDeploy
-    pool:
-      name: 'myPool'
-    displayName: Selenium Tests
-    environment: 'myEnvironment'
-    strategy:
-      runOnce:
-        deploy:
-          steps:
-          - task: DownloadPipelineArtifact@2
-            inputs:
-              artifact: drop-ui-tests
-              path: $(Pipeline.Workspace)/drop-ui-tests
-          - script: |
-              unzip -o $(Pipeline.Workspace)/drop-ui-tests/$(Build.BuildId)-ui-tests.zip -d $(Pipeline.Workspace)/drop-ui-tests/ui-tests
-            displayName: 'Unzip Selenium Tests'
-          - task: Bash@3
-            inputs:
-              targetType: 'inline'
-              script: |
-                set -e
-                sudo apt-get update
-
-                set +e
-                sudo apt-get upgrade -y
-                UPGRADE_CODE=$?
-                set -e
-
-                if [ "$UPGRADE_CODE" -ne 0 ] && [ "$UPGRADE_CODE" -ne 8 ]; then
-                  echo "apt-get upgrade failed $UPGRADE_CODE"
-                  exit $UPGRADE_CODE
-                fi
-                sudo apt-get install -y wget unzip python3-pip
-                wget -q https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-                sudo apt-get install -y ./google-chrome-stable_current_amd64.deb || true
-                CHROME_VERSION=$(google-chrome --version | grep -oP '\d+\.\d+\.\d+' | head -n1)
-                CHROMEDRIVER_VERSION=$(wget -q -O - "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$CHROME_VERSION")
-                wget -q "https://chromedriver.storage.googleapis.com/${CHROMEDRIVER_VERSION}/chromedriver_linux64.zip"
-                unzip -o chromedriver_linux64.zip
-                sudo mv chromedriver /usr/local/bin/chromedriver
-                chmod +x /usr/local/bin/chromedriver
-
-                pip3 install selenium
-
-                cd $(Pipeline.Workspace)/drop-ui-tests/ui-tests
-                rm -rf selenium.log
-                python3 main.py --headless || exit 1
-
-                pip3 install selenium
-
-                cd $(Pipeline.Workspace)/drop-ui-tests/ui-tests
-                python3 main.py --headless || exit 1
-          - publish: $(Pipeline.Workspace)/drop-ui-tests/ui-tests/selenium.log
-            artifact: selenium-report
-            displayName: 'Publish Selenium Reports'
