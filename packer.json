@@ -44,7 +44,13 @@
 			"wget https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-5.2.1.tgz",
 			"tar -xf apache-jmeter-5.2.1.tgz",
 			"sudo mv apache-jmeter-5.2.1 /opt/jmeter",
-			"sudo ln -s /opt/jmeter/bin/jmeter /usr/local/bin/jmeter"
+			"sudo ln -s /opt/jmeter/bin/jmeter /usr/local/bin/jmeter",
+			"sudo apt-get update",
+			"sudo apt-get install -y openjdk-11-jdk",
+			"export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64",
+			"export PATH=$JAVA_HOME/bin:$PATH",
+			"echo 'export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64' | sudo tee -a /etc/profile",
+			"echo 'export PATH=$JAVA_HOME/bin:$PATH' | sudo tee -a /etc/profile"
 		],
 		"inline_shebang": "/bin/sh -x",
 		"type": "shell"

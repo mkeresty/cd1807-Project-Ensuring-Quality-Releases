@@ -211,7 +211,7 @@ stages:
               artifact: drop-jmeter-tests
               path: $(Pipeline.Workspace)/drop-jmeter-tests
           - script: |
-              unzip -o $(Pipeline.Workspace)/drop-jmeter-tests/$(Build.BuildId)-jmeter-tests.zip -d jmeter-tests
+              unzip -o $(Pipeline.Workspace)/drop-jmeter-tests/$(Build.BuildId)-jmeter-tests.zip -d $(Pipeline.Workspace)/drop-jmeter-tests/jmeter-tests
             displayName: 'Unzip JMeter Tests'
           - script: |
               wget https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-5.2.1.tgz
@@ -224,7 +224,7 @@ stages:
               export PATH=$JAVA_HOME/bin:$PATH
             displayName: 'Install JMeter'
           - script: |
-              cd jmeter-tests/endurance
+              cd $(Pipeline.Workspace)/drop-jmeter-tests/jmeter-tests/endurance
               jmeter -n \
                 -t endurance.jmx \
                 -JbaseUrl=fakerestapi.azurewebsites.net \
@@ -263,7 +263,7 @@ stages:
               artifact: drop-podman-tests
               path: $(Pipeline.Workspace)/drop-podman-tests
           - script: |
-              unzip -o $(Pipeline.Workspace)/drop-postman-tests/$(Build.BuildId)-postman-tests.zip -d postman-tests
+              unzip -o $(Pipeline.Workspace)/drop-postman-tests/$(Build.BuildId)-postman-tests.zip -d $(Pipeline.Workspace)/drop-postman-tests/postman-tests
             displayName: 'Unzip Postman Tests'
           - script: |
               sudo apt install nodejs -y
@@ -272,7 +272,7 @@ stages:
               newman -v
             displayName: 'Install newman'
           - script: |
-              cd postman-tests
+              cd $(Pipeline.Workspace)/drop-postman-tests/postman-tests
               newman run Udacity.postman_collection.json -e environment.json --reporters cli,junit --reporter-junit-export postman.xml
             displayName: 'Run postman regressiona and validation tests'
           - publish: postman-tests/postman.xml
