@@ -32,10 +32,10 @@
 															"    pm.expect(jsonData.length).to.be.above(0);",
 															"",
 															"    jsonData.forEach(activity => {",
-															"        pm.expect(activity).to.have.property(\"id\");",
-															"        pm.expect(activity).to.have.property(\"title\");",
-															"        pm.expect(activity).to.have.property(\"dueDate\");",
-															"        pm.expect(activity).to.have.property(\"completed\");",
+															"        pm.expect(activity).to.have.property(\"ID\");",
+															"        pm.expect(activity).to.have.property(\"Title\");",
+															"        pm.expect(activity).to.have.property(\"DueDate\");",
+															"        pm.expect(activity).to.have.property(\"Completed\");",
 															"    });",
 															"});",
 															""
@@ -77,7 +77,7 @@
 															"pm.test(\"Activity created\", function () {",
 															"    pm.response.to.have.status(200);",
 															"    const jsonData = pm.response.json();",
-															"    pm.expect(jsonData.id).to.eql(parseInt(pm.environment.get(\"activityId\")));",
+															"    pm.expect(jsonData.ID).to.eql(parseInt(pm.environment.get(\"activityId\")));",
 															"});",
 															""
 														],
@@ -100,7 +100,7 @@
 												],
 												"body": {
 													"mode": "raw",
-													"raw": "{\n  \"id\": {{activityId}},\n  \"title\": \"Title\",\n  \"dueDate\": \"2025-01-01T00:00:00\",\n  \"completed\": false\n}",
+													"raw": "{\n  \"ID\": {{activityId}},\n  \"Title\": \"Title\",\n  \"DueDate\": \"2025-01-01T00:00:00\",\n  \"Completed\": false\n}",
 													"options": {
 														"raw": {
 															"headerFamily": "json",
@@ -125,19 +125,19 @@
 									]
 								},
 								{
-									"name": "{id}",
+									"name": "{ID}",
 									"item": [
 										{
-											"name": "/api/Activities/:id",
+											"name": "/api/Activities/:ID",
 											"event": [
 												{
 													"listen": "test",
 													"script": {
 														"exec": [
-															"pm.test(\"Activity has correct id.\", function () {",
+															"pm.test(\"Activity has correct ID.\", function () {",
 															"    pm.response.to.have.status(200);",
 															"    const jsonData = pm.response.json();",
-															"    pm.expect(jsonData.id).to.eql(parseInt(pm.environment.get(\"activityId\")));",
+															"    pm.expect(jsonData.ID).to.eql(parseInt(pm.environment.get(\"activityId\")));",
 															"});",
 															""
 														],
@@ -170,16 +170,16 @@
 											"response": []
 										},
 										{
-											"name": "/api/Activities/:id",
+											"name": "/api/Activities/:ID",
 											"event": [
 												{
 													"listen": "test",
 													"script": {
 														"exec": [
-															"pm.test(\"Activity has title.\", function () {",
+															"pm.test(\"Activity has Title.\", function () {",
 															"    pm.response.to.have.status(200);",
 															"    const jsonData = pm.response.json();",
-															"    pm.expect(jsonData.title).to.eql(\"New Title\");",
+															"    pm.expect(jsonData.Title).to.eql(\"New Title\");",
 															"});",
 															""
 														],
@@ -202,7 +202,7 @@
 												],
 												"body": {
 													"mode": "raw",
-													"raw": "{\n  \"id\": {{activityId}},\n  \"title\": \"New Title\",\n  \"dueDate\": \"2025-01-01\",\n  \"completed\": false\n}",
+													"raw": "{\n  \"ID\": {{activityId}},\n  \"Title\": \"New Title\",\n  \"DueDate\": \"2025-01-01\",\n  \"Completed\": false\n}",
 													"options": {
 														"raw": {
 															"headerFamily": "json",
@@ -211,7 +211,7 @@
 													}
 												},
 												"url": {
-													"raw": "{{baseUrl}}/api/Activities/:id",
+													"raw": "{{baseUrl}}/api/Activities/:ID",
 													"host": [
 														"{{baseUrl}}"
 													],
@@ -219,11 +219,11 @@
 														"api",
 														
 														"Activities",
-														":id"
+														":ID"
 													],
 													"variable": [
 														{
-															"key": "id",
+															"key": "ID",
 															"value": "-31726222",
 															"description": "(Required) "
 														}
@@ -233,7 +233,7 @@
 											"response": []
 										},
 										{
-											"name": "/api/Activities/:id",
+											"name": "/api/Activities/:ID",
 											"event": [
 												{
 													"listen": "test",
@@ -287,7 +287,7 @@
 															"pm.test(\"Author created\", function () {",
 															"    pm.response.to.have.status(200);",
 															"    const jsonData = pm.response.json();",
-															"    pm.expect(jsonData.id).to.eql(parseInt(pm.environment.get(\"authorId\")));",
+															"    pm.expect(jsonData.ID).to.eql(parseInt(pm.environment.get(\"authorId\")));",
 															"    });",
 															""
 														],
@@ -310,7 +310,7 @@
 												],
 												"body": {
 													"mode": "raw",
-													"raw": "{\n  \"id\": {{authorId}},\n  \"idBook\": {{bookId}},\n  \"firstName\": \"Bob\",\n  \"lastName\": \"Jones\"\n}",
+													"raw": "{\n  \"ID\": {{authorId}},\n  \"IDBook\": {{bookId}},\n  \"FirstName\": \"Bob\",\n  \"LastName\": \"Jones\"\n}",
 													"options": {
 														"raw": {
 															"headerFamily": "json",
@@ -349,10 +349,10 @@
 															"    pm.expect(jsonData.length).to.be.above(0);",
 															"",
 															"    jsonData.forEach(activity => {",
-															"        pm.expect(activity).to.have.property(\"id\");",
-															"        pm.expect(activity).to.have.property(\"idBook\");",
-															"        pm.expect(activity).to.have.property(\"firstName\");",
-															"        pm.expect(activity).to.have.property(\"lastName\");",
+															"        pm.expect(activity).to.have.property(\"ID\");",
+															"        pm.expect(activity).to.have.property(\"IDBook\");",
+															"        pm.expect(activity).to.have.property(\"FirstName\");",
+															"        pm.expect(activity).to.have.property(\"LastName\");",
 															"    });",
 															"});",
 															""
@@ -393,10 +393,10 @@
 											"name": "books",
 											"item": [
 												{
-													"name": "{idBook}",
+													"name": "{IDBook}",
 													"item": [
 														{
-															"name": "/api/Authors/authors/books/:idBook",
+															"name": "/api/Authors/authors/books/:IDBook",
 															"event": [
 																{
 																	"listen": "test",
@@ -412,10 +412,10 @@
 																			"    pm.expect(jsonData.length).to.be.above(0);",
 																			"",
 																			"    jsonData.forEach(activity => {",
-																			"        pm.expect(activity).to.have.property(\"id\");",
-																			"        pm.expect(activity).to.have.property(\"idBook\");",
-																			"        pm.expect(activity).to.have.property(\"firstName\");",
-																			"        pm.expect(activity).to.have.property(\"lastName\");",
+																			"        pm.expect(activity).to.have.property(\"ID\");",
+																			"        pm.expect(activity).to.have.property(\"IDBook\");",
+																			"        pm.expect(activity).to.have.property(\"FirstName\");",
+																			"        pm.expect(activity).to.have.property(\"LastName\");",
 																			"    });",
 																			"});",
 																			""
@@ -457,19 +457,19 @@
 									]
 								},
 								{
-									"name": "{id}",
+									"name": "{ID}",
 									"item": [
 										{
-											"name": "/api/Authors/:id",
+											"name": "/api/Authors/:ID",
 											"event": [
 												{
 													"listen": "test",
 													"script": {
 														"exec": [
-															"pm.test(\"Author has correct id.\", function () {",
+															"pm.test(\"Author has correct ID.\", function () {",
 															"    pm.response.to.have.status(200);",
 															"    const jsonData = pm.response.json();",
-															"    pm.expect(jsonData.id).to.eql(parseInt(pm.environment.get(\"authorId\")));",
+															"    pm.expect(jsonData.ID).to.eql(parseInt(pm.environment.get(\"authorId\")));",
 															"});",
 															""
 														],
@@ -502,7 +502,7 @@
 											"response": []
 										},
 										{
-											"name": "/api/Authors/:id",
+											"name": "/api/Authors/:ID",
 											"event": [
 												{
 													"listen": "test",
@@ -511,7 +511,7 @@
 															"pm.test(\"Author has name.\", function () {",
 															"    pm.response.to.have.status(200);",
 															"    const jsonData = pm.response.json();",
-															"    pm.expect(jsonData.firstName).to.eql(\"Joe\");",
+															"    pm.expect(jsonData.FirstName).to.eql(\"Joe\");",
 															"});",
 															""
 														],
@@ -534,7 +534,7 @@
 												],
 												"body": {
 													"mode": "raw",
-													"raw": "{\n  \"id\": {{activityId}},\n  \"idBook\": {{bookId}},\n  \"firstName\": \"Joe\",\n  \"lastName\": \"Jones\"\n}",
+													"raw": "{\n  \"ID\": {{activityId}},\n  \"IDBook\": {{bookId}},\n  \"FirstName\": \"Joe\",\n  \"LastName\": \"Jones\"\n}",
 													"options": {
 														"raw": {
 															"headerFamily": "json",
@@ -558,7 +558,7 @@
 											"response": []
 										},
 										{
-											"name": "/api/Authors/:id",
+											"name": "/api/Authors/:ID",
 											"event": [
 												{
 													"listen": "test",
@@ -612,7 +612,7 @@
 															"pm.test(\"Book created\", function () {",
 															"    pm.response.to.have.status(200);",
 															"    const jsonData = pm.response.json();",
-															"    pm.expect(jsonData.id).to.eql(parseInt(pm.environment.get(\"bookId\")));",
+															"    pm.expect(jsonData.ID).to.eql(parseInt(pm.environment.get(\"bookId\")));",
 															"});",
 															""
 														],
@@ -631,7 +631,7 @@
 												],
 												"body": {
 													"mode": "raw",
-													"raw": "{\n  \"id\": {{bookId}},\n  \"title\": \"Cat in the Hat\",\n  \"description\": \"cat is in a hat\",\n  \"pageCount\": 1234,\n  \"excerpt\": \"string\",\n  \"publishDate\": \"2025-01-01T00:00:00\"\n}",
+													"raw": "{\n  \"ID\": {{bookId}},\n  \"Title\": \"Cat in the Hat\",\n  \"description\": \"cat is in a hat\",\n  \"PageCount\": 1234,\n  \"Excerpt\": \"string\",\n  \"PublishDate\": \"2025-01-01T00:00:00\"\n}",
 													"options": {
 														"raw": {
 															"headerFamily": "json",
@@ -670,12 +670,12 @@
 															"    pm.expect(jsonData.length).to.be.above(0);",
 															"",
 															"    jsonData.forEach(activity => {",
-															"        pm.expect(activity).to.have.property(\"id\");",
-															"        pm.expect(activity).to.have.property(\"title\");",
+															"        pm.expect(activity).to.have.property(\"ID\");",
+															"        pm.expect(activity).to.have.property(\"Title\");",
 															"        pm.expect(activity).to.have.property(\"description\");",
-															"        pm.expect(activity).to.have.property(\"pageCount\");",
-															"        pm.expect(activity).to.have.property(\"excerpt\");",
-															"        pm.expect(activity).to.have.property(\"publishDate\");",
+															"        pm.expect(activity).to.have.property(\"PageCount\");",
+															"        pm.expect(activity).to.have.property(\"Excerpt\");",
+															"        pm.expect(activity).to.have.property(\"PublishDate\");",
 															"    });",
 															"});",
 															""
@@ -710,19 +710,19 @@
 									]
 								},
 								{
-									"name": "{id}",
+									"name": "{ID}",
 									"item": [
 										{
-											"name": "/api/Books/:id",
+											"name": "/api/Books/:ID",
 											"event": [
 												{
 													"listen": "test",
 													"script": {
 														"exec": [
-															"pm.test(\"Activity has title.\", function () {",
+															"pm.test(\"Activity has Title.\", function () {",
 															"    pm.response.to.have.status(200);",
 															"    const jsonData = pm.response.json();",
-															"    pm.expect(jsonData.pageCount).to.eql(1235);",
+															"    pm.expect(jsonData.PageCount).to.eql(1235);",
 															"});",
 															""
 														],
@@ -741,7 +741,7 @@
 												],
 												"body": {
 													"mode": "raw",
-													"raw": "{\n  \"id\": {{bookId}},\n  \"title\": \"Cat in the Hat\",\n  \"description\": \"cat is in a hat\",\n  \"pageCount\": 1235,\n  \"excerpt\": \"string\",\n  \"publishDate\": \"2025-01-01T00:00:00\"\n}",
+													"raw": "{\n  \"ID\": {{bookId}},\n  \"Title\": \"Cat in the Hat\",\n  \"description\": \"cat is in a hat\",\n  \"PageCount\": 1235,\n  \"Excerpt\": \"string\",\n  \"PublishDate\": \"2025-01-01T00:00:00\"\n}",
 													"options": {
 														"raw": {
 															"headerFamily": "json",
@@ -765,16 +765,16 @@
 											"response": []
 										},
 										{
-											"name": "/api/Books/:id",
+											"name": "/api/Books/:ID",
 											"event": [
 												{
 													"listen": "test",
 													"script": {
 														"exec": [
-															"pm.test(\"Book has correct id.\", function () {",
+															"pm.test(\"Book has correct ID.\", function () {",
 															"    pm.response.to.have.status(200);",
 															"    const jsonData = pm.response.json();",
-															"    pm.expect(jsonData.id).to.eql(parseInt(pm.environment.get(\"bookId\")));",
+															"    pm.expect(jsonData.ID).to.eql(parseInt(pm.environment.get(\"bookId\")));",
 															"});",
 															""
 														],
@@ -807,7 +807,7 @@
 											"response": []
 										},
 										{
-											"name": "/api/Books/:id",
+											"name": "/api/Books/:ID",
 											"event": [
 												{
 													"listen": "test",
@@ -868,9 +868,9 @@
 															"    pm.expect(jsonData.length).to.be.above(0);",
 															"",
 															"    jsonData.forEach(activity => {",
-															"        pm.expect(activity).to.have.property(\"id\");",
-															"        pm.expect(activity).to.have.property(\"idBook\");",
-															"        pm.expect(activity).to.have.property(\"url\");",
+															"        pm.expect(activity).to.have.property(\"ID\");",
+															"        pm.expect(activity).to.have.property(\"IDBook\");",
+															"        pm.expect(activity).to.have.property(\"Url\");",
 															"    });",
 															"});",
 															""
@@ -912,7 +912,7 @@
 															"pm.test(\"Photo created\", function () {",
 															"    pm.response.to.have.status(200);",
 															"    const jsonData = pm.response.json();",
-															"    pm.expect(jsonData.id).to.eql(parseInt(pm.environment.get(\"photoId\")));",
+															"    pm.expect(jsonData.ID).to.eql(parseInt(pm.environment.get(\"photoId\")));",
 															"});",
 															""
 														],
@@ -935,7 +935,7 @@
 												],
 												"body": {
 													"mode": "raw",
-													"raw": "{\n  \"id\": {{photoId}},\n  \"idBook\": {{bookId}},\n  \"url\": \"https://test.com\"\n}",
+													"raw": "{\n  \"ID\": {{photoId}},\n  \"IDBook\": {{bookId}},\n  \"url\": \"https://test.com\"\n}",
 													"options": {
 														"raw": {
 															"headerFamily": "json",
@@ -966,16 +966,16 @@
 											"name": "covers",
 											"item": [
 												{
-													"name": "{idBook}",
+													"name": "{IDBook}",
 													"item": [
 														{
-															"name": "/api/CoverPhotos/books/covers/:idBook",
+															"name": "/api/CoverPhotos/books/covers/:IDBook",
 															"event": [
 																{
 																	"listen": "test",
 																	"script": {
 																		"exec": [
-																			"pm.test(\"GET //api/CoverPhotos/books/covers/{idBook} returns valid data\", function () {",
+																			"pm.test(\"GET //api/CoverPhotos/books/covers/{IDBook} returns valid data\", function () {",
 																			"    pm.response.to.have.status(200);",
 																			"",
 																			"    const jsonData = pm.response.json();",
@@ -985,8 +985,8 @@
 																			"    pm.expect(jsonData.length).to.be.above(0);",
 																			"",
 																			"    jsonData.forEach(activity => {",
-																			"        pm.expect(activity).to.have.property(\"id\");",
-																			"        pm.expect(activity).to.have.property(\"idBook\");",
+																			"        pm.expect(activity).to.have.property(\"ID\");",
+																			"        pm.expect(activity).to.have.property(\"IDBook\");",
 																			"        pm.expect(activity).to.have.property(\"url\");",
 																			"    });",
 																			"});",
@@ -1029,19 +1029,19 @@
 									]
 								},
 								{
-									"name": "{id}",
+									"name": "{ID}",
 									"item": [
 										{
-											"name": "/api/CoverPhotos/:id",
+											"name": "/api/CoverPhotos/:ID",
 											"event": [
 												{
 													"listen": "test",
 													"script": {
 														"exec": [
-															"pm.test(\"Photo has correct id.\", function () {",
+															"pm.test(\"Photo has correct ID.\", function () {",
 															"    pm.response.to.have.status(200);",
 															"    const jsonData = pm.response.json();",
-															"    pm.expect(jsonData.id).to.eql(parseInt(pm.environment.get(\"photoId\")));",
+															"    pm.expect(jsonData.ID).to.eql(parseInt(pm.environment.get(\"photoId\")));",
 															"});",
 															""
 														],
@@ -1074,7 +1074,7 @@
 											"response": []
 										},
 										{
-											"name": "/api/CoverPhotos/:id",
+											"name": "/api/CoverPhotos/:ID",
 											"event": [
 												{
 													"listen": "test",
@@ -1106,7 +1106,7 @@
 												],
 												"body": {
 													"mode": "raw",
-													"raw": "{\n  \"id\": {{photoId}},\n  \"idBook\": {{bookId}},\n  \"url\": \"https://test2.com\"\n}",
+													"raw": "{\n  \"ID\": {{photoId}},\n  \"IDBook\": {{bookId}},\n  \"url\": \"https://test2.com\"\n}",
 													"options": {
 														"raw": {
 															"headerFamily": "json",
@@ -1130,7 +1130,7 @@
 											"response": []
 										},
 										{
-											"name": "/api/CoverPhotos/:id",
+											"name": "/api/CoverPhotos/:ID",
 											"event": [
 												{
 													"listen": "test",
@@ -1191,9 +1191,9 @@
 															"    pm.expect(jsonData.length).to.be.above(0);",
 															"",
 															"    jsonData.forEach(activity => {",
-															"        pm.expect(activity).to.have.property(\"id\");",
-															"        pm.expect(activity).to.have.property(\"userName\");",
-															"        pm.expect(activity).to.have.property(\"password\");",
+															"        pm.expect(activity).to.have.property(\"ID\");",
+															"        pm.expect(activity).to.have.property(\"UserName\");",
+															"        pm.expect(activity).to.have.property(\"Password\");",
 															"    });",
 															"});",
 															""
@@ -1235,7 +1235,7 @@
 															"pm.test(\"User created\", function () {",
 															"    pm.response.to.have.status(200);",
 															"    const jsonData = pm.response.json();",
-															"    pm.expect(jsonData.id).to.eql(parseInt(pm.environment.get(\"userId\")));",
+															"    pm.expect(jsonData.ID).to.eql(parseInt(pm.environment.get(\"userId\")));",
 															"});",
 															""
 														],
@@ -1254,7 +1254,7 @@
 												],
 												"body": {
 													"mode": "raw",
-													"raw": "{\n  \"id\": {{userId}},\n  \"userName\": \"Steve\",\n  \"password\": \"pa55word\"\n}",
+													"raw": "{\n  \"ID\": {{userId}},\n  \"UserName\": \"Steve\",\n  \"Password\": \"pa55word\"\n}",
 													"options": {
 														"raw": {
 															"headerFamily": "json",
@@ -1279,19 +1279,19 @@
 									]
 								},
 								{
-									"name": "{id}",
+									"name": "{ID}",
 									"item": [
 										{
-											"name": "/api/Users/:id",
+											"name": "/api/Users/:ID",
 											"event": [
 												{
 													"listen": "test",
 													"script": {
 														"exec": [
-															"pm.test(\"User has correct id.\", function () {",
+															"pm.test(\"User has correct ID.\", function () {",
 															"    pm.response.to.have.status(200);",
 															"    const jsonData = pm.response.json();",
-															"    pm.expect(jsonData.id).to.eql(parseInt(pm.environment.get(\"userId\")));",
+															"    pm.expect(jsonData.ID).to.eql(parseInt(pm.environment.get(\"userId\")));",
 															"});",
 															""
 														],
@@ -1319,16 +1319,16 @@
 											"response": []
 										},
 										{
-											"name": "/api/Users/:id",
+											"name": "/api/Users/:ID",
 											"event": [
 												{
 													"listen": "test",
 													"script": {
 														"exec": [
-															"pm.test(\"Activity has title.\", function () {",
+															"pm.test(\"Activity has Title.\", function () {",
 															"    pm.response.to.have.status(200);",
 															"    const jsonData = pm.response.json();",
-															"    pm.expect(jsonData.userName).to.eql(\"John\");",
+															"    pm.expect(jsonData.UserName).to.eql(\"John\");",
 															"});",
 															""
 														],
@@ -1347,7 +1347,7 @@
 												],
 												"body": {
 													"mode": "raw",
-													"raw": "{\n  \"id\": {{userId}},\n  \"userName\": \"John\",\n  \"password\": \"pa55word\"\n}",
+													"raw": "{\n  \"ID\": {{userId}},\n  \"UserName\": \"John\",\n  \"Password\": \"pa55word\"\n}",
 													"options": {
 														"raw": {
 															"headerFamily": "json",
@@ -1371,7 +1371,7 @@
 											"response": []
 										},
 										{
-											"name": "/api/Users/:id",
+											"name": "/api/Users/:ID",
 											"request": {
 												"method": "DELETE",
 												"header": [],

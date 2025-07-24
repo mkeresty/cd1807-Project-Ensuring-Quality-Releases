@@ -118,13 +118,25 @@ terraform destroy
 - Click **Run**
 
 
-### Alerts
+### Alerts and Monitoring
 #### Azure Monitor
 Monitor to alert if a 404 error happens
 - In the Azure portal go to the web app service that was just deployed
-- Set the 
+- Go to **Alerts** and then click **New alert rule**
+- Set the **Condition** as ```Http 404```
+- Set the **Action Group** as Email and fill in details 
+- Click **Create alert rule**
 
-
+#### Querying Logs
+How to find specific logs within Azure
+- In the Azure portal go to the web app service that was just deployed
+- Go to **Diagnostic settings** then click **Add diagnostic setting**
+- Fill in the Query
+```KQL
+Operation
+| where TimeGenerated > ago(1h)
+| sumarize count () by TimeGenerated, OperationStatus, Detail
+```
 
 ### Destroying Resources
 In your local cli at ```./terraform/environments/test```
