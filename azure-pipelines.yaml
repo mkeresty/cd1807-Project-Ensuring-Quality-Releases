@@ -181,7 +181,7 @@ stages:
               artifact: drop-fakerestapi
               path: $(Pipeline.Workspace)/drop-fakerestapi
           - task: AzureWebApp@1
-            condition: true
+            condition: false
             displayName: 'Deploy Azure Web App'
             inputs:
               azureSubscription: $(azureServiceConnectionId)
