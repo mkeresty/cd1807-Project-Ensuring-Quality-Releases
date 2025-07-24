@@ -193,8 +193,8 @@ stages:
 - stage: Deploy
   jobs:
   - deployment: FakeRestAPI
-    pool:
-      vmImage: '$(packerImageName)'
+    # pool:
+    #   name: '$(packerImageName)'
     environment: 'myEnvironment'
     strategy:
       runOnce:
