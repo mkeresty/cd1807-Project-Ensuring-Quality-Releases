@@ -13,8 +13,9 @@ az vm open-port \
   --port 22
 
 
-ssh azureuser@<publicIp> # 20.225.176.199
+ssh azureuser@<publicIp> # 172.211.43.120
 
 # Copied from dev portal
-mkdir azagent;cd azagent;curl -fkSL -o vstsagent.tar.gz https://download.agent.dev.azure.com/agent/4.258.1/vsts-agent-linux-x64-4.258.1.tar.gz;tar -zxvf vstsagent.tar.gz; if [ -x "$(command -v systemctl)" ]; then ./config.sh --environment --environmentname "myEnvironment" --acceptteeeula --agent $HOSTNAME --url https://dev.azure.com/odluser284917/ --work _work --projectname 'Udacity' --auth PAT --token 9YoPRrhuRTTupoBnjPprkGKryNeAPG9iQfdFM83pPrvpTxEneDTNJQQJ99BGACAAAAAPDBwgAAASAZDO1DKf --runasservice; sudo ./svc.sh install; sudo ./svc.sh start; else ./config.sh --environment --environmentname "myEnvironment" --acceptteeeula --agent $HOSTNAME --url https://dev.azure.com/odluser284917/ --work _work --projectname 'Udacity' --auth PAT --token 9YoPRrhuRTTupoBnjPprkGKryNeAPG9iQfdFM83pPrvpTxEneDTNJQQJ99BGACAAAAAPDBwgAAASAZDO1DKf; ./run.sh; fi
+# make sure you use the link below to download, the one given is wrong
+mkdir azagent;cd azagent;curl -fkSL -o vstsagent.tar.gz https://download.agent.dev.azure.com/agent/4.258.1/vsts-agent-linux-x64-4.258.1.tar.gz;tar -zxvf vstsagent.tar.gz; if [ -x "$(command -v systemctl)" ]; then ./config.sh --environment --environmentname "myEnvironment" --acceptteeeula --agent $HOSTNAME --url https://dev.azure.com/odluser284939/ --work _work --projectname 'Udacity' --auth PAT --token EeeNoQHatFOUSPrmLRuIq7ZhQusFm2T9h6874KmKtdqX3vH8X07iJQQJ99BGACAAAAAPDBwgAAASAZDO3e8l --runasservice; sudo ./svc.sh install; sudo ./svc.sh start; else ./config.sh --environment --environmentname "myEnvironment" --acceptteeeula --agent $HOSTNAME --url https://dev.azure.com/odluser284939/ --work _work --projectname 'Udacity' --auth PAT --token EeeNoQHatFOUSPrmLRuIq7ZhQusFm2T9h6874KmKtdqX3vH8X07iJQQJ99BGACAAAAAPDBwgAAASAZDO3e8l; ./run.sh; fi
 ```
