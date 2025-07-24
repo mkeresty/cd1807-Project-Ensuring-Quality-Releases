@@ -217,7 +217,7 @@ stages:
               targetType: 'inline'
               script: |
                 set -e
-                sudo apt-get update
+                sudo apt-get upgrade -y || [[ $? -eq 8 ]]
                 sudo apt-get install -y wget unzip python3-pip
 
                 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
@@ -236,7 +236,7 @@ stages:
                 python3 main.py --headless
           - publish: $(Pipeline.Workspace)/drop-ui-tests/ui-tests/selenium.log
             artifact: selenium-report
-            displayName: 'Publish JMeter HTML Reports'
+            displayName: 'Publish Selenium Reports'
           
 
 
