@@ -193,6 +193,49 @@ stages:
 
 
 #--------------------------------------------#  
+# POSTMAN TESTS STAGE
+#--------------------------------------------#    
+- stage: PostmanTests
+  jobs:
+  - deployment: PostmanDeploy
+    pool:
+      name: 'myPool'
+    displayName: Postman Tests
+    environment: 'myEnvironment'
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - task: DownloadPipelineArtifact@2
+            inputs:
+              artifact: drop-postman-tests
+              path: $(Pipeline.Workspace)/drop-postman-tests
+          - script: |
+              unzip -o $(Pipeline.Workspace)/drop-postman-tests/$(Build.BuildId)-postman-tests.zip -d $(Pipeline.Workspace)/drop-postman-tests/postman-tests
+            displayName: 'Unzip Postman Tests'
+          - script: |
+              curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
+              sudo apt-get install -y nodejs
+              which node
+              sudo update-alternatives --install /usr/bin/node node /usr/bin/nodejs 10
+              sudo update-alternatives --install /usr/bin/node node /usr/local/bin/node 20
+              sudo update-alternatives --set node /usr/local/bin/node
+              sudo apt install -y npm
+              sudo npm install -g newman
+              newman -v
+            displayName: 'Install newman'
+          - script: |
+              cd $(Pipeline.Workspace)/drop-postman-tests/postman-tests
+              rm -rf postman.xml
+              newman run Udacity.postman_collection.json -e environment.json --reporters cli,junit --reporter-junit-export postman.xml
+            displayName: 'Run postman regressiona and validation tests'
+          - publish: $(Pipeline.Workspace)/drop-postman-tests/postman-tests/postman.xml
+            artifact: postman-report
+            displayName: 'Publish Postman Report'
+
+
+
+#--------------------------------------------#  
 # JMETER TESTS STAGE
 #--------------------------------------------#    
 - stage: JMeterTests
@@ -250,44 +293,6 @@ stages:
           - publish: $(Pipeline.Workspace)/drop-jmeter-tests/jmeter-tests/results
             artifact: jmeter-report
             displayName: 'Publish JMeter HTML Reports'
-
-
-#--------------------------------------------#  
-# POSTMAN TESTS STAGE
-#--------------------------------------------#    
-- stage: PostmanTests
-  jobs:
-  - deployment: PostmanDeploy
-    pool:
-      name: 'myPool'
-    displayName: Postman Tests
-    environment: 'myEnvironment'
-    strategy:
-      runOnce:
-        deploy:
-          steps:
-          - task: DownloadPipelineArtifact@2
-            inputs:
-              artifact: drop-postman-tests
-              path: $(Pipeline.Workspace)/drop-postman-tests
-          - script: |
-              unzip -o $(Pipeline.Workspace)/drop-postman-tests/$(Build.BuildId)-postman-tests.zip -d $(Pipeline.Workspace)/drop-postman-tests/postman-tests
-            displayName: 'Unzip Postman Tests'
-          - script: |
-              curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
-              sudo apt-get install -y nodejs
-              sudo apt install -y npm
-              sudo npm install -g newman
-              newman -v
-            displayName: 'Install newman'
-          - script: |
-              cd $(Pipeline.Workspace)/drop-postman-tests/postman-tests
-              rm -rf postman.xml
-              newman run Udacity.postman_collection.json -e environment.json --reporters cli,junit --reporter-junit-export postman.xml
-            displayName: 'Run postman regressiona and validation tests'
-          - publish: $(Pipeline.Workspace)/drop-postman-tests/postman-tests/postman.xml
-            artifact: postman-report
-            displayName: 'Publish Postman Report'
 
 
 
