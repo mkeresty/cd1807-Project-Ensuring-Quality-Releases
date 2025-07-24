@@ -221,15 +221,12 @@ stages:
               targetType: 'inline'
               script: |
                 pip3 install selenium
-
                 cd $(Pipeline.Workspace)/drop-ui-tests/ui-tests
                 rm -f selenium.log
                 echo "Running tests..."
-                python3 main.py --headless > selenium.log 2>&1 || {
-                  cat selenium.log
-                  exit 1
-                }
-
+                python3 main.py --headless >> selenium.log
+          - script: cat $(Pipeline.Workspace)/drop-ui-tests/ui-tests/selenium.log
+            displayName: 'Print Selenium Log to Pipeline'
           - publish: $(Pipeline.Workspace)/drop-ui-tests/ui-tests/selenium.log
             artifact: selenium-report
             displayName: 'Publish Selenium Reports'
@@ -277,7 +274,10 @@ stages:
               cd $(Pipeline.Workspace)/drop-postman-tests/postman-tests
               rm -rf postman.xml
               newman run Udacity.postman_collection.json -e environment.json --reporters cli,junit --reporter-junit-export postman.xml
-            displayName: 'Run postman regressiona and validation tests'
+            displayName: 'Run postman regression and validation tests'
+          - script: |
+              cat $(Pipeline.Workspace)/drop-postman-tests/postman-tests/postman.xml
+            displayName: 'Print Postman Reports'
           - publish: $(Pipeline.Workspace)/drop-postman-tests/postman-tests/postman.xml
             artifact: postman-report
             displayName: 'Publish Postman Report'
@@ -315,6 +315,8 @@ stages:
               export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
               export PATH=$JAVA_HOME/bin:$PATH
             displayName: 'Install JMeter'
+            env:
+              SYSTEM_DEBUG: true
           - script: |
               export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
               export PATH=$JAVA_HOME/bin:$PATH
@@ -326,6 +328,10 @@ stages:
                 -JbaseUrl=fakerestapi.azurewebsites.net \
                 -l $(Pipeline.Workspace)/drop-jmeter-tests/jmeter-tests/results/endurance/test-results.csv \
                 -e -o $(Pipeline.Workspace)/drop-jmeter-tests/jmeter-tests/results/endurance/html
+                -j $(Pipeline.Workspace)/drop-jmeter-tests/jmeter-tests/results/endurance/jmeter.log
+                
+              echo "Print Endurance JMeter log"
+              cat $(Pipeline.Workspace)/drop-jmeter-tests/jmeter-tests/results/endurance/jmeter.log
             displayName: 'Run endurance test'
           - script: |
               export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
@@ -338,7 +344,13 @@ stages:
                 -JbaseUrl=fakerestapi.azurewebsites.net \
                 -l $(Pipeline.Workspace)/drop-jmeter-tests/jmeter-tests/results/stress-test/test-results.csv \
                 -e -o $(Pipeline.Workspace)/drop-jmeter-tests/jmeter-tests/results/stress-test/html
+                -j $(Pipeline.Workspace)/drop-jmeter-tests/jmeter-tests/results/stress-test/jmeter.log
+              
+              echo "Print Stress JMeter log"
+              cat $(Pipeline.Workspace)/drop-jmeter-tests/jmeter-tests/results/stress-test/jmeter.log
             displayName: 'Run stress test'
+            env:
+              SYSTEM_DEBUG: true
           - publish: $(Pipeline.Workspace)/drop-jmeter-tests/jmeter-tests/results
             artifact: jmeter-report
             displayName: 'Publish JMeter HTML Reports'
