@@ -223,7 +223,7 @@ stages:
                 python -v
                 pip -v
                 pip install selenium
-                python3 main.py >> selenium.log
+                python3 main.py --headless >> selenium.log
           - publish: ui-tests/selenium.log
             artifact: selenium-report
             displayName: 'Publish JMeter HTML Reports'
