@@ -24,7 +24,7 @@ source myvenv/bin/activate
 ## Selenium
 ```bash
 pip install selenium
-sudo ap-get install -y chromium-browser
+sudo apt-get install -y chromium-browser
 ```
 or if on Mac
 ```zsh

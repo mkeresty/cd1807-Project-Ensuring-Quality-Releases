@@ -187,6 +187,9 @@ stages:
               appName: '$(azureWebAppName)'
               appType: webApp
               package: $(Pipeline.Workspace)/drop-fakerestapi/$(Build.BuildId)-fakerestapi.zip
+          - script: |
+              echo "Health check"
+              curl -s -o /dev/null -w "%{http_code}" $(webAppUrl)/api/v1/Activities
 
 #--------------------------------------------#  
 # SELENIUM TESTS STAGE
@@ -213,13 +216,14 @@ stages:
             inputs:
               targetType: 'inline'
               script: |
+                sudo apt update
+                sudo apt-get install -y wget unzip curl gnupg
+                sudo apt-get install -y chromium-browser
                 cd ui-tests
-                python3 -m pip install selenium
+                python -v
+                pip -v
+                pip install selenium
                 python3 main.py >> selenium.log
-          - script: |
-              echo "==== END: Files at TEST end ===="
-              find . -type f
-            displayName: 'Log files at end of TEST stage'
           - publish: ui-tests/selenium.log
             artifact: selenium-report
             displayName: 'Publish JMeter HTML Reports'
