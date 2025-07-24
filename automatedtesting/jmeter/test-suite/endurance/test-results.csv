@@ -1,80 +1,41 @@
-1753310645540,474,GET Activities,200,OK,Endurance Test 1-2,text,true,,287,208,11,11,https://fakerestapi.azurewebsites.net/api/v1/Activities/2,469,0,365
-1753310645540,474,GET Activities,200,OK,Endurance Test 1-2,text,true,,287,208,11,11,https://fakerestapi.azurewebsites.net/api/v1/Activities/2,469,0,365
-1753310645694,336,GET Activities,200,OK,Endurance Test 1-5,text,true,,286,208,11,11,https://fakerestapi.azurewebsites.net/api/v1/Activities/5,322,0,211
-1753310645694,336,GET Activities,200,OK,Endurance Test 1-5,text,true,,286,208,11,11,https://fakerestapi.azurewebsites.net/api/v1/Activities/5,322,0,211
-1753310645643,388,GET Activities,200,OK,Endurance Test 1-4,text,true,,287,208,11,11,https://fakerestapi.azurewebsites.net/api/v1/Activities/4,388,0,262
-1753310645643,388,GET Activities,200,OK,Endurance Test 1-4,text,true,,287,208,11,11,https://fakerestapi.azurewebsites.net/api/v1/Activities/4,388,0,262
-1753310645594,437,GET Activities,200,OK,Endurance Test 1-3,text,true,,288,208,11,11,https://fakerestapi.azurewebsites.net/api/v1/Activities/3,437,0,311
-1753310645594,437,GET Activities,200,OK,Endurance Test 1-3,text,true,,288,208,11,11,https://fakerestapi.azurewebsites.net/api/v1/Activities/3,437,0,311
-1753310645526,519,GET Activities,200,OK,Endurance Test 1-1,text,true,,288,208,12,12,https://fakerestapi.azurewebsites.net/api/v1/Activities/1,509,0,380
-1753310645526,519,GET Activities,200,OK,Endurance Test 1-1,text,true,,288,208,12,12,https://fakerestapi.azurewebsites.net/api/v1/Activities/1,509,0,380
-1753310645744,310,GET Activities,200,OK,Endurance Test 1-6,text,true,,287,208,12,12,https://fakerestapi.azurewebsites.net/api/v1/Activities/6,310,0,189
-1753310645744,310,GET Activities,200,OK,Endurance Test 1-6,text,true,,287,208,12,12,https://fakerestapi.azurewebsites.net/api/v1/Activities/6,310,0,189
-1753310645793,296,GET Activities,200,OK,Endurance Test 1-7,text,true,,288,208,13,13,https://fakerestapi.azurewebsites.net/api/v1/Activities/7,296,0,185
-1753310645793,296,GET Activities,200,OK,Endurance Test 1-7,text,true,,288,208,13,13,https://fakerestapi.azurewebsites.net/api/v1/Activities/7,296,0,185
-1753310646031,104,POST Activities,200,OK,Endurance Test 1-5,text,true,,253,308,13,13,https://fakerestapi.azurewebsites.net/api/v1/Authors,97,0,0
-1753310646031,104,POST Activities,200,OK,Endurance Test 1-5,text,true,,253,308,13,13,https://fakerestapi.azurewebsites.net/api/v1/Authors,97,0,0
-1753310646019,119,POST Activities,200,OK,Endurance Test 1-2,text,true,,253,308,12,12,https://fakerestapi.azurewebsites.net/api/v1/Authors,109,0,0
-1753310646019,119,POST Activities,200,OK,Endurance Test 1-2,text,true,,253,308,12,12,https://fakerestapi.azurewebsites.net/api/v1/Authors,109,0,0
-1753310646031,126,POST Activities,200,OK,Endurance Test 1-3,text,true,,253,308,12,12,https://fakerestapi.azurewebsites.net/api/v1/Authors,125,0,0
-1753310646031,126,POST Activities,200,OK,Endurance Test 1-3,text,true,,253,308,12,12,https://fakerestapi.azurewebsites.net/api/v1/Authors,125,0,0
-1753310646044,123,POST Activities,200,OK,Endurance Test 1-1,text,true,,253,308,11,11,https://fakerestapi.azurewebsites.net/api/v1/Authors,122,0,0
-1753310646044,123,POST Activities,200,OK,Endurance Test 1-1,text,true,,253,308,11,11,https://fakerestapi.azurewebsites.net/api/v1/Authors,122,0,0
-1753310645842,325,GET Activities,200,OK,Endurance Test 1-8,text,true,,286,208,11,11,https://fakerestapi.azurewebsites.net/api/v1/Activities/8,325,0,191
-1753310645842,325,GET Activities,200,OK,Endurance Test 1-8,text,true,,286,208,11,11,https://fakerestapi.azurewebsites.net/api/v1/Activities/8,325,0,191
-1753310646055,112,POST Activities,200,OK,Endurance Test 1-6,text,true,,253,308,11,11,https://fakerestapi.azurewebsites.net/api/v1/Authors,112,0,0
-1753310646031,136,POST Activities,200,OK,Endurance Test 1-4,text,true,,253,308,11,11,https://fakerestapi.azurewebsites.net/api/v1/Authors,136,0,0
-1753310646055,112,POST Activities,200,OK,Endurance Test 1-6,text,true,,253,308,11,11,https://fakerestapi.azurewebsites.net/api/v1/Authors,112,0,0
-1753310646031,136,POST Activities,200,OK,Endurance Test 1-4,text,true,,253,308,11,11,https://fakerestapi.azurewebsites.net/api/v1/Authors,136,0,0
-1753310646089,103,POST Activities,200,OK,Endurance Test 1-7,text,true,,253,308,9,9,https://fakerestapi.azurewebsites.net/api/v1/Authors,99,0,0
-1753310646089,103,POST Activities,200,OK,Endurance Test 1-7,text,true,,253,308,9,9,https://fakerestapi.azurewebsites.net/api/v1/Authors,99,0,0
-1753310645889,314,GET Activities,200,OK,Endurance Test 1-9,text,true,,288,208,8,8,https://fakerestapi.azurewebsites.net/api/v1/Activities/9,312,0,196
-1753310645889,314,GET Activities,200,OK,Endurance Test 1-9,text,true,,288,208,8,8,https://fakerestapi.azurewebsites.net/api/v1/Activities/9,312,0,196
-1753310645944,299,GET Activities,200,OK,Endurance Test 1-10,text,true,,289,209,9,9,https://fakerestapi.azurewebsites.net/api/v1/Activities/10,299,0,191
-1753310645944,299,GET Activities,200,OK,Endurance Test 1-10,text,true,,289,209,9,9,https://fakerestapi.azurewebsites.net/api/v1/Activities/10,299,0,191
-1753310646167,102,POST Activities,200,OK,Endurance Test 1-8,text,true,,253,308,9,9,https://fakerestapi.azurewebsites.net/api/v1/Authors,100,0,0
-1753310646167,102,POST Activities,200,OK,Endurance Test 1-8,text,true,,253,308,9,9,https://fakerestapi.azurewebsites.net/api/v1/Authors,100,0,0
-1753310646203,99,POST Activities,200,OK,Endurance Test 1-9,text,true,,253,308,9,9,https://fakerestapi.azurewebsites.net/api/v1/Authors,97,0,0
-1753310646203,99,POST Activities,200,OK,Endurance Test 1-9,text,true,,253,308,9,9,https://fakerestapi.azurewebsites.net/api/v1/Authors,97,0,0
-1753310645993,315,GET Activities,200,OK,Endurance Test 1-11,text,true,,290,209,8,8,https://fakerestapi.azurewebsites.net/api/v1/Activities/11,314,0,196
-1753310645993,315,GET Activities,200,OK,Endurance Test 1-11,text,true,,290,209,8,8,https://fakerestapi.azurewebsites.net/api/v1/Activities/11,314,0,196
-1753310646243,97,POST Activities,200,OK,Endurance Test 1-10,text,true,,255,310,8,8,https://fakerestapi.azurewebsites.net/api/v1/Authors,97,0,0
-1753310646243,97,POST Activities,200,OK,Endurance Test 1-10,text,true,,255,310,8,8,https://fakerestapi.azurewebsites.net/api/v1/Authors,97,0,0
-1753310646038,310,GET Activities,200,OK,Endurance Test 1-12,text,true,,288,209,8,8,https://fakerestapi.azurewebsites.net/api/v1/Activities/12,310,0,198
-1753310646038,310,GET Activities,200,OK,Endurance Test 1-12,text,true,,288,209,8,8,https://fakerestapi.azurewebsites.net/api/v1/Activities/12,310,0,198
-1753310646088,292,GET Activities,200,OK,Endurance Test 1-13,text,true,,290,209,8,8,https://fakerestapi.azurewebsites.net/api/v1/Activities/13,291,0,187
-1753310646088,292,GET Activities,200,OK,Endurance Test 1-13,text,true,,290,209,8,8,https://fakerestapi.azurewebsites.net/api/v1/Activities/13,291,0,187
-1753310646308,101,POST Activities,200,OK,Endurance Test 1-11,text,true,,255,310,9,9,https://fakerestapi.azurewebsites.net/api/v1/Authors,99,0,0
-1753310646308,101,POST Activities,200,OK,Endurance Test 1-11,text,true,,255,310,9,9,https://fakerestapi.azurewebsites.net/api/v1/Authors,99,0,0
-1753310646142,306,GET Activities,200,OK,Endurance Test 1-14,text,true,,289,209,9,9,https://fakerestapi.azurewebsites.net/api/v1/Activities/14,299,0,193
-1753310646142,306,GET Activities,200,OK,Endurance Test 1-14,text,true,,289,209,9,9,https://fakerestapi.azurewebsites.net/api/v1/Activities/14,299,0,193
-1753310646348,104,POST Activities,200,OK,Endurance Test 1-12,text,true,,255,310,9,9,https://fakerestapi.azurewebsites.net/api/v1/Authors,102,0,0
-1753310646348,104,POST Activities,200,OK,Endurance Test 1-12,text,true,,255,310,9,9,https://fakerestapi.azurewebsites.net/api/v1/Authors,102,0,0
-1753310646380,96,POST Activities,200,OK,Endurance Test 1-13,text,true,,255,310,8,8,https://fakerestapi.azurewebsites.net/api/v1/Authors,94,0,0
-1753310646380,96,POST Activities,200,OK,Endurance Test 1-13,text,true,,255,310,8,8,https://fakerestapi.azurewebsites.net/api/v1/Authors,94,0,0
-1753310646192,299,GET Activities,200,OK,Endurance Test 1-15,text,true,,290,209,7,7,https://fakerestapi.azurewebsites.net/api/v1/Activities/15,299,0,198
-1753310646192,299,GET Activities,200,OK,Endurance Test 1-15,text,true,,290,209,7,7,https://fakerestapi.azurewebsites.net/api/v1/Activities/15,299,0,198
-1753310646242,297,GET Activities,200,OK,Endurance Test 1-16,text,true,,288,209,7,7,https://fakerestapi.azurewebsites.net/api/v1/Activities/16,289,0,185
-1753310646242,297,GET Activities,200,OK,Endurance Test 1-16,text,true,,288,209,7,7,https://fakerestapi.azurewebsites.net/api/v1/Activities/16,289,0,185
-1753310646449,101,POST Activities,200,OK,Endurance Test 1-14,text,true,,255,310,7,7,https://fakerestapi.azurewebsites.net/api/v1/Authors,101,0,0
-1753310646449,101,POST Activities,200,OK,Endurance Test 1-14,text,true,,255,310,7,7,https://fakerestapi.azurewebsites.net/api/v1/Authors,101,0,0
-1753310646288,297,GET Activities,200,OK,Endurance Test 1-17,text,true,,290,209,6,6,https://fakerestapi.azurewebsites.net/api/v1/Activities/17,297,0,198
-1753310646288,297,GET Activities,200,OK,Endurance Test 1-17,text,true,,290,209,6,6,https://fakerestapi.azurewebsites.net/api/v1/Activities/17,297,0,198
-1753310646491,103,POST Activities,200,OK,Endurance Test 1-15,text,true,,255,310,6,6,https://fakerestapi.azurewebsites.net/api/v1/Authors,102,0,0
-1753310646491,103,POST Activities,200,OK,Endurance Test 1-15,text,true,,255,310,6,6,https://fakerestapi.azurewebsites.net/api/v1/Authors,102,0,0
-1753310646539,105,POST Activities,200,OK,Endurance Test 1-16,text,true,,255,310,5,5,https://fakerestapi.azurewebsites.net/api/v1/Authors,104,0,0
-1753310646539,105,POST Activities,200,OK,Endurance Test 1-16,text,true,,255,310,5,5,https://fakerestapi.azurewebsites.net/api/v1/Authors,104,0,0
-1753310646342,308,GET Activities,200,OK,Endurance Test 1-18,text,true,,289,209,4,4,https://fakerestapi.azurewebsites.net/api/v1/Activities/18,307,0,200
-1753310646342,308,GET Activities,200,OK,Endurance Test 1-18,text,true,,289,209,4,4,https://fakerestapi.azurewebsites.net/api/v1/Activities/18,307,0,200
-1753310646392,287,GET Activities,200,OK,Endurance Test 1-19,text,true,,290,209,4,4,https://fakerestapi.azurewebsites.net/api/v1/Activities/19,285,0,189
-1753310646392,287,GET Activities,200,OK,Endurance Test 1-19,text,true,,290,209,4,4,https://fakerestapi.azurewebsites.net/api/v1/Activities/19,285,0,189
-1753310646585,124,POST Activities,200,OK,Endurance Test 1-17,text,true,,255,310,4,4,https://fakerestapi.azurewebsites.net/api/v1/Authors,123,0,0
-1753310646585,124,POST Activities,200,OK,Endurance Test 1-17,text,true,,255,310,4,4,https://fakerestapi.azurewebsites.net/api/v1/Authors,123,0,0
-1753310646442,302,GET Activities,200,OK,Endurance Test 1-20,text,true,,289,209,3,3,https://fakerestapi.azurewebsites.net/api/v1/Activities/20,302,0,202
-1753310646442,302,GET Activities,200,OK,Endurance Test 1-20,text,true,,289,209,3,3,https://fakerestapi.azurewebsites.net/api/v1/Activities/20,302,0,202
-1753310646651,98,POST Activities,200,OK,Endurance Test 1-18,text,true,,255,310,3,3,https://fakerestapi.azurewebsites.net/api/v1/Authors,97,0,0
-1753310646651,98,POST Activities,200,OK,Endurance Test 1-18,text,true,,255,310,3,3,https://fakerestapi.azurewebsites.net/api/v1/Authors,97,0,0
-1753310646679,94,POST Activities,200,OK,Endurance Test 1-19,text,true,,255,310,2,2,https://fakerestapi.azurewebsites.net/api/v1/Authors,92,0,0
-1753310646679,94,POST Activities,200,OK,Endurance Test 1-19,text,true,,255,310,2,2,https://fakerestapi.azurewebsites.net/api/v1/Authors,92,0,0
-1753310646745,101,POST Activities,200,OK,Endurance Test 1-20,text,true,,255,310,1,1,https://fakerestapi.azurewebsites.net/api/v1/Authors,101,0,0
-1753310646745,101,POST Activities,200,OK,Endurance Test 1-20,text,true,,255,310,1,1,https://fakerestapi.azurewebsites.net/api/v1/Authors,101,0,0
+timeStamp,elapsed,label,responseCode,responseMessage,threadName,dataType,success,failureMessage,bytes,sentBytes,grpThreads,allThreads,URL,Latency,IdleTime,Connect
+1753380227373,336,GET Activities,400,Bad Request,Endurance Test 1-4,text,false,,478,337,10,10,https://fakerestapi.azurewebsites.net/api/v1/Activities,335,0,195
+1753380227258,451,GET Activities,400,Bad Request,Endurance Test 1-1,text,false,,478,337,10,10,https://fakerestapi.azurewebsites.net/api/v1/Activities,451,0,300
+1753380227273,436,GET Activities,400,Bad Request,Endurance Test 1-2,text,false,,478,337,10,10,https://fakerestapi.azurewebsites.net/api/v1/Activities,435,0,285
+1753380227318,397,GET Activities,400,Bad Request,Endurance Test 1-3,text,false,,478,337,10,10,https://fakerestapi.azurewebsites.net/api/v1/Activities,397,0,241
+1753380227423,310,GET Activities,400,Bad Request,Endurance Test 1-5,text,false,,478,337,11,11,https://fakerestapi.azurewebsites.net/api/v1/Activities,310,0,187
+1753380227469,318,GET Activities,400,Bad Request,Endurance Test 1-6,text,false,,478,337,12,12,https://fakerestapi.azurewebsites.net/api/v1/Activities,318,0,200
+1753380227715,106,POST Activities,200,OK,Endurance Test 1-3,text,true,,253,308,12,12,https://fakerestapi.azurewebsites.net/api/v1/Authors,105,0,0
+1753380227710,136,POST Activities,200,OK,Endurance Test 1-4,text,true,,253,308,12,12,https://fakerestapi.azurewebsites.net/api/v1/Authors,107,0,0
+1753380227710,137,POST Activities,200,OK,Endurance Test 1-2,text,true,,253,308,11,11,https://fakerestapi.azurewebsites.net/api/v1/Authors,137,0,0
+1753380227733,115,POST Activities,200,OK,Endurance Test 1-5,text,true,,253,308,10,10,https://fakerestapi.azurewebsites.net/api/v1/Authors,115,0,0
+1753380227523,328,GET Activities,400,Bad Request,Endurance Test 1-7,text,false,,478,337,9,9,https://fakerestapi.azurewebsites.net/api/v1/Activities,327,0,203
+1753380227710,142,POST Activities,200,OK,Endurance Test 1-1,text,true,,253,308,9,9,https://fakerestapi.azurewebsites.net/api/v1/Authors,142,0,0
+1753380227572,319,GET Activities,400,Bad Request,Endurance Test 1-8,text,false,,478,337,9,9,https://fakerestapi.azurewebsites.net/api/v1/Activities,317,0,202
+1753380227787,136,POST Activities,200,OK,Endurance Test 1-6,text,true,,253,308,9,9,https://fakerestapi.azurewebsites.net/api/v1/Authors,136,0,0
+1753380227623,311,GET Activities,400,Bad Request,Endurance Test 1-9,text,false,,478,337,9,9,https://fakerestapi.azurewebsites.net/api/v1/Activities,311,0,206
+1753380227851,107,POST Activities,200,OK,Endurance Test 1-7,text,true,,253,308,9,9,https://fakerestapi.azurewebsites.net/api/v1/Authors,101,0,0
+1753380227673,307,GET Activities,400,Bad Request,Endurance Test 1-10,text,false,,478,337,9,9,https://fakerestapi.azurewebsites.net/api/v1/Activities,307,0,192
+1753380227891,118,POST Activities,200,OK,Endurance Test 1-8,text,true,,253,308,9,9,https://fakerestapi.azurewebsites.net/api/v1/Authors,117,0,0
+1753380227935,111,POST Activities,200,OK,Endurance Test 1-9,text,true,,253,308,9,9,https://fakerestapi.azurewebsites.net/api/v1/Authors,108,0,0
+1753380227723,323,GET Activities,400,Bad Request,Endurance Test 1-11,text,false,,478,337,9,9,https://fakerestapi.azurewebsites.net/api/v1/Activities,321,0,198
+1753380227772,312,GET Activities,400,Bad Request,Endurance Test 1-12,text,false,,478,337,9,9,https://fakerestapi.azurewebsites.net/api/v1/Activities,312,0,199
+1753380227981,113,POST Activities,200,OK,Endurance Test 1-10,text,true,,255,310,9,9,https://fakerestapi.azurewebsites.net/api/v1/Authors,104,0,0
+1753380228046,101,POST Activities,200,OK,Endurance Test 1-11,text,true,,255,310,9,9,https://fakerestapi.azurewebsites.net/api/v1/Authors,101,0,0
+1753380227823,324,GET Activities,400,Bad Request,Endurance Test 1-13,text,false,,478,337,8,8,https://fakerestapi.azurewebsites.net/api/v1/Activities,321,0,199
+1753380228085,103,POST Activities,200,OK,Endurance Test 1-12,text,true,,255,310,9,9,https://fakerestapi.azurewebsites.net/api/v1/Authors,101,0,0
+1753380227873,320,GET Activities,400,Bad Request,Endurance Test 1-14,text,false,,478,337,8,8,https://fakerestapi.azurewebsites.net/api/v1/Activities,309,0,198
+1753380227924,298,GET Activities,400,Bad Request,Endurance Test 1-15,text,false,,478,337,8,8,https://fakerestapi.azurewebsites.net/api/v1/Activities,294,0,187
+1753380228148,100,POST Activities,200,OK,Endurance Test 1-13,text,true,,255,310,8,8,https://fakerestapi.azurewebsites.net/api/v1/Authors,100,0,0
+1753380227974,305,GET Activities,400,Bad Request,Endurance Test 1-16,text,false,,478,337,7,7,https://fakerestapi.azurewebsites.net/api/v1/Activities,300,0,198
+1753380228193,105,POST Activities,200,OK,Endurance Test 1-14,text,true,,255,310,7,7,https://fakerestapi.azurewebsites.net/api/v1/Authors,97,0,0
+1753380228018,289,GET Activities,400,Bad Request,Endurance Test 1-17,text,false,,478,337,6,6,https://fakerestapi.azurewebsites.net/api/v1/Activities,287,0,187
+1753380228222,98,POST Activities,200,OK,Endurance Test 1-15,text,true,,255,310,6,6,https://fakerestapi.azurewebsites.net/api/v1/Authors,94,0,0
+1753380228279,100,POST Activities,200,OK,Endurance Test 1-16,text,true,,255,310,5,5,https://fakerestapi.azurewebsites.net/api/v1/Authors,97,0,0
+1753380228073,310,GET Activities,400,Bad Request,Endurance Test 1-18,text,false,,478,337,4,4,https://fakerestapi.azurewebsites.net/api/v1/Activities,306,0,202
+1753380228307,98,POST Activities,200,OK,Endurance Test 1-17,text,true,,255,310,4,4,https://fakerestapi.azurewebsites.net/api/v1/Authors,97,0,0
+1753380228124,298,GET Activities,400,Bad Request,Endurance Test 1-19,text,false,,478,337,3,3,https://fakerestapi.azurewebsites.net/api/v1/Activities,298,0,198
+1753380228173,299,GET Activities,400,Bad Request,Endurance Test 1-20,text,false,,478,337,3,3,https://fakerestapi.azurewebsites.net/api/v1/Activities,299,0,192
+1753380228383,101,POST Activities,200,OK,Endurance Test 1-18,text,true,,255,310,3,3,https://fakerestapi.azurewebsites.net/api/v1/Authors,101,0,0
+1753380228422,110,POST Activities,200,OK,Endurance Test 1-19,text,true,,255,310,2,2,https://fakerestapi.azurewebsites.net/api/v1/Authors,110,0,0
+1753380228472,97,POST Activities,200,OK,Endurance Test 1-20,text,true,,255,310,1,1,https://fakerestapi.azurewebsites.net/api/v1/Authors,96,0,0
