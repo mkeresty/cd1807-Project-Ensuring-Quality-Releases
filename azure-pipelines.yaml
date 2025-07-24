@@ -112,17 +112,6 @@ stages:
         workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environments/test'
         environmentServiceNameAzureRM: '$(azureServiceConnectionId)'
 
-    - task: ArchiveFiles@2
-      displayName: 'Archive UI Tests'
-      inputs:
-        rootFolderOrFile: '$(System.DefaultWorkingDirectory)/automatedtesting/selenium'
-        includeRootFolder: false
-        archiveType: 'zip'
-        archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId)-uitests.zip'
-
-    - publish: $(Build.ArtifactStagingDirectory)/$(Build.BuildId)-uitests.zip
-      displayName: 'Upload Package'
-      artifact: drop-ui-tests
 
     - task: ArchiveFiles@2
       displayName: 'Archive FakeRestAPI'
@@ -137,6 +126,18 @@ stages:
       artifact: drop-fakerestapi
 
     - task: ArchiveFiles@2
+      displayName: 'Archive UI Tests'
+      inputs:
+        rootFolderOrFile: '$(System.DefaultWorkingDirectory)/automatedtesting/selenium'
+        includeRootFolder: false
+        archiveType: 'zip'
+        archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId)-uitests.zip'
+
+    - publish: $(Build.ArtifactStagingDirectory)/$(Build.BuildId)-uitests.zip
+      displayName: 'Upload Package'
+      artifact: drop-ui-tests
+
+    - task: ArchiveFiles@2
       displayName: 'Archive PerformanceTestSuite'
       inputs:
         rootFolderOrFile: '$(System.DefaultWorkingDirectory)/automatedtesting/jmeter/testsuite'
@@ -148,39 +149,18 @@ stages:
       displayName: 'Upload Package'
       artifact: drop-jmeter-tests
 
-  - job: AutomatedTesting
-    condition: true
-    displayName: Automated Testing
-    pool:
-      vmImage: 'ubuntu-20.04'
-    steps:
-    - task: CmdLine@2
-      displayName: Install Newman
+    - task: ArchiveFiles@2
+      displayName: 'Archive Postman Tests'
       inputs:
-        script: |
-          sudo apt install nodejs -y
-          sudo apt install npm -y
-          sudo npm install -g newman
-        workingDirectory: $(System.DefaultWorkingDirectory)
+        rootFolderOrFile: '$(System.DefaultWorkingDirectory)/automatedtesting/postman'
+        includeRootFolder: false
+        archiveType: 'zip'
+        archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId)-postman-tests.zip'
 
-    - task: CmdLine@2
-      displayName: Run Postman Tests
-      continueOnError: true
-      inputs:
-        script: 'newman run Udacity.postman_collection.json -e environment.json --reporters cli,junit --reporter-junit-export postman.xml'
-        workingDirectory: '$(System.DefaultWorkingDirectory)/automatedtesting/postman'
+    - publish: $(Build.ArtifactStagingDirectory)/$(Build.BuildId)-postman-tests.zip
+      displayName: 'Upload Package'
+      artifact: drop-postman-tests
 
-    - task: PublishTestResults@2
-      inputs:
-        testResultsFormat: 'JUnit'
-        testResultsFiles: '**/postman.xml'
-        searchFolder: '$(System.DefaultWorkingDirectory)/automatedtesting/postman'
-        mergeTestResults: true
-        testRunTitle: test-run-$(Build.BuildId)
-    - script: |
-        echo "==== END: Files at Build end ===="
-        find . -type f
-      displayName: 'Log files at end of Build stage'
 #--------------------------------------------#  
 # DEPLOYMENT STAGE
 #--------------------------------------------#    
@@ -215,7 +195,7 @@ stages:
 #--------------------------------------------#    
 - stage: SeleniumTests
   jobs:
-  - deployment: VMDeploy
+  - deployment: SeleniumDeploy
     pool:
       name: 'myPool'
     displayName: Selenium Tests
@@ -227,6 +207,9 @@ stages:
           - download: current
             artifact: drop-ui-tests
           - script: |
+              unzip -o $(Pipeline.Workspace)/drop-ui-tests/$(Build.BuildId)-ui-tests.zip -d ui-tests
+            displayName: 'Unzip Selenium Tests'
+          - script: |
               echo "==== BEGIN: Files at TEST start ===="
               find . -type f
             displayName: 'Log files at end of TEST stage'
@@ -234,30 +217,16 @@ stages:
             inputs:
               targetType: 'inline'
               script: |
-                #! /bin/bash
-                cd ~/
-                DIR=/home/testuser/app
-                if [ ! -d "$DIR" ]; then
-                    mkdir app
-                fi
-                mv /home/testuser/azagent/_work/1/drop-uitests/$(Build.BuildId)-uitests.zip app
-                cd app
-                unzip -o $(Build.BuildId)-uitests.zip
-                FILE=/home/testuser/app/chromedriver_linux64.zip
-                if [ ! -f "$FILE" ]; then
-                    LATEST=$(wget -q -O - http://chromedriver.storage.googleapis.com/LATEST_RELEASE)
-                    wget http://chromedriver.storage.googleapis.com/$LATEST/chromedriver_linux64.zip
-                    unzip -o chromedriver_linux64.zip
-                    sudo ln -s $PWD/chromedriver /usr/local/bin/chromedriver
-                fi
-                export PATH=$PATH:/home/testuser/app
-                echo "Starting Selenium Tests"
+                cd ui-tests
                 python3 main.py >> selenium.log
-                echo "Completed Selenium Tests. Check selenium.log for results."
           - script: |
               echo "==== END: Files at TEST end ===="
               find . -type f
             displayName: 'Log files at end of TEST stage'
+          - publish: ui-tests/selenium.log
+            artifact: selenium-report
+            displayName: 'Publish JMeter HTML Reports'
+          
 
 
 
@@ -266,7 +235,7 @@ stages:
 #--------------------------------------------#    
 - stage: JMeterTests
   jobs:
-  - deployment: VMDeploy
+  - deployment: JMeterDeploy
     pool:
       name: 'myPool'
     displayName: JMeter Tests
@@ -287,24 +256,63 @@ stages:
               sudo ln -s /opt/jmeter/bin/jmeter /usr/local/bin/jmeter
             displayName: 'Install JMeter'
           - script: |
-              cd jmeter-tests/automatedtesting/jmeter
+              cd jmeter-tests/endurance
               jmeter -n \
                 -t endurance.jmx \
                 -JbaseUrl=fakerestapi.azurewebsites.net \
                 -l test-results.csv \
-                -e -o html/endurance
+                -e -o ../results/endurance
             displayName: 'Run endurance test'
           - script: |
-              cd jmeter-tests/automatedtesting/jmeter
+              cd jmeter-tests/endurance
               jmeter -n \
                 -t stress.jmx \
                 -JbaseUrl=fakerestapi.azurewebsites.net \
                 -l test-results.csv \
-                -e -o html/stress
+                -e -o ../results/stress
             displayName: 'Run stress test'
-          - publish: jmeter-tests/automatedtesting/jmeter/html
+          - publish: jmeter-tests/results/
             artifact: jmeter-report
-            displayName: 'Publish JMeter HTML Report'
+            displayName: 'Publish JMeter HTML Reports'
+          - script: |
+              echo "==== END: Files at TEST end ===="
+              find . -type f
+            displayName: 'Log files at end of TEST stage'
+
+
+
+#--------------------------------------------#  
+# POSTMAN TESTS STAGE
+#--------------------------------------------#    
+- stage: PostmanTests
+  jobs:
+  - deployment: PostmanDeploy
+    pool:
+      name: 'myPool'
+    displayName: Postman Tests
+    environment: 'myEnvironment'
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - download: current
+            artifact: drop-postman-tests
+          - script: |
+              unzip -o $(Pipeline.Workspace)/drop-postman-tests/$(Build.BuildId)-postman-tests.zip -d postman-tests
+            displayName: 'Unzip Postman Tests'
+          - script: |
+              sudo apt install nodejs -y
+              sudo apt install npm -y
+              sudo npm install -g newman
+              newman -v
+            displayName: 'Install newman'
+          - script: |
+              cd postman-tests
+              newman run Udacity.postman_collection.json -e environment.json --reporters cli,junit --reporter-junit-export postman.xml
+            displayName: 'Run postman regressiona and validation tests'
+          - publish: postman-tests/postman.xml
+            artifact: postman-report
+            displayName: 'Publish Postman Report'
           - script: |
               echo "==== END: Files at TEST end ===="
               find . -type f
