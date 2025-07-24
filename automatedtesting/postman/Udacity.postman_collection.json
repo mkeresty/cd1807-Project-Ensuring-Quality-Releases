@@ -19,7 +19,7 @@
 									"name": "std",
 									"item": [
 										{
-											"name": "/api/v1/Activities",
+											"name": "/api/Activities",
 											"event": [
 												{
 													"listen": "test",
@@ -57,7 +57,7 @@
 													}
 												],
 												"url": {
-													"raw": "{{baseUrl}}/api/v1/Activities",
+													"raw": "{{baseUrl}}/api/Activities",
 													"host": [
 														"{{baseUrl}}"
 													],
@@ -71,7 +71,7 @@
 											"response": []
 										},
 										{
-											"name": "/api/v1/Activities",
+											"name": "/api/Activities",
 											"event": [
 												{
 													"listen": "test",
@@ -112,7 +112,7 @@
 													}
 												},
 												"url": {
-													"raw": "{{baseUrl}}/api/v1/Activities",
+													"raw": "{{baseUrl}}/api/Activities",
 													"host": [
 														"{{baseUrl}}"
 													],
@@ -131,7 +131,7 @@
 									"name": "{id}",
 									"item": [
 										{
-											"name": "/api/v1/Activities/:id",
+											"name": "/api/Activities/:id",
 											"event": [
 												{
 													"listen": "test",
@@ -158,7 +158,7 @@
 													}
 												],
 												"url": {
-													"raw": "{{baseUrl}}/api/v1/Activities/{{activityId}}",
+													"raw": "{{baseUrl}}/api/Activities/{{activityId}}",
 													"host": [
 														"{{baseUrl}}"
 													],
@@ -173,7 +173,7 @@
 											"response": []
 										},
 										{
-											"name": "/api/v1/Activities/:id",
+											"name": "/api/Activities/:id",
 											"event": [
 												{
 													"listen": "test",
@@ -214,7 +214,7 @@
 													}
 												},
 												"url": {
-													"raw": "{{baseUrl}}/api/v1/Activities/:id",
+													"raw": "{{baseUrl}}/api/Activities/:id",
 													"host": [
 														"{{baseUrl}}"
 													],
@@ -236,7 +236,7 @@
 											"response": []
 										},
 										{
-											"name": "/api/v1/Activities/:id",
+											"name": "/api/Activities/:id",
 											"event": [
 												{
 													"listen": "test",
@@ -256,7 +256,7 @@
 												"method": "DELETE",
 												"header": [],
 												"url": {
-													"raw": "{{baseUrl}}/api/v1/Activities/{{activityId}}",
+													"raw": "{{baseUrl}}/api/Activities/{{activityId}}",
 													"host": [
 														"{{baseUrl}}"
 													],
@@ -281,7 +281,7 @@
 									"name": "std",
 									"item": [
 										{
-											"name": "/api/v1/Authors",
+											"name": "/api/Authors",
 											"event": [
 												{
 													"listen": "test",
@@ -322,7 +322,7 @@
 													}
 												},
 												"url": {
-													"raw": "{{baseUrl}}/api/v1/Authors",
+													"raw": "{{baseUrl}}/api/Authors",
 													"host": [
 														"{{baseUrl}}"
 													],
@@ -336,7 +336,7 @@
 											"response": []
 										},
 										{
-											"name": "/api/v1/Authors",
+											"name": "/api/Authors",
 											"event": [
 												{
 													"listen": "test",
@@ -374,7 +374,7 @@
 													}
 												],
 												"url": {
-													"raw": "{{baseUrl}}/api/v1/Authors",
+													"raw": "{{baseUrl}}/api/Authors",
 													"host": [
 														"{{baseUrl}}"
 													],
@@ -399,7 +399,7 @@
 													"name": "{idBook}",
 													"item": [
 														{
-															"name": "/api/v1/Authors/authors/books/:idBook",
+															"name": "/api/Authors/authors/books/:idBook",
 															"event": [
 																{
 																	"listen": "test",
@@ -437,7 +437,7 @@
 																	}
 																],
 																"url": {
-																	"raw": "{{baseUrl}}/api/v1/Authors/authors/books/{{bookId}}",
+																	"raw": "{{baseUrl}}/api/Authors/authors/books/{{bookId}}",
 																	"host": [
 																		"{{baseUrl}}"
 																	],
@@ -463,7 +463,7 @@
 									"name": "{id}",
 									"item": [
 										{
-											"name": "/api/v1/Authors/:id",
+											"name": "/api/Authors/:id",
 											"event": [
 												{
 													"listen": "test",
@@ -490,7 +490,7 @@
 													}
 												],
 												"url": {
-													"raw": "{{baseUrl}}/api/v1/Authors/{{authorId}}",
+													"raw": "{{baseUrl}}/api/Authors/{{authorId}}",
 													"host": [
 														"{{baseUrl}}"
 													],
@@ -505,7 +505,7 @@
 											"response": []
 										},
 										{
-											"name": "/api/v1/Authors/:id",
+											"name": "/api/Authors/:id",
 											"event": [
 												{
 													"listen": "test",
@@ -546,7 +546,7 @@
 													}
 												},
 												"url": {
-													"raw": "{{baseUrl}}/api/v1/Authors/{{authorId}}",
+													"raw": "{{baseUrl}}/api/Authors/{{authorId}}",
 													"host": [
 														"{{baseUrl}}"
 													],
@@ -561,7 +561,7 @@
 											"response": []
 										},
 										{
-											"name": "/api/v1/Authors/:id",
+											"name": "/api/Authors/:id",
 											"event": [
 												{
 													"listen": "test",
@@ -581,7 +581,7 @@
 												"method": "DELETE",
 												"header": [],
 												"url": {
-													"raw": "{{baseUrl}}/api/v1/Authors/{{authorId}}",
+													"raw": "{{baseUrl}}/api/Authors/{{authorId}}",
 													"host": [
 														"{{baseUrl}}"
 													],
@@ -606,7 +606,7 @@
 									"name": "std",
 									"item": [
 										{
-											"name": "/api/v1/Books",
+											"name": "/api/Books",
 											"event": [
 												{
 													"listen": "test",
@@ -643,7 +643,7 @@
 													}
 												},
 												"url": {
-													"raw": "{{baseUrl}}/api/v1/Books",
+													"raw": "{{baseUrl}}/api/Books",
 													"host": [
 														"{{baseUrl}}"
 													],
@@ -657,7 +657,7 @@
 											"response": []
 										},
 										{
-											"name": "/api/v1/Books",
+											"name": "/api/Books",
 											"event": [
 												{
 													"listen": "test",
@@ -697,7 +697,7 @@
 													}
 												],
 												"url": {
-													"raw": "{{baseUrl}}/api/v1/Books",
+													"raw": "{{baseUrl}}/api/Books",
 													"host": [
 														"{{baseUrl}}"
 													],
@@ -716,7 +716,7 @@
 									"name": "{id}",
 									"item": [
 										{
-											"name": "/api/v1/Books/:id",
+											"name": "/api/Books/:id",
 											"event": [
 												{
 													"listen": "test",
@@ -753,7 +753,7 @@
 													}
 												},
 												"url": {
-													"raw": "{{baseUrl}}/api/v1/Books/{{bookId}}",
+													"raw": "{{baseUrl}}/api/Books/{{bookId}}",
 													"host": [
 														"{{baseUrl}}"
 													],
@@ -768,7 +768,7 @@
 											"response": []
 										},
 										{
-											"name": "/api/v1/Books/:id",
+											"name": "/api/Books/:id",
 											"event": [
 												{
 													"listen": "test",
@@ -795,7 +795,7 @@
 													}
 												],
 												"url": {
-													"raw": "{{baseUrl}}/api/v1/Books/{{bookId}}",
+													"raw": "{{baseUrl}}/api/Books/{{bookId}}",
 													"host": [
 														"{{baseUrl}}"
 													],
@@ -810,7 +810,7 @@
 											"response": []
 										},
 										{
-											"name": "/api/v1/Books/:id",
+											"name": "/api/Books/:id",
 											"event": [
 												{
 													"listen": "test",
@@ -830,7 +830,7 @@
 												"method": "DELETE",
 												"header": [],
 												"url": {
-													"raw": "{{baseUrl}}/api/v1/Books/{{bookId}}",
+													"raw": "{{baseUrl}}/api/Books/{{bookId}}",
 													"host": [
 														"{{baseUrl}}"
 													],
@@ -855,7 +855,7 @@
 									"name": "std",
 									"item": [
 										{
-											"name": "/api/v1/CoverPhotos",
+											"name": "/api/CoverPhotos",
 											"event": [
 												{
 													"listen": "test",
@@ -892,7 +892,7 @@
 													}
 												],
 												"url": {
-													"raw": "{{baseUrl}}/api/v1/CoverPhotos",
+													"raw": "{{baseUrl}}/api/CoverPhotos",
 													"host": [
 														"{{baseUrl}}"
 													],
@@ -906,7 +906,7 @@
 											"response": []
 										},
 										{
-											"name": "/api/v1/CoverPhotos",
+											"name": "/api/CoverPhotos",
 											"event": [
 												{
 													"listen": "test",
@@ -947,7 +947,7 @@
 													}
 												},
 												"url": {
-													"raw": "{{baseUrl}}/api/v1/CoverPhotos",
+													"raw": "{{baseUrl}}/api/CoverPhotos",
 													"host": [
 														"{{baseUrl}}"
 													],
@@ -972,13 +972,13 @@
 													"name": "{idBook}",
 													"item": [
 														{
-															"name": "/api/v1/CoverPhotos/books/covers/:idBook",
+															"name": "/api/CoverPhotos/books/covers/:idBook",
 															"event": [
 																{
 																	"listen": "test",
 																	"script": {
 																		"exec": [
-																			"pm.test(\"GET //api/v1/CoverPhotos/books/covers/{idBook} returns valid data\", function () {",
+																			"pm.test(\"GET //api/CoverPhotos/books/covers/{idBook} returns valid data\", function () {",
 																			"    pm.response.to.have.status(200);",
 																			"",
 																			"    const jsonData = pm.response.json();",
@@ -1009,7 +1009,7 @@
 																	}
 																],
 																"url": {
-																	"raw": "{{baseUrl}}/api/v1/CoverPhotos/books/covers/{{bookId}}",
+																	"raw": "{{baseUrl}}/api/CoverPhotos/books/covers/{{bookId}}",
 																	"host": [
 																		"{{baseUrl}}"
 																	],
@@ -1035,7 +1035,7 @@
 									"name": "{id}",
 									"item": [
 										{
-											"name": "/api/v1/CoverPhotos/:id",
+											"name": "/api/CoverPhotos/:id",
 											"event": [
 												{
 													"listen": "test",
@@ -1062,7 +1062,7 @@
 													}
 												],
 												"url": {
-													"raw": "{{baseUrl}}/api/v1/CoverPhotos/{{photoId}}",
+													"raw": "{{baseUrl}}/api/CoverPhotos/{{photoId}}",
 													"host": [
 														"{{baseUrl}}"
 													],
@@ -1077,7 +1077,7 @@
 											"response": []
 										},
 										{
-											"name": "/api/v1/CoverPhotos/:id",
+											"name": "/api/CoverPhotos/:id",
 											"event": [
 												{
 													"listen": "test",
@@ -1118,7 +1118,7 @@
 													}
 												},
 												"url": {
-													"raw": "{{baseUrl}}/api/v1/CoverPhotos/{{photoId}}",
+													"raw": "{{baseUrl}}/api/CoverPhotos/{{photoId}}",
 													"host": [
 														"{{baseUrl}}"
 													],
@@ -1133,7 +1133,7 @@
 											"response": []
 										},
 										{
-											"name": "/api/v1/CoverPhotos/:id",
+											"name": "/api/CoverPhotos/:id",
 											"event": [
 												{
 													"listen": "test",
@@ -1153,7 +1153,7 @@
 												"method": "DELETE",
 												"header": [],
 												"url": {
-													"raw": "{{baseUrl}}/api/v1/CoverPhotos/{{photoId}}",
+													"raw": "{{baseUrl}}/api/CoverPhotos/{{photoId}}",
 													"host": [
 														"{{baseUrl}}"
 													],
@@ -1178,7 +1178,7 @@
 									"name": "std",
 									"item": [
 										{
-											"name": "/api/v1/Users",
+											"name": "/api/Users",
 											"event": [
 												{
 													"listen": "test",
@@ -1215,7 +1215,7 @@
 													}
 												],
 												"url": {
-													"raw": "{{baseUrl}}/api/v1/Users",
+													"raw": "{{baseUrl}}/api/Users",
 													"host": [
 														"{{baseUrl}}"
 													],
@@ -1229,7 +1229,7 @@
 											"response": []
 										},
 										{
-											"name": "/api/v1/Users",
+											"name": "/api/Users",
 											"event": [
 												{
 													"listen": "test",
@@ -1266,7 +1266,7 @@
 													}
 												},
 												"url": {
-													"raw": "{{baseUrl}}/api/v1/Users",
+													"raw": "{{baseUrl}}/api/Users",
 													"host": [
 														"{{baseUrl}}"
 													],
@@ -1285,7 +1285,7 @@
 									"name": "{id}",
 									"item": [
 										{
-											"name": "/api/v1/Users/:id",
+											"name": "/api/Users/:id",
 											"event": [
 												{
 													"listen": "test",
@@ -1307,7 +1307,7 @@
 												"method": "GET",
 												"header": [],
 												"url": {
-													"raw": "{{baseUrl}}/api/v1/Users/{{userId}}",
+													"raw": "{{baseUrl}}/api/Users/{{userId}}",
 													"host": [
 														"{{baseUrl}}"
 													],
@@ -1322,7 +1322,7 @@
 											"response": []
 										},
 										{
-											"name": "/api/v1/Users/:id",
+											"name": "/api/Users/:id",
 											"event": [
 												{
 													"listen": "test",
@@ -1359,7 +1359,7 @@
 													}
 												},
 												"url": {
-													"raw": "{{baseUrl}}/api/v1/Users/{{userId}}",
+													"raw": "{{baseUrl}}/api/Users/{{userId}}",
 													"host": [
 														"{{baseUrl}}"
 													],
@@ -1374,12 +1374,12 @@
 											"response": []
 										},
 										{
-											"name": "/api/v1/Users/:id",
+											"name": "/api/Users/:id",
 											"request": {
 												"method": "DELETE",
 												"header": [],
 												"url": {
-													"raw": "{{baseUrl}}/api/v1/Users/:{{userId}}",
+													"raw": "{{baseUrl}}/api/Users/:{{userId}}",
 													"host": [
 														"{{baseUrl}}"
 													],
