@@ -15,7 +15,8 @@ variables:
   armBackendContainerName: 'tfstate'
   packerImageName: 'myPackerImage'
   environmentName: 'myEnvironment'
-  azureWebAppName: 'webapp-0254563186.azurewebsites.net'
+  azureWebAppName: 'webapp-0254563186'
+  webAppUrl: 'https://webapp-0254563186.azurewebsites.net'
 
 stages:
 #--------------------------------------------#  
@@ -131,9 +132,9 @@ stages:
         rootFolderOrFile: '$(System.DefaultWorkingDirectory)/automatedtesting/selenium'
         includeRootFolder: false
         archiveType: 'zip'
-        archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId)-uitests.zip'
+        archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId)-ui-tests.zip'
 
-    - publish: $(Build.ArtifactStagingDirectory)/$(Build.BuildId)-uitests.zip
+    - publish: $(Build.ArtifactStagingDirectory)/$(Build.BuildId)-ui-tests.zip
       displayName: 'Upload Package'
       artifact: drop-ui-tests
 
@@ -183,7 +184,7 @@ stages:
             displayName: 'Deploy Azure Web App'
             inputs:
               azureSubscription: $(azureServiceConnectionId)
-              appName: 'myWebApp'
+              appName: '$(azureWebAppName)'
               appType: webApp
               package: $(Pipeline.Workspace)/drop-fakerestapi/$(Build.BuildId)-fakerestapi.zip
           - script: |
