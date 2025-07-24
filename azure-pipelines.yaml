@@ -218,24 +218,24 @@ stages:
             inputs:
               targetType: 'inline'
               script: |
-                set +e
-                sudo apt-get upgrade -y
-                UPGRADE_CODE=$?
-                set -e
-                if [ "$UPGRADE_CODE" -ne 0 ] && [ "$UPGRADE_CODE" -ne 8 ]; then
-                  echo "apt-get upgrade failed: $UPGRADE_CODE"
-                  exit $UPGRADE_CODE
-                fi
+                set -euxo pipefail
 
-                sudo apt-get install -y wget unzip python3-pip
-                # Install Chrome 114
+                # Update packages
+                sudo apt-get update
+
+                # Ensure required tools
+                sudo apt-get install -y unzip wget python3-pip
+
+                # Install Chrome 114 (pinned, stable)
+                echo "Installing Chrome 114"
                 wget -q https://dl.google.com/linux/chrome/deb/pool/main/g/google-chrome-stable/google-chrome-stable_114.0.5735.110-1_amd64.deb
-                sudo apt-get install -y ./google-chrome-stable_114.0.5735.110-1_amd64.deb
+                sudo apt-get install -y ./google-chrome-stable_114.0.5735.110-1_amd64.deb || { echo "Chrome install failed"; exit 1; }
 
-                # Install matching Chromedriver version
+                # Install matching Chromedriver
+                echo "Installing Chromedriver 114.0.5735.90"
                 CHROMEDRIVER_VERSION=114.0.5735.90
                 wget -q "https://chromedriver.storage.googleapis.com/${CHROMEDRIVER_VERSION}/chromedriver_linux64.zip"
-                unzip -o chromedriver_linux64.zip
+                unzip -o chromedriver_linux64.zip || { echo "Unzip failed"; exit 1; }
                 sudo mv chromedriver /usr/local/bin/chromedriver
                 chmod +x /usr/local/bin/chromedriver
 
@@ -243,12 +243,11 @@ stages:
                 google-chrome --version
                 chromedriver --version
 
-
+                # Run tests
                 pip3 install selenium
-
                 cd $(Pipeline.Workspace)/drop-ui-tests/ui-tests
-                rm -rf selenium.log
-                python3 main.py --headless || exit 1
+                rm -f selenium.log
+                python3 main.py --headless || { echo "Test failed"; exit 1; }
           - publish: $(Pipeline.Workspace)/drop-ui-tests/ui-tests/selenium.log
             artifact: selenium-report
             displayName: 'Publish Selenium Reports'
