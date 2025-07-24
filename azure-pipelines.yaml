@@ -264,7 +264,7 @@ stages:
 #--------------------------------------------#  
 # JMETER TESTS STAGE
 #--------------------------------------------#    
-- stage: SeleniumTests
+- stage: JMeterTests
   jobs:
   - deployment: VMDeploy
     pool:
