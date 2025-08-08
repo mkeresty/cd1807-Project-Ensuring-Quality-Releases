@@ -7,7 +7,7 @@
         <collectionProp name="Arguments.arguments">
           <elementProp name="baseUrl" elementType="Argument">
             <stringProp name="Argument.name">baseUrl</stringProp>
-            <stringProp name="Argument.value">fakerestapi.azurewebsites.net</stringProp>
+            <stringProp name="Argument.value">webapp-odluser285335.azurewebsites.net</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
         </collectionProp>
@@ -81,7 +81,7 @@
               <connectTime>true</connectTime>
             </value>
           </objProp>
-          <stringProp name="filename">/Users/masonkeresty/Projects/Udacity/cloud_devops_azure/cd1807-Project-Ensuring-Quality-Releases/automatedtesting/jmeter/test-suite/stress-test/test-results.csv</stringProp>
+          <stringProp name="filename">${__P(results_file,results/test-results.csv)}</stringProp>
         </ResultCollector>
         <hashTree/>
         <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">

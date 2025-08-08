@@ -7,7 +7,7 @@
         <collectionProp name="Arguments.arguments">
           <elementProp name="baseUrl" elementType="Argument">
             <stringProp name="Argument.name">baseUrl</stringProp>
-            <stringProp name="Argument.value">fakerestapi.azurewebsites.net</stringProp>
+            <stringProp name="Argument.value">webapp-odluser285335.azurewebsites.net</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
         </collectionProp>
@@ -64,7 +64,7 @@
         </HTTPSamplerProxy>
         <hashTree/>
         <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Data Set Config">
-          <stringProp name="filename">/Users/masonkeresty/Projects/Udacity/cloud_devops_azure/cd1807-Project-Ensuring-Quality-Releases/automatedtesting/jmeter/test-suite/endurance/postid.csv</stringProp>
+          <stringProp name="filename">${__P(csv_file,postid.csv)}</stringProp>
           <stringProp name="fileEncoding"></stringProp>
           <stringProp name="variableNames">postid</stringProp>
           <boolProp name="ignoreFirstLine">false</boolProp>
@@ -109,10 +109,10 @@
               <connectTime>true</connectTime>
             </value>
           </objProp>
-          <stringProp name="filename">/Users/masonkeresty/Projects/Udacity/cloud_devops_azure/cd1807-Project-Ensuring-Quality-Releases/automatedtesting/jmeter/test-suite/endurance/test-results.csv</stringProp>
+          <stringProp name="filename">${__P(results_file,results/test-results.csv)}</stringProp>
         </ResultCollector>
         <hashTree/>
-        <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+        <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree">
           <boolProp name="ResultCollector.error_logging">false</boolProp>
           <objProp>
             <name>saveConfig</name>
@@ -149,7 +149,7 @@
           <stringProp name="filename"></stringProp>
         </ResultCollector>
         <hashTree/>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="POST Activities" enabled="true">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="POST Activities">
           <stringProp name="HTTPSampler.domain">${baseUrl}</stringProp>
           <stringProp name="HTTPSampler.protocol">https</stringProp>
           <stringProp name="HTTPSampler.path">/api/Authors</stringProp>

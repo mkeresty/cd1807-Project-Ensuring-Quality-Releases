@@ -1,6 +1,8 @@
 # #!/usr/bin/env python
 import argparse
 import os
+import shutil
+import tempfile
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
@@ -89,6 +91,10 @@ def main():
     parser.add_argument("--headless", action="store_true", help="Run Chrome in headless mode")
     args = parser.parse_args()
 
+    profile_dir = args.profile_dir or tempfile.mkdtemp(prefix="selenium_profile_")
+    runtime_dir = args.runtime_dir or tempfile.mkdtemp(prefix="selenium_runtime_")
+    os.environ["XDG_RUNTIME_DIR"] = runtime_dir
+
     options = Options()
     if args.headless:
         options.add_argument("--headless=new")
@@ -98,16 +104,23 @@ def main():
     
     options.add_argument(f"--user-data-dir=/tmp/selenium_user_data_{os.getpid()}")
 
+    options.add_argument(f"--user-data-dir={profile_dir}")
+    options.add_argument("--no-first-run")
+    options.add_argument("--no-default-browser-check")
+    options.add_argument("--disable-features=TranslateUI")
+    options.add_argument("--disable-extensions")
     options.add_argument("--disable-infobars")
-    options.add_argument("--incognito")
-    options.add_argument("--password-store=basic")
+    options.add_argument("--window-size=1920,1080")
+    options.add_argument("--remote-debugging-port=0")
+
     options.add_experimental_option("prefs", {
         "credentials_enable_service": False,
         "profile.password_manager_enabled": False,
         "profile.default_content_setting_values.notifications": 2
     })
-    driver = webdriver.Chrome(options=options)
+    driver = None
     try:
+        driver = webdriver.Chrome(options=options)
         login(driver,"https://www.saucedemo.com/", "standard_user", "secret_sauce")
         add_items_to_cart(driver)
         time.sleep(2)
@@ -123,6 +136,10 @@ def main():
         if driver:
             print("Closing browser...")
             driver.quit()
+        if not args.profile_dir:
+            shutil.rmtree(profile_dir, ignore_errors=True)
+        if not args.runtime_dir:
+            shutil.rmtree(runtime_dir, ignore_errors=True)
 
 
 if __name__ == "__main__":

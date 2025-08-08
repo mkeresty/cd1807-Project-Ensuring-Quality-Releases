@@ -185,11 +185,25 @@ stages:
             inputs:
               targetType: 'inline'
               script: |
+                set -euxo pipefail
+                # Clean and ensure no stray Chrome from earlier attempts
+                pkill -f chrome || true
+                pkill -f chromium || true
+                rm -rf /tmp/selenium_user_data_* /tmp/selenium_runtime_* || true
+
+                # Use a fresh temp root so concurrent jobs can't collide
+                export CI_TMP_ROOT="$(mktemp -d -t ci-sel-XXXXXX)"
+                echo "Using CI_TMP_ROOT=$CI_TMP_ROOT"
+                rm -rf /tmp/selenium_user_data_*
+
                 pip3 install selenium
                 cd $(Pipeline.Workspace)/drop-ui-tests/ui-tests
                 rm -f selenium.log
+
                 echo "Running tests..."
-                python3 main.py --headless >> selenium.log 2>&1
+                python3 main.py --headless \
+                  --profile-dir "$CI_TMP_ROOT/profile" \
+                  --runtime-dir "$CI_TMP_ROOT/runtime" >> selenium.log 2>&1 || true
                 set +e
                 cat selenium.log
           - script: cat $(Pipeline.Workspace)/drop-ui-tests/ui-tests/selenium.log
@@ -307,9 +321,9 @@ stages:
               unzip -o $(Pipeline.Workspace)/drop-jmeter-tests/$(Build.BuildId)-jmeter-tests.zip -d $(Pipeline.Workspace)/drop-jmeter-tests/jmeter-tests
             displayName: 'Unzip JMeter Tests'
           - script: |
-              wget https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-5.2.1.tgz
-              tar -xf apache-jmeter-5.2.1.tgz
-              sudo mv apache-jmeter-5.2.1 /opt/jmeter
+              wget https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-5.6.3.tgz
+              tar -xf apache-jmeter-5.6.3.tgz
+              sudo mv apache-jmeter-5.6.3 /opt/jmeter
               sudo ln -s /opt/jmeter/bin/jmeter /usr/local/bin/jmeter
               sudo apt-get update
               sudo apt-get install -y openjdk-11-jdk
@@ -327,6 +341,7 @@ stages:
               jmeter -n \
                 -t endurance.jmx \
                 -JbaseUrl=$(webAppUrl) \
+                -Jcsv_file=jmeter-tests/endurance/postid.csv \
                 -l $(Pipeline.Workspace)/drop-jmeter-tests/jmeter-tests/results/endurance/test-results.csv \
                 -e -o $(Pipeline.Workspace)/drop-jmeter-tests/jmeter-tests/results/endurance/html \
                 -j $(Pipeline.Workspace)/drop-jmeter-tests/jmeter-tests/results/endurance/jmeter.log
