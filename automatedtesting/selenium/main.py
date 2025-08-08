@@ -1,5 +1,4 @@
 # #!/usr/bin/env python
-import shutil
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
@@ -89,7 +88,7 @@ def make_driver():
     options.add_argument("--no-sandbox")
     options.add_argument("--disable-dev-shm-usage")
 
-    driver = webdriver.Chrome(options=options)
+    return webdriver.Chrome(options=options)
 
 def main():
 
@@ -112,10 +111,6 @@ def main():
         if driver:
             print("Closing browser...")
             driver.quit()
-        if not args.profile_dir:
-            shutil.rmtree(profile_dir, ignore_errors=True)
-        if not args.runtime_dir:
-            shutil.rmtree(runtime_dir, ignore_errors=True)
 
 
 if __name__ == "__main__":
