@@ -29,13 +29,12 @@ def login(driver, website, user, password):
     print("Login successful!")
 
 def reset_app_state(driver):
-    # Open burger menu
-    WebDriverWait(driver, 10).until(expected_conditions.element_to_be_clickable((By.ID, "react-burger-menu-btn"))).click()
-    # Click reset app state
-    WebDriverWait(driver, 10).until(expected_conditions.element_to_be_clickable((By.ID, "reset_sidebar_link"))).click()
-    # Close menu
-    WebDriverWait(driver, 10).until(expected_conditions.element_to_be_clickable((By.ID, "react-burger-cross-btn"))).click()
+    """ Reset the application state by clearing cookies and local storage"""
+    driver.delete_all_cookies()
+    driver.execute_script("window.localStorage.clear();")
+    driver.execute_script("window.sessionStorage.clear();")
 
+    
 def add_items_to_cart(driver):
     """ Add all items to the cart and verify the cart count"""
     # Find all item containers
@@ -110,6 +109,7 @@ def remove_items_from_cart(driver):
 
 
 def make_driver():
+    """Creates a Chrome driver with necessary options"""
     options = Options()
     options.add_argument("--headless=new")
     options.add_argument("--no-sandbox")
