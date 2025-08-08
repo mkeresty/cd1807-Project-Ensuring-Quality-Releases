@@ -30,6 +30,7 @@ def login(driver, website, user, password):
 
 def reset_app_state(driver):
     """ Reset the application state by clearing cookies and local storage"""
+    print("Resetting application state...")
     driver.delete_all_cookies()
     driver.execute_script("window.localStorage.clear();")
     driver.execute_script("window.sessionStorage.clear();")
