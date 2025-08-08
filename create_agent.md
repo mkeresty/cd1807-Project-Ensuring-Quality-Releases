@@ -14,18 +14,18 @@ az vm open-port \
   --port 22
 
 
-ssh devopsagent@<publicIp> #172.201.61.116
+ssh devopsagent@<publicIp> #13.90.90.146
 sudo snap install docker
 python3 --version
 sudo groupadd docker
 sudo usermod -aG docker $USER
 
-# go to dev portal then click new agent in the pool settings
+# go to dev portal then create new agent pool in project settings
 curl -O https://download.agent.dev.azure.com/agent/4.258.1/vsts-agent-linux-x64-4.258.1.tar.gz
 mkdir myagent && cd myagent
 tar -xzvf ../vsts-agent-linux-x64-4.258.1.tar.gz
 ./config.sh
-# enter dev portal url : ex: https://dev.azure.com/odluser284939
+# enter dev portal url : ex: https://dev.azure.com/odluser285335
 # enter access token
 # enter myPool name
 # use default vm myLinuxVM
