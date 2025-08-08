@@ -11,7 +11,7 @@ variables:
   projectRoot: $(System.DefaultWorkingDirectory)
   subscriptionId: '0fadec41-9b39-430f-aa5d-ce7b49f9346c'
   resourceGroupName: 'Azuredevops'
-  armBackendStorageAccountName: 'tfstate207391737'
+  armBackendStorageAccountName: 'tfstate3257826585'
   armBackendContainerName: 'tfstate'
   packerImageName: 'myPackerImage'
   environmentName: 'myEnvironment'
