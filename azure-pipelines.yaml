@@ -7,7 +7,7 @@ pool: myPool
 
 variables:
   python.version: '3.7.6'
-  azureServiceConnectionId: '1f3adfd5-a51a-40ec-899e-7a9a05837992'
+  azureServiceConnectionId: '9797b99f-0a8f-4f21-9469-31c27100fe58'
   projectRoot: $(System.DefaultWorkingDirectory)
   subscriptionId: '0fadec41-9b39-430f-aa5d-ce7b49f9346c'
   resourceGroupName: 'Azuredevops'
