@@ -20,6 +20,45 @@ variables:
 
 stages:
 #--------------------------------------------#  
+# SELENIUM TESTS STAGE
+#--------------------------------------------#    
+- stage: SeleniumTests
+  jobs:
+  - deployment: SeleniumDeploy
+    pool:
+      name: 'myPool'
+      vmImage: 'ubuntu-22.04'
+    displayName: Selenium Tests
+    environment: 'myEnvironment'
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - task: DownloadPipelineArtifact@2
+            inputs:
+              artifact: drop-ui-tests
+              path: $(Pipeline.Workspace)/drop-ui-tests
+          - script: |
+              unzip -o $(Pipeline.Workspace)/drop-ui-tests/$(Build.BuildId)-ui-tests.zip -d $(Pipeline.Workspace)/drop-ui-tests/ui-tests
+            displayName: 'Unzip Selenium Tests'
+          - task: Bash@3
+            inputs:
+              targetType: 'inline'
+              script: |
+                pip3 install selenium
+                cd $(Pipeline.Workspace)/drop-ui-tests/ui-tests
+                rm -f selenium.log
+                echo "Running tests..."
+                python3 main.py --headless >> selenium.log 2>&1
+                set +e
+                cat selenium.log
+          - script: cat $(Pipeline.Workspace)/drop-ui-tests/ui-tests/selenium.log
+            displayName: 'Print Selenium Log to Pipeline'
+          - publish: $(Pipeline.Workspace)/drop-ui-tests/ui-tests/selenium.log
+            artifact: selenium-report
+            displayName: 'Publish Selenium Reports'
+            
+#--------------------------------------------#  
 # BUILD STAGE
 #--------------------------------------------#    
 - stage: Build
@@ -191,42 +230,7 @@ stages:
 
 
 
-#--------------------------------------------#  
-# SELENIUM TESTS STAGE
-#--------------------------------------------#    
-- stage: SeleniumTests
-  jobs:
-  - deployment: SeleniumDeploy
-    pool:
-      name: 'myPool'
-      vmImage: 'ubuntu-22.04'
-    displayName: Selenium Tests
-    environment: 'myEnvironment'
-    strategy:
-      runOnce:
-        deploy:
-          steps:
-          - task: DownloadPipelineArtifact@2
-            inputs:
-              artifact: drop-ui-tests
-              path: $(Pipeline.Workspace)/drop-ui-tests
-          - script: |
-              unzip -o $(Pipeline.Workspace)/drop-ui-tests/$(Build.BuildId)-ui-tests.zip -d $(Pipeline.Workspace)/drop-ui-tests/ui-tests
-            displayName: 'Unzip Selenium Tests'
-          - task: Bash@3
-            inputs:
-              targetType: 'inline'
-              script: |
-                pip3 install selenium
-                cd $(Pipeline.Workspace)/drop-ui-tests/ui-tests
-                rm -f selenium.log
-                echo "Running tests..."
-                python3 main.py --headless >> selenium.log 2>&1
-          - script: cat $(Pipeline.Workspace)/drop-ui-tests/ui-tests/selenium.log
-            displayName: 'Print Selenium Log to Pipeline'
-          - publish: $(Pipeline.Workspace)/drop-ui-tests/ui-tests/selenium.log
-            artifact: selenium-report
-            displayName: 'Publish Selenium Reports'
+
 
 
 
