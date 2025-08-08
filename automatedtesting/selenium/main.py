@@ -1,8 +1,8 @@
 # #!/usr/bin/env python
 import argparse
 import os
-import shutil
 import tempfile
+import shutil
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
@@ -89,6 +89,8 @@ def remove_items_from_cart(driver):
 def main():
     parser = argparse.ArgumentParser(description="Run Selenium")
     parser.add_argument("--headless", action="store_true", help="Run Chrome in headless mode")
+    parser.add_argument("--profile-dir", help="Path to Chrome user data dir")
+    parser.add_argument("--runtime-dir", help="Path to runtime dir")
     args = parser.parse_args()
 
     profile_dir = args.profile_dir or tempfile.mkdtemp(prefix="selenium_profile_")
