@@ -15,8 +15,8 @@ variables:
   armBackendContainerName: 'tfstate'
   packerImageName: 'myPackerImage'
   environmentName: 'myEnvironment'
-  azureWebAppName: 'webapp-odluser284939'
-  webAppUrl: 'webapp-odluser284939.azurewebsites.net'
+  azureWebAppName: 'webapp-odluser285335'
+  webAppUrl: 'webapp-odluser285335.azurewebsites.net'
 
 stages:
 #--------------------------------------------#  
