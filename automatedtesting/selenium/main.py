@@ -39,7 +39,7 @@ def add_items_to_cart(driver):
         item_name = item.find_element(By.CLASS_NAME, "inventory_item_name").text
         item.find_element(By.CLASS_NAME, "btn_inventory").click()
         print(f"Added {item_name} to cart")
-        time.sleep(2)
+        time.sleep(4)
         cart_count += 1
         WebDriverWait(driver, 10).until(
             lambda d: d.find_element(By.CLASS_NAME, "shopping_cart_badge").text.isdigit()
@@ -80,7 +80,7 @@ def remove_items_from_cart(driver):
         item_name = item.find_element(By.CLASS_NAME, "inventory_item_name").text
         item.find_element(By.CLASS_NAME, "btn_secondary").click()
         print(f"Removed {item_name} from cart")
-        time.sleep(2)
+        time.sleep(4)
         remove_count += 1
         expected_count = original_cart_count - remove_count
 
