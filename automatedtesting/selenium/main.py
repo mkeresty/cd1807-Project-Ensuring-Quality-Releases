@@ -1,7 +1,4 @@
 # #!/usr/bin/env python
-import argparse
-import os
-import tempfile
 import shutil
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -85,63 +82,21 @@ def remove_items_from_cart(driver):
     assert (len(cart_items) == remove_count), "Cart is not empty after removing items"
     print("All items removed from cart successfully")
 
-def safe_mkdir(p):
-    os.makedirs(p, exist_ok=True)
 
-def clean_chrome_profile(p):
-    for name in ("SingletonLock", "SingletonCookie", "SingletonSocket"):
-        fp = os.path.join(p, name)
-        try:
-            if os.path.exists(fp):
-                os.remove(fp)
-        except Exception:
-            pass
+def make_driver():
+    options = Options()
+    options.add_argument("--headless=new")
+    options.add_argument("--no-sandbox")
+    options.add_argument("--disable-dev-shm-usage")
 
-def make_driver(profile_dir, runtime_dir, headless):
-    os.environ["XDG_RUNTIME_DIR"] = runtime_dir
-    os.makedirs(runtime_dir, exist_ok=True)
-    os.chmod(runtime_dir, 0o700)
-
-    os.makedirs(profile_dir, exist_ok=True)
-    clean_chrome_profile(profile_dir)
-
-    opts = Options()
-    if headless:
-        opts.add_argument("--headless=new")
-        opts.add_argument("--no-sandbox")
-        opts.add_argument("--disable-dev-shm-usage")
-        opts.add_argument("--disable-gpu")
-
-    # IMPORTANT: set ONE user-data-dir
-    opts.add_argument(f"--user-data-dir={profile_dir}")
-    opts.add_argument("--no-first-run")
-    opts.add_argument("--no-default-browser-check")
-    opts.add_argument("--disable-features=TranslateUI")
-    opts.add_argument("--disable-extensions")
-    opts.add_argument("--disable-infobars")
-    opts.add_argument("--window-size=1920,1080")
-    opts.add_argument("--remote-debugging-port=0")
-    opts.add_argument("--enable-logging=stderr")
-    opts.add_argument("--v=1")
-
-    print(f"[DEBUG] Using profile_dir={profile_dir}")
-    print(f"[DEBUG] Using runtime_dir={runtime_dir} (mode {oct(os.stat(runtime_dir).st_mode & 0o777)})")
-
-    return webdriver.Chrome(options=opts)
+    driver = webdriver.Chrome(options=options)
 
 def main():
-    parser = argparse.ArgumentParser(description="Run Selenium")
-    parser.add_argument("--headless", action="store_true", help="Run Chrome in headless mode")
-    parser.add_argument("--profile-dir", help="Path to Chrome user data dir")
-    parser.add_argument("--runtime-dir", help="Path to XDG runtime dir")
-    args = parser.parse_args()
 
-    profile_dir = args.profile_dir or tempfile.mkdtemp(prefix="selenium_profile_")
-    runtime_dir = args.runtime_dir or tempfile.mkdtemp(prefix="selenium_runtime_")
 
     driver = None
     try:
-        driver = make_driver(profile_dir, runtime_dir, args.headless)
+        driver = make_driver()
         login(driver,"https://www.saucedemo.com/", "standard_user", "secret_sauce")
         add_items_to_cart(driver)
         time.sleep(2)

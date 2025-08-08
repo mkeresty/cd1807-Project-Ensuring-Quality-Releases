@@ -186,36 +186,21 @@ stages:
               targetType: 'inline'
               script: |
                 set -euxo pipefail
-                # Clean and ensure no stray Chrome from earlier attempts
-                pkill -f chrome || true
-                pkill -f chromium || true
-                rm -rf /tmp/selenium_user_data_* /tmp/selenium_runtime_* || true
 
-                # Use a fresh temp root
-                export CI_TMP_ROOT="$(mktemp -d -t ci-sel-XXXXXX)"
-                echo "Using CI_TMP_ROOT=$CI_TMP_ROOT"
-                rm -rf /tmp/selenium_user_data_*
+                # Install Google Chrome Stable
+                sudo install -d /usr/share/keyrings
+                wget -qO- https://dl.google.com/linux/linux_signing_key.pub \
+                  | sudo gpg --dearmor -o /usr/share/keyrings/google-chrome.gpg
+                echo "deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] http://dl.google.com/linux/chrome/deb/ stable main" \
+                  | sudo tee /etc/apt/sources.list.d/google-chrome.list > /dev/null
+                sudo apt-get update
+                sudo apt-get install -y google-chrome-stable python3-pip
 
-                PROFILE_DIR="$CI_TMP_ROOT/profile"
-                RUNTIME_DIR="$CI_TMP_ROOT/runtime"
-                mkdir -p "$PROFILE_DIR" "$RUNTIME_DIR"
+                python3 -m pip install --user --upgrade pip
+                python3 -m pip install --user selenium
 
-                chmod 700 "$RUNTIME_DIR"
-                export XDG_RUNTIME_DIR="$RUNTIME_DIR"
-
-                pip3 install --user selenium
-
-                cd $(Pipeline.Workspace)/drop-ui-tests/ui-tests
-                rm -f selenium.log
-
-                echo "Running tests..."
-                set +e
-                python3 main.py --headless \
-                  --profile-dir "$PROFILE_DIR" \
-                  --runtime-dir "$RUNTIME_DIR" \
-                  | tee selenium.log
-                EXIT_CODE=${PIPESTATUS[0]}
-                set -e
+                export PATH="$HOME/.local/bin:$PATH"
+                python3 main.py | tee selenium.log
                 cat selenium.log
           - script: cat $(Pipeline.Workspace)/drop-ui-tests/ui-tests/selenium.log
             displayName: 'Print Selenium Log to Pipeline'
