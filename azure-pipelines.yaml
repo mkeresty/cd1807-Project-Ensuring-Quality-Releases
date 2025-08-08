@@ -186,13 +186,17 @@ stages:
               targetType: 'inline'
               script: |
                 set -euxo pipefail
+                sudo apt-get update
+                sudo apt-get install -y curl gnupg ca-certificates
 
-                # Install Google Chrome Stable
                 sudo install -d /usr/share/keyrings
-                wget -qO- https://dl.google.com/linux/linux_signing_key.pub \
-                  | sudo gpg --dearmor -o /usr/share/keyrings/google-chrome.gpg
+                curl -fsSL https://dl.google.com/linux/linux_signing_key.pub \
+                  | sudo gpg --dearmor --yes --batch -o /usr/share/keyrings/google-chrome.gpg
+
+                # Add repo
                 echo "deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] http://dl.google.com/linux/chrome/deb/ stable main" \
                   | sudo tee /etc/apt/sources.list.d/google-chrome.list > /dev/null
+                  
                 sudo apt-get update
                 sudo apt-get install -y google-chrome-stable python3-pip
 
