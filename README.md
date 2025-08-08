@@ -136,12 +136,12 @@ In your local cli at ```./terraform/environments/test```
 ```zsh
 export ARM_ACCESS_KEY=$(az storage account keys list \
   --resource-group Azuredevops \
-  --account-name tfstate207391737 \
+  --account-name <tfstate12345> \
   --query '[0].value' --output tsv)
 
 terraform init -reconfigure \
   -backend-config="resource_group_name=Azuredevops" \
-  -backend-config="storage_account_name=tfstate207391737" \
+  -backend-config="storage_account_name=<tfstate12345>" \
   -backend-config="container_name=tfstate" \
   -backend-config="key=test.terraform.tfstate"
 

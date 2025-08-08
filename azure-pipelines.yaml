@@ -221,7 +221,7 @@ stages:
                 cd $(Pipeline.Workspace)/drop-ui-tests/ui-tests
                 rm -f selenium.log
                 echo "Running tests..."
-                python3 main.py --headless >> selenium.log
+                python3 main.py --headless >> selenium.log 2>&1
           - script: cat $(Pipeline.Workspace)/drop-ui-tests/ui-tests/selenium.log
             displayName: 'Print Selenium Log to Pipeline'
           - publish: $(Pipeline.Workspace)/drop-ui-tests/ui-tests/selenium.log

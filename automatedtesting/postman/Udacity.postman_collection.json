@@ -1,1407 +1,1375 @@
 {
 	"info": {
-		"_postman_id": "8f7943a5-4bad-4182-baf0-6bfb67641575",
+		"_postman_id": "10401c1f-f074-44de-a9c0-46e3965f9676",
 		"name": "Udacity",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "24570224"
 	},
 	"item": [
 		{
-					"name": "api",
+			"name": "api",
+			"item": [
+				{
+					"name": "Activities",
 					"item": [
 						{
-							"name": "Activities",
+							"name": "std",
 							"item": [
 								{
-									"name": "std",
-									"item": [
+									"name": "/api/Activities",
+									"event": [
 										{
-											"name": "/api/Activities",
-											"event": [
-												{
-													"listen": "test",
-													"script": {
-														"exec": [
-															"pm.test(\"GET /Activities returns valid data\", function () {",
-															"    pm.response.to.have.status(200);",
-															"",
-															"    const jsonData = pm.response.json();",
-															"",
-															"    // Check it's an array and not empty",
-															"    pm.expect(jsonData).to.be.an(\"array\");",
-															"    pm.expect(jsonData.length).to.be.above(0);",
-															"",
-															"    jsonData.forEach(activity => {",
-															"        pm.expect(activity).to.have.property(\"ID\");",
-															"        pm.expect(activity).to.have.property(\"Title\");",
-															"        pm.expect(activity).to.have.property(\"DueDate\");",
-															"        pm.expect(activity).to.have.property(\"Completed\");",
-															"    });",
-															"});",
-															""
-														],
-														"type": "text/javascript",
-														"packages": {}
-													}
-												}
-											],
-											"request": {
-												"method": "GET",
-												"header": [
-													{
-														"key": "Accept",
-														"value": "text/plain; v=1.0"
-													}
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Activity created\", function () {",
+													"    pm.response.to.have.status(200);",
+													"    const jsonData = pm.response.json();",
+													"    pm.expect(jsonData.ID).to.eql(parseInt(pm.environment.get(\"activityId\")));",
+													"});",
+													""
 												],
-												"url": {
-													"raw": "{{baseUrl}}/api/Activities",
-													"host": [
-														"{{baseUrl}}"
-													],
-													"path": [
-														"api",
-														
-														"Activities"
-													]
-												}
-											},
-											"response": []
-										},
-										{
-											"name": "/api/Activities",
-											"event": [
-												{
-													"listen": "test",
-													"script": {
-														"exec": [
-															"pm.test(\"Activity created\", function () {",
-															"    pm.response.to.have.status(200);",
-															"    const jsonData = pm.response.json();",
-															"    pm.expect(jsonData.ID).to.eql(parseInt(pm.environment.get(\"activityId\")));",
-															"});",
-															""
-														],
-														"type": "text/javascript",
-														"packages": {}
-													}
-												}
-											],
-											"request": {
-												"method": "POST",
-												"header": [
-													{
-														"key": "Content-Type",
-														"value": "application/json; v=1.0"
-													},
-													{
-														"key": "Accept",
-														"value": "text/plain; v=1.0"
-													}
-												],
-												"body": {
-													"mode": "raw",
-													"raw": "{\n  \"ID\": {{activityId}},\n  \"Title\": \"Title\",\n  \"DueDate\": \"2025-01-01T00:00:00\",\n  \"Completed\": false\n}",
-													"options": {
-														"raw": {
-															"headerFamily": "json",
-															"language": "json"
-														}
-													}
-												},
-												"url": {
-													"raw": "{{baseUrl}}/api/Activities",
-													"host": [
-														"{{baseUrl}}"
-													],
-													"path": [
-														"api",
-														
-														"Activities"
-													]
-												}
-											},
-											"response": []
+												"type": "text/javascript",
+												"packages": {}
+											}
 										}
-									]
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json; v=1.0"
+											},
+											{
+												"key": "Accept",
+												"value": "text/plain; v=1.0"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"ID\": {{activityId}},\n  \"Title\": \"Title\",\n  \"DueDate\": \"2025-01-01T00:00:00\",\n  \"Completed\": false\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/Activities",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Activities"
+											]
+										}
+									},
+									"response": []
 								},
 								{
-									"name": "{ID}",
-									"item": [
+									"name": "/api/Activities",
+									"event": [
 										{
-											"name": "/api/Activities/:ID",
-											"event": [
-												{
-													"listen": "test",
-													"script": {
-														"exec": [
-															"pm.test(\"Activity has correct ID.\", function () {",
-															"    pm.response.to.have.status(200);",
-															"    const jsonData = pm.response.json();",
-															"    pm.expect(jsonData.ID).to.eql(parseInt(pm.environment.get(\"activityId\")));",
-															"});",
-															""
-														],
-														"type": "text/javascript",
-														"packages": {}
-													}
-												}
-											],
-											"request": {
-												"method": "GET",
-												"header": [
-													{
-														"key": "Accept",
-														"value": "text/plain; v=1.0"
-													}
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"GET /Activities returns valid data\", function () {",
+													"    pm.response.to.have.status(200);",
+													"",
+													"    const jsonData = pm.response.json();",
+													"",
+													"    // Check it's an array and not empty",
+													"    pm.expect(jsonData).to.be.an(\"array\");",
+													"    pm.expect(jsonData.length).to.be.above(0);",
+													"",
+													"    jsonData.forEach(activity => {",
+													"        pm.expect(activity).to.have.property(\"ID\");",
+													"        pm.expect(activity).to.have.property(\"Title\");",
+													"        pm.expect(activity).to.have.property(\"DueDate\");",
+													"        pm.expect(activity).to.have.property(\"Completed\");",
+													"    });",
+													"});",
+													""
 												],
-												"url": {
-													"raw": "{{baseUrl}}/api/Activities/{{activityId}}",
-													"host": [
-														"{{baseUrl}}"
-													],
-													"path": [
-														"api",
-														
-														"Activities",
-														"{{activityId}}"
-													]
-												}
-											},
-											"response": []
-										},
-										{
-											"name": "/api/Activities/:ID",
-											"event": [
-												{
-													"listen": "test",
-													"script": {
-														"exec": [
-															"pm.test(\"Activity has Title.\", function () {",
-															"    pm.response.to.have.status(200);",
-															"    const jsonData = pm.response.json();",
-															"    pm.expect(jsonData.Title).to.eql(\"New Title\");",
-															"});",
-															""
-														],
-														"type": "text/javascript",
-														"packages": {}
-													}
-												}
-											],
-											"request": {
-												"method": "PUT",
-												"header": [
-													{
-														"key": "Content-Type",
-														"value": "application/json; v=1.0"
-													},
-													{
-														"key": "Accept",
-														"value": "text/plain; v=1.0"
-													}
-												],
-												"body": {
-													"mode": "raw",
-													"raw": "{\n  \"ID\": {{activityId}},\n  \"Title\": \"New Title\",\n  \"DueDate\": \"2025-01-01\",\n  \"Completed\": false\n}",
-													"options": {
-														"raw": {
-															"headerFamily": "json",
-															"language": "json"
-														}
-													}
-												},
-												"url": {
-													"raw": "{{baseUrl}}/api/Activities/:ID",
-													"host": [
-														"{{baseUrl}}"
-													],
-													"path": [
-														"api",
-														
-														"Activities",
-														":ID"
-													],
-													"variable": [
-														{
-															"key": "ID",
-															"value": "-31726222",
-															"description": "(Required) "
-														}
-													]
-												}
-											},
-											"response": []
-										},
-										{
-											"name": "/api/Activities/:ID",
-											"event": [
-												{
-													"listen": "test",
-													"script": {
-														"exec": [
-															"pm.test(\"Activity deleted.\", function () {",
-															"    pm.response.to.have.status(200);",
-															"});",
-															""
-														],
-														"type": "text/javascript",
-														"packages": {}
-													}
-												}
-											],
-											"request": {
-												"method": "DELETE",
-												"header": [],
-												"url": {
-													"raw": "{{baseUrl}}/api/Activities/{{activityId}}",
-													"host": [
-														"{{baseUrl}}"
-													],
-													"path": [
-														"api",
-														
-														"Activities",
-														"{{activityId}}"
-													]
-												}
-											},
-											"response": []
+												"type": "text/javascript",
+												"packages": {}
+											}
 										}
-									]
+									],
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "text/plain; v=1.0"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/Activities",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Activities"
+											]
+										}
+									},
+									"response": []
 								}
 							]
 						},
 						{
-							"name": "Authors",
+							"name": "{ID}",
 							"item": [
 								{
-									"name": "std",
-									"item": [
+									"name": "/api/Activities/:ID",
+									"event": [
 										{
-											"name": "/api/Authors",
-											"event": [
-												{
-													"listen": "test",
-													"script": {
-														"exec": [
-															"pm.test(\"Author created\", function () {",
-															"    pm.response.to.have.status(200);",
-															"    const jsonData = pm.response.json();",
-															"    pm.expect(jsonData.ID).to.eql(parseInt(pm.environment.get(\"authorId\")));",
-															"    });",
-															""
-														],
-														"type": "text/javascript",
-														"packages": {}
-													}
-												}
-											],
-											"request": {
-												"method": "POST",
-												"header": [
-													{
-														"key": "Content-Type",
-														"value": "application/json; v=1.0"
-													},
-													{
-														"key": "Accept",
-														"value": "text/plain; v=1.0"
-													}
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Activity has correct ID.\", function () {",
+													"    pm.response.to.have.status(200);",
+													"    const jsonData = pm.response.json();",
+													"    pm.expect(jsonData.ID).to.eql(parseInt(pm.environment.get(\"activityId\")));",
+													"});",
+													""
 												],
-												"body": {
-													"mode": "raw",
-													"raw": "{\n  \"ID\": {{authorId}},\n  \"IDBook\": {{bookId}},\n  \"FirstName\": \"Bob\",\n  \"LastName\": \"Jones\"\n}",
-													"options": {
-														"raw": {
-															"headerFamily": "json",
-															"language": "json"
-														}
-													}
-												},
-												"url": {
-													"raw": "{{baseUrl}}/api/Authors",
-													"host": [
-														"{{baseUrl}}"
-													],
-													"path": [
-														"api",
-														
-														"Authors"
-													]
-												}
-											},
-											"response": []
-										},
-										{
-											"name": "/api/Authors",
-											"event": [
-												{
-													"listen": "test",
-													"script": {
-														"exec": [
-															"pm.test(\"GET /Authors returns valid data\", function () {",
-															"    pm.response.to.have.status(200);",
-															"",
-															"    const jsonData = pm.response.json();",
-															"",
-															"    // Check it's an array and not empty",
-															"    pm.expect(jsonData).to.be.an(\"array\");",
-															"    pm.expect(jsonData.length).to.be.above(0);",
-															"",
-															"    jsonData.forEach(activity => {",
-															"        pm.expect(activity).to.have.property(\"ID\");",
-															"        pm.expect(activity).to.have.property(\"IDBook\");",
-															"        pm.expect(activity).to.have.property(\"FirstName\");",
-															"        pm.expect(activity).to.have.property(\"LastName\");",
-															"    });",
-															"});",
-															""
-														],
-														"type": "text/javascript",
-														"packages": {}
-													}
-												}
-											],
-											"request": {
-												"method": "GET",
-												"header": [
-													{
-														"key": "Accept",
-														"value": "text/plain; v=1.0"
-													}
-												],
-												"url": {
-													"raw": "{{baseUrl}}/api/Authors",
-													"host": [
-														"{{baseUrl}}"
-													],
-													"path": [
-														"api",
-														
-														"Authors"
-													]
-												}
-											},
-											"response": []
+												"type": "text/javascript",
+												"packages": {}
+											}
 										}
-									]
+									],
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "text/plain; v=1.0"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/Activities/{{activityId}}",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Activities",
+												"{{activityId}}"
+											]
+										}
+									},
+									"response": []
 								},
 								{
-									"name": "authors",
-									"item": [
+									"name": "/api/Activities/:ID",
+									"event": [
 										{
-											"name": "books",
-											"item": [
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Activity has Title.\", function () {",
+													"    pm.response.to.have.status(200);",
+													"    const jsonData = pm.response.json();",
+													"    pm.expect(jsonData.Title).to.eql(\"New Title\");",
+													"});",
+													""
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"request": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json; v=1.0"
+											},
+											{
+												"key": "Accept",
+												"value": "text/plain; v=1.0"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"ID\": {{activityId}},\n  \"Title\": \"New Title\",\n  \"DueDate\": \"2025-01-01\",\n  \"Completed\": false\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/Activities/:ID",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Activities",
+												":ID"
+											],
+											"variable": [
 												{
-													"name": "{IDBook}",
-													"item": [
-														{
-															"name": "/api/Authors/authors/books/:IDBook",
-															"event": [
-																{
-																	"listen": "test",
-																	"script": {
-																		"exec": [
-																			"pm.test(\"GET /Authors/authors/books returns valid data\", function () {",
-																			"    pm.response.to.have.status(200);",
-																			"",
-																			"    const jsonData = pm.response.json();",
-																			"",
-																			"    // Check it's an array and not empty",
-																			"    pm.expect(jsonData).to.be.an(\"array\");",
-																			"    pm.expect(jsonData.length).to.be.above(0);",
-																			"",
-																			"    jsonData.forEach(activity => {",
-																			"        pm.expect(activity).to.have.property(\"ID\");",
-																			"        pm.expect(activity).to.have.property(\"IDBook\");",
-																			"        pm.expect(activity).to.have.property(\"FirstName\");",
-																			"        pm.expect(activity).to.have.property(\"LastName\");",
-																			"    });",
-																			"});",
-																			""
-																		],
-																		"type": "text/javascript",
-																		"packages": {}
-																	}
-																}
-															],
-															"request": {
-																"method": "GET",
-																"header": [
-																	{
-																		"key": "Accept",
-																		"value": "text/plain; v=1.0"
-																	}
-																],
-																"url": {
-																	"raw": "{{baseUrl}}/api/Authors/authors/books/{{bookId}}",
-																	"host": [
-																		"{{baseUrl}}"
-																	],
-																	"path": [
-																		"api",
-																		
-																		"Authors",
-																		"authors",
-																		"books",
-																		"{{bookId}}"
-																	]
-																}
-															},
-															"response": []
-														}
-													]
+													"key": "ID",
+													"value": "-31726222",
+													"description": "(Required) "
 												}
 											]
 										}
-									]
+									},
+									"response": []
 								},
 								{
-									"name": "{ID}",
-									"item": [
+									"name": "/api/Activities/:ID",
+									"event": [
 										{
-											"name": "/api/Authors/:ID",
-											"event": [
-												{
-													"listen": "test",
-													"script": {
-														"exec": [
-															"pm.test(\"Author has correct ID.\", function () {",
-															"    pm.response.to.have.status(200);",
-															"    const jsonData = pm.response.json();",
-															"    pm.expect(jsonData.ID).to.eql(parseInt(pm.environment.get(\"authorId\")));",
-															"});",
-															""
-														],
-														"type": "text/javascript",
-														"packages": {}
-													}
-												}
-											],
-											"request": {
-												"method": "GET",
-												"header": [
-													{
-														"key": "Accept",
-														"value": "text/plain; v=1.0"
-													}
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Activity deleted.\", function () {",
+													"    pm.response.to.have.status(200);",
+													"});",
+													""
 												],
-												"url": {
-													"raw": "{{baseUrl}}/api/Authors/{{authorId}}",
-													"host": [
-														"{{baseUrl}}"
-													],
-													"path": [
-														"api",
-														
-														"Authors",
-														"{{authorId}}"
-													]
-												}
-											},
-											"response": []
-										},
-										{
-											"name": "/api/Authors/:ID",
-											"event": [
-												{
-													"listen": "test",
-													"script": {
-														"exec": [
-															"pm.test(\"Author has name.\", function () {",
-															"    pm.response.to.have.status(200);",
-															"    const jsonData = pm.response.json();",
-															"    pm.expect(jsonData.FirstName).to.eql(\"Joe\");",
-															"});",
-															""
-														],
-														"type": "text/javascript",
-														"packages": {}
-													}
-												}
-											],
-											"request": {
-												"method": "PUT",
-												"header": [
-													{
-														"key": "Content-Type",
-														"value": "application/json; v=1.0"
-													},
-													{
-														"key": "Accept",
-														"value": "text/plain; v=1.0"
-													}
-												],
-												"body": {
-													"mode": "raw",
-													"raw": "{\n  \"ID\": {{activityId}},\n  \"IDBook\": {{bookId}},\n  \"FirstName\": \"Joe\",\n  \"LastName\": \"Jones\"\n}",
-													"options": {
-														"raw": {
-															"headerFamily": "json",
-															"language": "json"
-														}
-													}
-												},
-												"url": {
-													"raw": "{{baseUrl}}/api/Authors/{{authorId}}",
-													"host": [
-														"{{baseUrl}}"
-													],
-													"path": [
-														"api",
-														
-														"Authors",
-														"{{authorId}}"
-													]
-												}
-											},
-											"response": []
-										},
-										{
-											"name": "/api/Authors/:ID",
-											"event": [
-												{
-													"listen": "test",
-													"script": {
-														"exec": [
-															"pm.test(\"Author deleted.\", function () {",
-															"    pm.response.to.have.status(200);",
-															"});",
-															""
-														],
-														"type": "text/javascript",
-														"packages": {}
-													}
-												}
-											],
-											"request": {
-												"method": "DELETE",
-												"header": [],
-												"url": {
-													"raw": "{{baseUrl}}/api/Authors/{{authorId}}",
-													"host": [
-														"{{baseUrl}}"
-													],
-													"path": [
-														"api",
-														
-														"Authors",
-														"{{authorId}}"
-													]
-												}
-											},
-											"response": []
+												"type": "text/javascript",
+												"packages": {}
+											}
 										}
-									]
-								}
-							]
-						},
-						{
-							"name": "Books",
-							"item": [
-								{
-									"name": "std",
-									"item": [
-										{
-											"name": "/api/Books",
-											"event": [
-												{
-													"listen": "test",
-													"script": {
-														"exec": [
-															"pm.test(\"Book created\", function () {",
-															"    pm.response.to.have.status(200);",
-															"    const jsonData = pm.response.json();",
-															"    pm.expect(jsonData.ID).to.eql(parseInt(pm.environment.get(\"bookId\")));",
-															"});",
-															""
-														],
-														"type": "text/javascript",
-														"packages": {}
-													}
-												}
+									],
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/Activities/{{activityId}}",
+											"host": [
+												"{{baseUrl}}"
 											],
-											"request": {
-												"method": "POST",
-												"header": [
-													{
-														"key": "Content-Type",
-														"value": "application/json; v=1.0"
-													}
-												],
-												"body": {
-													"mode": "raw",
-													"raw": "{\n  \"ID\": {{bookId}},\n  \"Title\": \"Cat in the Hat\",\n  \"description\": \"cat is in a hat\",\n  \"PageCount\": 1234,\n  \"Excerpt\": \"string\",\n  \"PublishDate\": \"2025-01-01T00:00:00\"\n}",
-													"options": {
-														"raw": {
-															"headerFamily": "json",
-															"language": "json"
-														}
-													}
-												},
-												"url": {
-													"raw": "{{baseUrl}}/api/Books",
-													"host": [
-														"{{baseUrl}}"
-													],
-													"path": [
-														"api",
-														
-														"Books"
-													]
-												}
-											},
-											"response": []
-										},
-										{
-											"name": "/api/Books",
-											"event": [
-												{
-													"listen": "test",
-													"script": {
-														"exec": [
-															"pm.test(\"GET /Books returns valid data\", function () {",
-															"    pm.response.to.have.status(200);",
-															"",
-															"    const jsonData = pm.response.json();",
-															"",
-															"    // Check it's an array and not empty",
-															"    pm.expect(jsonData).to.be.an(\"array\");",
-															"    pm.expect(jsonData.length).to.be.above(0);",
-															"",
-															"    jsonData.forEach(activity => {",
-															"        pm.expect(activity).to.have.property(\"ID\");",
-															"        pm.expect(activity).to.have.property(\"Title\");",
-															"        pm.expect(activity).to.have.property(\"description\");",
-															"        pm.expect(activity).to.have.property(\"PageCount\");",
-															"        pm.expect(activity).to.have.property(\"Excerpt\");",
-															"        pm.expect(activity).to.have.property(\"PublishDate\");",
-															"    });",
-															"});",
-															""
-														],
-														"type": "text/javascript",
-														"packages": {}
-													}
-												}
-											],
-											"request": {
-												"method": "GET",
-												"header": [
-													{
-														"key": "Accept",
-														"value": "text/plain; v=1.0"
-													}
-												],
-												"url": {
-													"raw": "{{baseUrl}}/api/Books",
-													"host": [
-														"{{baseUrl}}"
-													],
-													"path": [
-														"api",
-														
-														"Books"
-													]
-												}
-											},
-											"response": []
-										}
-									]
-								},
-								{
-									"name": "{ID}",
-									"item": [
-										{
-											"name": "/api/Books/:ID",
-											"event": [
-												{
-													"listen": "test",
-													"script": {
-														"exec": [
-															"pm.test(\"Activity has Title.\", function () {",
-															"    pm.response.to.have.status(200);",
-															"    const jsonData = pm.response.json();",
-															"    pm.expect(jsonData.PageCount).to.eql(1235);",
-															"});",
-															""
-														],
-														"type": "text/javascript",
-														"packages": {}
-													}
-												}
-											],
-											"request": {
-												"method": "PUT",
-												"header": [
-													{
-														"key": "Content-Type",
-														"value": "application/json; v=1.0"
-													}
-												],
-												"body": {
-													"mode": "raw",
-													"raw": "{\n  \"ID\": {{bookId}},\n  \"Title\": \"Cat in the Hat\",\n  \"description\": \"cat is in a hat\",\n  \"PageCount\": 1235,\n  \"Excerpt\": \"string\",\n  \"PublishDate\": \"2025-01-01T00:00:00\"\n}",
-													"options": {
-														"raw": {
-															"headerFamily": "json",
-															"language": "json"
-														}
-													}
-												},
-												"url": {
-													"raw": "{{baseUrl}}/api/Books/{{bookId}}",
-													"host": [
-														"{{baseUrl}}"
-													],
-													"path": [
-														"api",
-														
-														"Books",
-														"{{bookId}}"
-													]
-												}
-											},
-											"response": []
-										},
-										{
-											"name": "/api/Books/:ID",
-											"event": [
-												{
-													"listen": "test",
-													"script": {
-														"exec": [
-															"pm.test(\"Book has correct ID.\", function () {",
-															"    pm.response.to.have.status(200);",
-															"    const jsonData = pm.response.json();",
-															"    pm.expect(jsonData.ID).to.eql(parseInt(pm.environment.get(\"bookId\")));",
-															"});",
-															""
-														],
-														"type": "text/javascript",
-														"packages": {}
-													}
-												}
-											],
-											"request": {
-												"method": "GET",
-												"header": [
-													{
-														"key": "Accept",
-														"value": "text/plain; v=1.0"
-													}
-												],
-												"url": {
-													"raw": "{{baseUrl}}/api/Books/{{bookId}}",
-													"host": [
-														"{{baseUrl}}"
-													],
-													"path": [
-														"api",
-														
-														"Books",
-														"{{bookId}}"
-													]
-												}
-											},
-											"response": []
-										},
-										{
-											"name": "/api/Books/:ID",
-											"event": [
-												{
-													"listen": "test",
-													"script": {
-														"exec": [
-															"pm.test(\"Book deleted.\", function () {",
-															"    pm.response.to.have.status(200);",
-															"});",
-															""
-														],
-														"type": "text/javascript",
-														"packages": {}
-													}
-												}
-											],
-											"request": {
-												"method": "DELETE",
-												"header": [],
-												"url": {
-													"raw": "{{baseUrl}}/api/Books/{{bookId}}",
-													"host": [
-														"{{baseUrl}}"
-													],
-													"path": [
-														"api",
-														
-														"Books",
-														"{{bookId}}"
-													]
-												}
-											},
-											"response": []
-										}
-									]
-								}
-							]
-						},
-						{
-							"name": "CoverPhotos",
-							"item": [
-								{
-									"name": "std",
-									"item": [
-										{
-											"name": "/api/CoverPhotos",
-											"event": [
-												{
-													"listen": "test",
-													"script": {
-														"exec": [
-															"pm.test(\"GET /Activities returns valid data\", function () {",
-															"    pm.response.to.have.status(200);",
-															"",
-															"    const jsonData = pm.response.json();",
-															"",
-															"    // Check it's an array and not empty",
-															"    pm.expect(jsonData).to.be.an(\"array\");",
-															"    pm.expect(jsonData.length).to.be.above(0);",
-															"",
-															"    jsonData.forEach(activity => {",
-															"        pm.expect(activity).to.have.property(\"ID\");",
-															"        pm.expect(activity).to.have.property(\"IDBook\");",
-															"        pm.expect(activity).to.have.property(\"Url\");",
-															"    });",
-															"});",
-															""
-														],
-														"type": "text/javascript",
-														"packages": {}
-													}
-												}
-											],
-											"request": {
-												"method": "GET",
-												"header": [
-													{
-														"key": "Accept",
-														"value": "text/plain; v=1.0"
-													}
-												],
-												"url": {
-													"raw": "{{baseUrl}}/api/CoverPhotos",
-													"host": [
-														"{{baseUrl}}"
-													],
-													"path": [
-														"api",
-														
-														"CoverPhotos"
-													]
-												}
-											},
-											"response": []
-										},
-										{
-											"name": "/api/CoverPhotos",
-											"event": [
-												{
-													"listen": "test",
-													"script": {
-														"exec": [
-															"pm.test(\"Photo created\", function () {",
-															"    pm.response.to.have.status(200);",
-															"    const jsonData = pm.response.json();",
-															"    pm.expect(jsonData.ID).to.eql(parseInt(pm.environment.get(\"photoId\")));",
-															"});",
-															""
-														],
-														"type": "text/javascript",
-														"packages": {}
-													}
-												}
-											],
-											"request": {
-												"method": "POST",
-												"header": [
-													{
-														"key": "Content-Type",
-														"value": "application/json; v=1.0"
-													},
-													{
-														"key": "Accept",
-														"value": "text/plain; v=1.0"
-													}
-												],
-												"body": {
-													"mode": "raw",
-													"raw": "{\n  \"ID\": {{photoId}},\n  \"IDBook\": {{bookId}},\n  \"url\": \"https://test.com\"\n}",
-													"options": {
-														"raw": {
-															"headerFamily": "json",
-															"language": "json"
-														}
-													}
-												},
-												"url": {
-													"raw": "{{baseUrl}}/api/CoverPhotos",
-													"host": [
-														"{{baseUrl}}"
-													],
-													"path": [
-														"api",
-														
-														"CoverPhotos"
-													]
-												}
-											},
-											"response": []
-										}
-									]
-								},
-								{
-									"name": "books",
-									"item": [
-										{
-											"name": "covers",
-											"item": [
-												{
-													"name": "{IDBook}",
-													"item": [
-														{
-															"name": "/api/CoverPhotos/books/covers/:IDBook",
-															"event": [
-																{
-																	"listen": "test",
-																	"script": {
-																		"exec": [
-																			"pm.test(\"GET //api/CoverPhotos/books/covers/{IDBook} returns valid data\", function () {",
-																			"    pm.response.to.have.status(200);",
-																			"",
-																			"    const jsonData = pm.response.json();",
-																			"",
-																			"    // Check it's an array and not empty",
-																			"    pm.expect(jsonData).to.be.an(\"array\");",
-																			"    pm.expect(jsonData.length).to.be.above(0);",
-																			"",
-																			"    jsonData.forEach(activity => {",
-																			"        pm.expect(activity).to.have.property(\"ID\");",
-																			"        pm.expect(activity).to.have.property(\"IDBook\");",
-																			"        pm.expect(activity).to.have.property(\"url\");",
-																			"    });",
-																			"});",
-																			""
-																		],
-																		"type": "text/javascript",
-																		"packages": {}
-																	}
-																}
-															],
-															"request": {
-																"method": "GET",
-																"header": [
-																	{
-																		"key": "Accept",
-																		"value": "text/plain; v=1.0"
-																	}
-																],
-																"url": {
-																	"raw": "{{baseUrl}}/api/CoverPhotos/books/covers/{{bookId}}",
-																	"host": [
-																		"{{baseUrl}}"
-																	],
-																	"path": [
-																		"api",
-																		
-																		"CoverPhotos",
-																		"books",
-																		"covers",
-																		"{{bookId}}"
-																	]
-																}
-															},
-															"response": []
-														}
-													]
-												}
+											"path": [
+												"api",
+												"Activities",
+												"{{activityId}}"
 											]
 										}
-									]
-								},
-								{
-									"name": "{ID}",
-									"item": [
-										{
-											"name": "/api/CoverPhotos/:ID",
-											"event": [
-												{
-													"listen": "test",
-													"script": {
-														"exec": [
-															"pm.test(\"Photo has correct ID.\", function () {",
-															"    pm.response.to.have.status(200);",
-															"    const jsonData = pm.response.json();",
-															"    pm.expect(jsonData.ID).to.eql(parseInt(pm.environment.get(\"photoId\")));",
-															"});",
-															""
-														],
-														"type": "text/javascript",
-														"packages": {}
-													}
-												}
-											],
-											"request": {
-												"method": "GET",
-												"header": [
-													{
-														"key": "Accept",
-														"value": "text/plain; v=1.0"
-													}
-												],
-												"url": {
-													"raw": "{{baseUrl}}/api/CoverPhotos/{{photoId}}",
-													"host": [
-														"{{baseUrl}}"
-													],
-													"path": [
-														"api",
-														
-														"CoverPhotos",
-														"{{photoId}}"
-													]
-												}
-											},
-											"response": []
-										},
-										{
-											"name": "/api/CoverPhotos/:ID",
-											"event": [
-												{
-													"listen": "test",
-													"script": {
-														"exec": [
-															"pm.test(\"Photo has url.\", function () {",
-															"    pm.response.to.have.status(200);",
-															"    const jsonData = pm.response.json();",
-															"    pm.expect(jsonData.url).to.eql(\"https://test2.com\");",
-															"});",
-															""
-														],
-														"type": "text/javascript",
-														"packages": {}
-													}
-												}
-											],
-											"request": {
-												"method": "PUT",
-												"header": [
-													{
-														"key": "Content-Type",
-														"value": "application/json; v=1.0"
-													},
-													{
-														"key": "Accept",
-														"value": "text/plain; v=1.0"
-													}
-												],
-												"body": {
-													"mode": "raw",
-													"raw": "{\n  \"ID\": {{photoId}},\n  \"IDBook\": {{bookId}},\n  \"url\": \"https://test2.com\"\n}",
-													"options": {
-														"raw": {
-															"headerFamily": "json",
-															"language": "json"
-														}
-													}
-												},
-												"url": {
-													"raw": "{{baseUrl}}/api/CoverPhotos/{{photoId}}",
-													"host": [
-														"{{baseUrl}}"
-													],
-													"path": [
-														"api",
-														
-														"CoverPhotos",
-														"{{photoId}}"
-													]
-												}
-											},
-											"response": []
-										},
-										{
-											"name": "/api/CoverPhotos/:ID",
-											"event": [
-												{
-													"listen": "test",
-													"script": {
-														"exec": [
-															"pm.test(\"Photo deleted.\", function () {",
-															"    pm.response.to.have.status(200);",
-															"});",
-															""
-														],
-														"type": "text/javascript",
-														"packages": {}
-													}
-												}
-											],
-											"request": {
-												"method": "DELETE",
-												"header": [],
-												"url": {
-													"raw": "{{baseUrl}}/api/CoverPhotos/{{photoId}}",
-													"host": [
-														"{{baseUrl}}"
-													],
-													"path": [
-														"api",
-														
-														"CoverPhotos",
-														"{{photoId}}"
-													]
-												}
-											},
-											"response": []
-										}
-									]
-								}
-							]
-						},
-						{
-							"name": "Users",
-							"item": [
-								{
-									"name": "std",
-									"item": [
-										{
-											"name": "/api/Users",
-											"event": [
-												{
-													"listen": "test",
-													"script": {
-														"exec": [
-															"pm.test(\"GET /Activities returns valid data\", function () {",
-															"    pm.response.to.have.status(200);",
-															"",
-															"    const jsonData = pm.response.json();",
-															"",
-															"    // Check it's an array and not empty",
-															"    pm.expect(jsonData).to.be.an(\"array\");",
-															"    pm.expect(jsonData.length).to.be.above(0);",
-															"",
-															"    jsonData.forEach(activity => {",
-															"        pm.expect(activity).to.have.property(\"ID\");",
-															"        pm.expect(activity).to.have.property(\"UserName\");",
-															"        pm.expect(activity).to.have.property(\"Password\");",
-															"    });",
-															"});",
-															""
-														],
-														"type": "text/javascript",
-														"packages": {}
-													}
-												}
-											],
-											"request": {
-												"method": "GET",
-												"header": [
-													{
-														"key": "Accept",
-														"value": "text/plain; v=1.0"
-													}
-												],
-												"url": {
-													"raw": "{{baseUrl}}/api/Users",
-													"host": [
-														"{{baseUrl}}"
-													],
-													"path": [
-														"api",
-														
-														"Users"
-													]
-												}
-											},
-											"response": []
-										},
-										{
-											"name": "/api/Users",
-											"event": [
-												{
-													"listen": "test",
-													"script": {
-														"exec": [
-															"pm.test(\"User created\", function () {",
-															"    pm.response.to.have.status(200);",
-															"    const jsonData = pm.response.json();",
-															"    pm.expect(jsonData.ID).to.eql(parseInt(pm.environment.get(\"userId\")));",
-															"});",
-															""
-														],
-														"type": "text/javascript",
-														"packages": {}
-													}
-												}
-											],
-											"request": {
-												"method": "POST",
-												"header": [
-													{
-														"key": "Content-Type",
-														"value": "application/json; v=1.0"
-													}
-												],
-												"body": {
-													"mode": "raw",
-													"raw": "{\n  \"ID\": {{userId}},\n  \"UserName\": \"Steve\",\n  \"Password\": \"pa55word\"\n}",
-													"options": {
-														"raw": {
-															"headerFamily": "json",
-															"language": "json"
-														}
-													}
-												},
-												"url": {
-													"raw": "{{baseUrl}}/api/Users",
-													"host": [
-														"{{baseUrl}}"
-													],
-													"path": [
-														"api",
-														
-														"Users"
-													]
-												}
-											},
-											"response": []
-										}
-									]
-								},
-								{
-									"name": "{ID}",
-									"item": [
-										{
-											"name": "/api/Users/:ID",
-											"event": [
-												{
-													"listen": "test",
-													"script": {
-														"exec": [
-															"pm.test(\"User has correct ID.\", function () {",
-															"    pm.response.to.have.status(200);",
-															"    const jsonData = pm.response.json();",
-															"    pm.expect(jsonData.ID).to.eql(parseInt(pm.environment.get(\"userId\")));",
-															"});",
-															""
-														],
-														"type": "text/javascript",
-														"packages": {}
-													}
-												}
-											],
-											"request": {
-												"method": "GET",
-												"header": [],
-												"url": {
-													"raw": "{{baseUrl}}/api/Users/{{userId}}",
-													"host": [
-														"{{baseUrl}}"
-													],
-													"path": [
-														"api",
-														
-														"Users",
-														"{{userId}}"
-													]
-												}
-											},
-											"response": []
-										},
-										{
-											"name": "/api/Users/:ID",
-											"event": [
-												{
-													"listen": "test",
-													"script": {
-														"exec": [
-															"pm.test(\"Activity has Title.\", function () {",
-															"    pm.response.to.have.status(200);",
-															"    const jsonData = pm.response.json();",
-															"    pm.expect(jsonData.UserName).to.eql(\"John\");",
-															"});",
-															""
-														],
-														"type": "text/javascript",
-														"packages": {}
-													}
-												}
-											],
-											"request": {
-												"method": "PUT",
-												"header": [
-													{
-														"key": "Content-Type",
-														"value": "application/json; v=1.0"
-													}
-												],
-												"body": {
-													"mode": "raw",
-													"raw": "{\n  \"ID\": {{userId}},\n  \"UserName\": \"John\",\n  \"Password\": \"pa55word\"\n}",
-													"options": {
-														"raw": {
-															"headerFamily": "json",
-															"language": "json"
-														}
-													}
-												},
-												"url": {
-													"raw": "{{baseUrl}}/api/Users/{{userId}}",
-													"host": [
-														"{{baseUrl}}"
-													],
-													"path": [
-														"api",
-														
-														"Users",
-														"{{userId}}"
-													]
-												}
-											},
-											"response": []
-										},
-										{
-											"name": "/api/Users/:ID",
-											"request": {
-												"method": "DELETE",
-												"header": [],
-												"url": {
-													"raw": "{{baseUrl}}/api/Users/:{{userId}}",
-													"host": [
-														"{{baseUrl}}"
-													],
-													"path": [
-														"api",
-														
-														"Users",
-														":{{userId}}"
-													],
-													"variable": [
-														{
-															"key": "{{userId}}",
-															"value": ""
-														}
-													]
-												}
-											},
-											"response": []
-										}
-									]
+									},
+									"response": []
 								}
 							]
 						}
 					]
-
+				},
+				{
+					"name": "Authors",
+					"item": [
+						{
+							"name": "std",
+							"item": [
+								{
+									"name": "/api/Authors",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Author created\", function () {",
+													"    pm.response.to.have.status(200);",
+													"    const jsonData = pm.response.json();",
+													"    pm.expect(jsonData.ID).to.eql(parseInt(pm.environment.get(\"authorId\")));",
+													"    });",
+													""
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json; v=1.0"
+											},
+											{
+												"key": "Accept",
+												"value": "text/plain; v=1.0"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"ID\": {{authorId}},\n  \"IDBook\": {{bookId}},\n  \"FirstName\": \"Bob\",\n  \"LastName\": \"Jones\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/Authors",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Authors"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "/api/Authors",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"GET /Authors returns valid data\", function () {",
+													"    pm.response.to.have.status(200);",
+													"",
+													"    const jsonData = pm.response.json();",
+													"",
+													"    // Check it's an array and not empty",
+													"    pm.expect(jsonData).to.be.an(\"array\");",
+													"    pm.expect(jsonData.length).to.be.above(0);",
+													"",
+													"    jsonData.forEach(activity => {",
+													"        pm.expect(activity).to.have.property(\"ID\");",
+													"        pm.expect(activity).to.have.property(\"IDBook\");",
+													"        pm.expect(activity).to.have.property(\"FirstName\");",
+													"        pm.expect(activity).to.have.property(\"LastName\");",
+													"    });",
+													"});",
+													""
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "text/plain; v=1.0"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/Authors",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Authors"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "authors",
+							"item": [
+								{
+									"name": "books",
+									"item": [
+										{
+											"name": "{IDBook}",
+											"item": [
+												{
+													"name": "/api/Authors/authors/books/:IDBook",
+													"event": [
+														{
+															"listen": "test",
+															"script": {
+																"exec": [
+																	"pm.test(\"GET /Authors/authors/books returns valid data\", function () {",
+																	"    pm.response.to.have.status(200);",
+																	"",
+																	"    const jsonData = pm.response.json();",
+																	"",
+																	"    // Check it's an array and not empty",
+																	"    pm.expect(jsonData).to.be.an(\"array\");",
+																	"    pm.expect(jsonData.length).to.be.above(0);",
+																	"",
+																	"    jsonData.forEach(activity => {",
+																	"        pm.expect(activity).to.have.property(\"ID\");",
+																	"        pm.expect(activity).to.have.property(\"IDBook\");",
+																	"        pm.expect(activity).to.have.property(\"FirstName\");",
+																	"        pm.expect(activity).to.have.property(\"LastName\");",
+																	"    });",
+																	"});",
+																	""
+																],
+																"type": "text/javascript",
+																"packages": {}
+															}
+														}
+													],
+													"request": {
+														"method": "GET",
+														"header": [
+															{
+																"key": "Accept",
+																"value": "text/plain; v=1.0"
+															}
+														],
+														"url": {
+															"raw": "{{baseUrl}}/authors/books/{{bookId}}",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"authors",
+																"books",
+																"{{bookId}}"
+															]
+														}
+													},
+													"response": []
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "{ID}",
+							"item": [
+								{
+									"name": "/api/Authors/:ID",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Author has correct ID.\", function () {",
+													"    pm.response.to.have.status(200);",
+													"    const jsonData = pm.response.json();",
+													"    pm.expect(jsonData.ID).to.eql(parseInt(pm.environment.get(\"authorId\")));",
+													"});",
+													""
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "text/plain; v=1.0"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/Authors/{{authorId}}",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Authors",
+												"{{authorId}}"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "/api/Authors/:ID",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Author has name.\", function () {",
+													"    pm.response.to.have.status(200);",
+													"    const jsonData = pm.response.json();",
+													"    pm.expect(jsonData.FirstName).to.eql(\"Joe\");",
+													"});",
+													""
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"request": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json; v=1.0"
+											},
+											{
+												"key": "Accept",
+												"value": "text/plain; v=1.0"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"ID\": {{activityId}},\n  \"IDBook\": {{bookId}},\n  \"FirstName\": \"Joe\",\n  \"LastName\": \"Jones\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/Authors/{{authorId}}",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Authors",
+												"{{authorId}}"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "/api/Authors/:ID",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Author deleted.\", function () {",
+													"    pm.response.to.have.status(200);",
+													"});",
+													""
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/Authors/{{authorId}}",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Authors",
+												"{{authorId}}"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Books",
+					"item": [
+						{
+							"name": "std",
+							"item": [
+								{
+									"name": "/api/Books",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Book created\", function () {",
+													"    pm.response.to.have.status(200);",
+													"    const jsonData = pm.response.json();",
+													"    pm.expect(jsonData.ID).to.eql(parseInt(pm.environment.get(\"bookId\")));",
+													"});",
+													""
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json; v=1.0"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"ID\": {{bookId}},\n  \"Title\": \"Cat in the Hat\",\n  \"description\": \"cat is in a hat\",\n  \"PageCount\": 1234,\n  \"Excerpt\": \"string\",\n  \"PublishDate\": \"2025-01-01T00:00:00\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/Books",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Books"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "/api/Books",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"GET /Books returns valid data\", function () {",
+													"    pm.response.to.have.status(200);",
+													"",
+													"    const jsonData = pm.response.json();",
+													"",
+													"    // Check it's an array and not empty",
+													"    pm.expect(jsonData).to.be.an(\"array\");",
+													"    pm.expect(jsonData.length).to.be.above(0);",
+													"",
+													"    jsonData.forEach(activity => {",
+													"        pm.expect(activity).to.have.property(\"ID\");",
+													"        pm.expect(activity).to.have.property(\"Title\");",
+													"        pm.expect(activity).to.have.property(\"Description\");",
+													"        pm.expect(activity).to.have.property(\"PageCount\");",
+													"        pm.expect(activity).to.have.property(\"Excerpt\");",
+													"        pm.expect(activity).to.have.property(\"PublishDate\");",
+													"    });",
+													"});",
+													""
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "text/plain; v=1.0"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/Books",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Books"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "{ID}",
+							"item": [
+								{
+									"name": "/api/Books/:ID",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Activity has Title.\", function () {",
+													"    pm.response.to.have.status(200);",
+													"    const jsonData = pm.response.json();",
+													"    pm.expect(jsonData.PageCount).to.eql(1235);",
+													"});",
+													""
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"request": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json; v=1.0"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"ID\": {{bookId}},\n  \"Title\": \"Cat in the Hat\",\n  \"description\": \"cat is in a hat\",\n  \"PageCount\": 1235,\n  \"Excerpt\": \"string\",\n  \"PublishDate\": \"2025-01-01T00:00:00\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/Books/{{bookId}}",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Books",
+												"{{bookId}}"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "/api/Books/:ID",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Book has correct ID.\", function () {",
+													"    pm.response.to.have.status(200);",
+													"    const jsonData = pm.response.json();",
+													"    pm.expect(jsonData.ID).to.eql(parseInt(pm.environment.get(\"bookId\")));",
+													"});",
+													""
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "text/plain; v=1.0"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/Books/{{bookId}}",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Books",
+												"{{bookId}}"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "/api/Books/:ID",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Book deleted.\", function () {",
+													"    pm.response.to.have.status(200);",
+													"});",
+													""
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/Books/{{bookId}}",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Books",
+												"{{bookId}}"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "CoverPhotos",
+					"item": [
+						{
+							"name": "std",
+							"item": [
+								{
+									"name": "/api/CoverPhotos",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Photo created\", function () {",
+													"    pm.response.to.have.status(200);",
+													"    const jsonData = pm.response.json();",
+													"    pm.expect(jsonData.ID).to.eql(parseInt(pm.environment.get(\"photoId\")));",
+													"});",
+													""
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json; v=1.0"
+											},
+											{
+												"key": "Accept",
+												"value": "text/plain; v=1.0"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"ID\": {{photoId}},\n  \"IDBook\": {{bookId}},\n  \"url\": \"https://test.com\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/CoverPhotos",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"CoverPhotos"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "/api/CoverPhotos",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"GET /Activities returns valid data\", function () {",
+													"    pm.response.to.have.status(200);",
+													"",
+													"    const jsonData = pm.response.json();",
+													"",
+													"    // Check it's an array and not empty",
+													"    pm.expect(jsonData).to.be.an(\"array\");",
+													"    pm.expect(jsonData.length).to.be.above(0);",
+													"",
+													"    jsonData.forEach(activity => {",
+													"        pm.expect(activity).to.have.property(\"ID\");",
+													"        pm.expect(activity).to.have.property(\"IDBook\");",
+													"        pm.expect(activity).to.have.property(\"Url\");",
+													"    });",
+													"});",
+													""
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "text/plain; v=1.0"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/CoverPhotos",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"CoverPhotos"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "books",
+							"item": [
+								{
+									"name": "covers",
+									"item": [
+										{
+											"name": "{IDBook}",
+											"item": [
+												{
+													"name": "/api/CoverPhotos/books/covers/:IDBook",
+													"event": [
+														{
+															"listen": "test",
+															"script": {
+																"exec": [
+																	"pm.test(\"GET //api/CoverPhotos/books/covers/{IDBook} returns valid data\", function () {",
+																	"    pm.response.to.have.status(200);",
+																	"",
+																	"    const jsonData = pm.response.json();",
+																	"",
+																	"    // Check it's an array and not empty",
+																	"    pm.expect(jsonData).to.be.an(\"array\");",
+																	"    pm.expect(jsonData.length).to.be.above(0);",
+																	"",
+																	"    jsonData.forEach(activity => {",
+																	"        pm.expect(activity).to.have.property(\"ID\");",
+																	"        pm.expect(activity).to.have.property(\"IDBook\");",
+																	"        pm.expect(activity).to.have.property(\"Url\");",
+																	"    });",
+																	"});",
+																	""
+																],
+																"type": "text/javascript",
+																"packages": {}
+															}
+														}
+													],
+													"request": {
+														"method": "GET",
+														"header": [
+															{
+																"key": "Accept",
+																"value": "text/plain; v=1.0"
+															}
+														],
+														"url": {
+															"raw": "{{baseUrl}}/books/covers/{{bookId}}",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"books",
+																"covers",
+																"{{bookId}}"
+															]
+														}
+													},
+													"response": []
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "{ID}",
+							"item": [
+								{
+									"name": "/api/CoverPhotos/:ID",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Photo has correct ID.\", function () {",
+													"    pm.response.to.have.status(200);",
+													"    const jsonData = pm.response.json();",
+													"    pm.expect(jsonData.ID).to.eql(parseInt(pm.environment.get(\"photoId\")));",
+													"});",
+													""
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "text/plain; v=1.0"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/CoverPhotos/{{photoId}}",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"CoverPhotos",
+												"{{photoId}}"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "/api/CoverPhotos/:ID",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Photo has url.\", function () {",
+													"    pm.response.to.have.status(200);",
+													"    const jsonData = pm.response.json();",
+													"    pm.expect(jsonData.Url).to.eql(\"https://test2.com\");",
+													"});",
+													""
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"request": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json; v=1.0"
+											},
+											{
+												"key": "Accept",
+												"value": "text/plain; v=1.0"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"ID\": {{photoId}},\n  \"IDBook\": {{bookId}},\n  \"url\": \"https://test2.com\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/CoverPhotos/{{photoId}}",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"CoverPhotos",
+												"{{photoId}}"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "/api/CoverPhotos/:ID",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Photo deleted.\", function () {",
+													"    pm.response.to.have.status(200);",
+													"});",
+													""
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/CoverPhotos/{{photoId}}",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"CoverPhotos",
+												"{{photoId}}"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Users",
+					"item": [
+						{
+							"name": "std",
+							"item": [
+								{
+									"name": "/api/Users",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"GET /Activities returns valid data\", function () {",
+													"    pm.response.to.have.status(200);",
+													"",
+													"    const jsonData = pm.response.json();",
+													"",
+													"    // Check it's an array and not empty",
+													"    pm.expect(jsonData).to.be.an(\"array\");",
+													"    pm.expect(jsonData.length).to.be.above(0);",
+													"",
+													"    jsonData.forEach(activity => {",
+													"        pm.expect(activity).to.have.property(\"ID\");",
+													"        pm.expect(activity).to.have.property(\"UserName\");",
+													"        pm.expect(activity).to.have.property(\"Password\");",
+													"    });",
+													"});",
+													""
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "text/plain; v=1.0"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/Users",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Users"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "/api/Users",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"User created\", function () {",
+													"    pm.response.to.have.status(200);",
+													"    const jsonData = pm.response.json();",
+													"    pm.expect(jsonData.ID).to.eql(parseInt(pm.environment.get(\"userId\")));",
+													"});",
+													""
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json; v=1.0"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"ID\": {{userId}},\n  \"UserName\": \"Steve\",\n  \"Password\": \"pa55word\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/Users",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Users"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "{ID}",
+							"item": [
+								{
+									"name": "/api/Users/:ID",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"User has correct ID.\", function () {",
+													"    pm.response.to.have.status(200);",
+													"    const jsonData = pm.response.json();",
+													"    pm.expect(jsonData.ID).to.eql(parseInt(pm.environment.get(\"userId\")));",
+													"});",
+													""
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/Users/{{userId}}",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Users",
+												"{{userId}}"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "/api/Users/:ID",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Activity has Title.\", function () {",
+													"    pm.response.to.have.status(200);",
+													"    const jsonData = pm.response.json();",
+													"    pm.expect(jsonData.UserName).to.eql(\"John\");",
+													"});",
+													""
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"request": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json; v=1.0"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"ID\": {{userId}},\n  \"UserName\": \"John\",\n  \"Password\": \"pa55word\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/Users/{{userId}}",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Users",
+												"{{userId}}"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "/api/Users/:ID",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/Users/:{{userId}}",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Users",
+												":{{userId}}"
+											],
+											"variable": [
+												{
+													"key": "{{userId}}",
+													"value": ""
+												}
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				}
+			]
 		}
 	],
 	"event": [
