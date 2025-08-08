@@ -200,6 +200,9 @@ stages:
                 python3 -m pip install --user selenium
 
                 export PATH="$HOME/.local/bin:$PATH"
+
+                cd $(Pipeline.Workspace)/drop-ui-tests/ui-tests
+                rm -f selenium.log
                 python3 main.py | tee selenium.log
                 cat selenium.log
           - script: cat $(Pipeline.Workspace)/drop-ui-tests/ui-tests/selenium.log
