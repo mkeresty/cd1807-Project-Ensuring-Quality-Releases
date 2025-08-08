@@ -40,10 +40,15 @@ def add_items_to_cart(driver):
         item.find_element(By.CLASS_NAME, "btn_inventory").click()
         print(f"Added {item_name} to cart")
         cart_count += 1
-        time.sleep(2)
+        WebDriverWait(driver, 10).until(
+            lambda d: d.find_element(By.CLASS_NAME, "shopping_cart_badge").text.isdigit()
+            and int(d.find_element(By.CLASS_NAME, "shopping_cart_badge").text) == cart_count
+        )
     print(f"Total items added to cart: {cart_count}")
 
-    time.sleep(2)
+    WebDriverWait(driver, 10).until(
+        expected_conditions.presence_of_element_located((By.CLASS_NAME, "shopping_cart_badge"))
+    )
 
     # Verify the cart count
     cart_badge_count = driver.find_element(By.CLASS_NAME, "shopping_cart_badge").text
@@ -61,6 +66,9 @@ def remove_items_from_cart(driver):
     WebDriverWait(driver, 10).until(
         expected_conditions.presence_of_element_located((By.CLASS_NAME, "cart_list"))
     )
+
+    original_cart_count = int(driver.find_element(By.CLASS_NAME, "shopping_cart_badge").text)
+    print(f"Original cart count: {original_cart_count}")
     
     # Find all cart items in containers
     cart_items = driver.find_elements(By.CLASS_NAME, "cart_item")
@@ -71,14 +79,22 @@ def remove_items_from_cart(driver):
         item.find_element(By.CLASS_NAME, "btn_secondary").click()
         print(f"Removed {item_name} from cart")
         remove_count += 1
-        time.sleep(2)
+        expected_count = original_cart_count - remove_count
 
+        WebDriverWait(driver, 10).until(
+            lambda d: (
+                len(d.find_elements(By.CLASS_NAME, "shopping_cart_badge")) == 0
+                if expected_count == 0
+                else (
+                    d.find_element(By.CLASS_NAME, "shopping_cart_badge").text.isdigit()
+                    and int(d.find_element(By.CLASS_NAME, "shopping_cart_badge").text) == expected_count
+                )
+            )
+        )
     print(f"Total items removed from cart: {remove_count}")
-    
-    time.sleep(4)
 
     # Verify the cart is empty
-    assert (len(cart_items) == remove_count), "Cart is not empty after removing items"
+    assert (len(driver.find_elements(By.CLASS_NAME, "cart_item")) == 0), "Cart is not empty after removing items"
     print("All items removed from cart successfully")
 
 
@@ -87,6 +103,7 @@ def make_driver():
     options.add_argument("--headless=new")
     options.add_argument("--no-sandbox")
     options.add_argument("--disable-dev-shm-usage")
+    options.add_argument("--window-size=1920,1080")
 
     return webdriver.Chrome(options=options)
 
