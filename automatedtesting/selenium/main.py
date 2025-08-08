@@ -90,57 +90,58 @@ def safe_mkdir(p):
 
 def clean_chrome_profile(p):
     for name in ("SingletonLock", "SingletonCookie", "SingletonSocket"):
+        fp = os.path.join(p, name)
         try:
-            fp = os.path.join(p, name)
             if os.path.exists(fp):
                 os.remove(fp)
         except Exception:
             pass
 
+def make_driver(profile_dir, runtime_dir, headless):
+    os.environ["XDG_RUNTIME_DIR"] = runtime_dir
+    os.makedirs(runtime_dir, exist_ok=True)
+    os.chmod(runtime_dir, 0o700)
+
+    os.makedirs(profile_dir, exist_ok=True)
+    clean_chrome_profile(profile_dir)
+
+    opts = Options()
+    if headless:
+        opts.add_argument("--headless=new")
+        opts.add_argument("--no-sandbox")
+        opts.add_argument("--disable-dev-shm-usage")
+        opts.add_argument("--disable-gpu")
+
+    # IMPORTANT: set ONE user-data-dir
+    opts.add_argument(f"--user-data-dir={profile_dir}")
+    opts.add_argument("--no-first-run")
+    opts.add_argument("--no-default-browser-check")
+    opts.add_argument("--disable-features=TranslateUI")
+    opts.add_argument("--disable-extensions")
+    opts.add_argument("--disable-infobars")
+    opts.add_argument("--window-size=1920,1080")
+    opts.add_argument("--remote-debugging-port=0")
+    opts.add_argument("--enable-logging=stderr")
+    opts.add_argument("--v=1")
+
+    print(f"[DEBUG] Using profile_dir={profile_dir}")
+    print(f"[DEBUG] Using runtime_dir={runtime_dir} (mode {oct(os.stat(runtime_dir).st_mode & 0o777)})")
+
+    return webdriver.Chrome(options=opts)
+
 def main():
     parser = argparse.ArgumentParser(description="Run Selenium")
     parser.add_argument("--headless", action="store_true", help="Run Chrome in headless mode")
     parser.add_argument("--profile-dir", help="Path to Chrome user data dir")
-    parser.add_argument("--runtime-dir", help="Path to runtime dir")
+    parser.add_argument("--runtime-dir", help="Path to XDG runtime dir")
     args = parser.parse_args()
 
-    # Empty dirs by default
     profile_dir = args.profile_dir or tempfile.mkdtemp(prefix="selenium_profile_")
     runtime_dir = args.runtime_dir or tempfile.mkdtemp(prefix="selenium_runtime_")
 
-    os.environ["XDG_RUNTIME_DIR"] = runtime_dir
-    safe_mkdir(runtime_dir)
-    os.chmod(runtime_dir, 0o700)  # Chrome expects 0700
-
-    safe_mkdir(profile_dir)
-    clean_chrome_profile(profile_dir)
-
-    options = Options()
-    if args.headless:
-        options.add_argument("--headless=new")
-        options.add_argument("--no-sandbox")
-        options.add_argument("--disable-dev-shm-usage")
-        options.add_argument("--disable-gpu")
-    
-    options.add_argument(f"--user-data-dir=/tmp/selenium_user_data_{os.getpid()}")
-
-    options.add_argument(f"--user-data-dir={profile_dir}")
-    options.add_argument("--no-first-run")
-    options.add_argument("--no-default-browser-check")
-    options.add_argument("--disable-features=TranslateUI")
-    options.add_argument("--disable-extensions")
-    options.add_argument("--disable-infobars")
-    options.add_argument("--window-size=1920,1080")
-    options.add_argument("--remote-debugging-port=0")
-
-    options.add_experimental_option("prefs", {
-        "credentials_enable_service": False,
-        "profile.password_manager_enabled": False,
-        "profile.default_content_setting_values.notifications": 2
-    })
     driver = None
     try:
-        driver = webdriver.Chrome(options=options)
+        driver = make_driver(profile_dir, runtime_dir, args.headless)
         login(driver,"https://www.saucedemo.com/", "standard_user", "secret_sauce")
         add_items_to_cart(driver)
         time.sleep(2)
