@@ -28,6 +28,13 @@ def login(driver, website, user, password):
     )
     print("Login successful!")
 
+def reset_app_state(driver):
+    # Open burger menu
+    WebDriverWait(driver, 10).until(expected_conditions.element_to_be_clickable((By.ID, "react-burger-menu-btn"))).click()
+    # Click reset app state
+    WebDriverWait(driver, 10).until(expected_conditions.element_to_be_clickable((By.ID, "reset_sidebar_link"))).click()
+    # Close menu
+    WebDriverWait(driver, 10).until(expected_conditions.element_to_be_clickable((By.ID, "react-burger-cross-btn"))).click()
 
 def add_items_to_cart(driver):
     """ Add all items to the cart and verify the cart count"""
@@ -118,6 +125,9 @@ def main():
     try:
         driver = make_driver()
         login(driver,"https://www.saucedemo.com/", "standard_user", "secret_sauce")
+        time.sleep(2)
+        reset_app_state(driver)
+        time.sleep(2)
         add_items_to_cart(driver)
         time.sleep(2)
         remove_items_from_cart(driver)
