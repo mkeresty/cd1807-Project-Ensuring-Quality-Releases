@@ -85,6 +85,17 @@ def remove_items_from_cart(driver):
     assert (len(cart_items) == remove_count), "Cart is not empty after removing items"
     print("All items removed from cart successfully")
 
+def safe_mkdir(p):
+    os.makedirs(p, exist_ok=True)
+
+def clean_chrome_profile(p):
+    for name in ("SingletonLock", "SingletonCookie", "SingletonSocket"):
+        try:
+            fp = os.path.join(p, name)
+            if os.path.exists(fp):
+                os.remove(fp)
+        except Exception:
+            pass
 
 def main():
     parser = argparse.ArgumentParser(description="Run Selenium")
@@ -93,9 +104,16 @@ def main():
     parser.add_argument("--runtime-dir", help="Path to runtime dir")
     args = parser.parse_args()
 
+    # Empty dirs by default
     profile_dir = args.profile_dir or tempfile.mkdtemp(prefix="selenium_profile_")
     runtime_dir = args.runtime_dir or tempfile.mkdtemp(prefix="selenium_runtime_")
+
     os.environ["XDG_RUNTIME_DIR"] = runtime_dir
+    safe_mkdir(runtime_dir)
+    os.chmod(runtime_dir, 0o700)  # Chrome expects 0700
+
+    safe_mkdir(profile_dir)
+    clean_chrome_profile(profile_dir)
 
     options = Options()
     if args.headless:

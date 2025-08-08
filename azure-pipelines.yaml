@@ -191,20 +191,31 @@ stages:
                 pkill -f chromium || true
                 rm -rf /tmp/selenium_user_data_* /tmp/selenium_runtime_* || true
 
-                # Use a fresh temp root so concurrent jobs can't collide
+                # Use a fresh temp root
                 export CI_TMP_ROOT="$(mktemp -d -t ci-sel-XXXXXX)"
                 echo "Using CI_TMP_ROOT=$CI_TMP_ROOT"
                 rm -rf /tmp/selenium_user_data_*
 
-                pip3 install selenium
+                PROFILE_DIR="$CI_TMP_ROOT/profile"
+                RUNTIME_DIR="$CI_TMP_ROOT/runtime"
+                mkdir -p "$PROFILE_DIR" "$RUNTIME_DIR"
+
+                chmod 700 "$RUNTIME_DIR"
+                export XDG_RUNTIME_DIR="$RUNTIME_DIR"
+
+                pip3 install --user selenium
+
                 cd $(Pipeline.Workspace)/drop-ui-tests/ui-tests
                 rm -f selenium.log
 
                 echo "Running tests..."
-                python3 main.py --headless \
-                  --profile-dir "$CI_TMP_ROOT/profile" \
-                  --runtime-dir "$CI_TMP_ROOT/runtime" >> selenium.log 2>&1 || true
                 set +e
+                python3 main.py --headless \
+                  --profile-dir "$PROFILE_DIR" \
+                  --runtime-dir "$RUNTIME_DIR" \
+                  | tee selenium.log
+                EXIT_CODE=${PIPESTATUS[0]}
+                set -e
                 cat selenium.log
           - script: cat $(Pipeline.Workspace)/drop-ui-tests/ui-tests/selenium.log
             displayName: 'Print Selenium Log to Pipeline'
