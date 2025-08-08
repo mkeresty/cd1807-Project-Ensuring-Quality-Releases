@@ -39,12 +39,14 @@ def add_items_to_cart(driver):
         item_name = item.find_element(By.CLASS_NAME, "inventory_item_name").text
         item.find_element(By.CLASS_NAME, "btn_inventory").click()
         print(f"Added {item_name} to cart")
+        time.sleep(2)
         cart_count += 1
         WebDriverWait(driver, 10).until(
             lambda d: d.find_element(By.CLASS_NAME, "shopping_cart_badge").text.isdigit()
             and int(d.find_element(By.CLASS_NAME, "shopping_cart_badge").text) == cart_count
         )
     print(f"Total items added to cart: {cart_count}")
+    time.sleep(4)
 
     WebDriverWait(driver, 10).until(
         expected_conditions.presence_of_element_located((By.CLASS_NAME, "shopping_cart_badge"))
@@ -78,6 +80,7 @@ def remove_items_from_cart(driver):
         item_name = item.find_element(By.CLASS_NAME, "inventory_item_name").text
         item.find_element(By.CLASS_NAME, "btn_secondary").click()
         print(f"Removed {item_name} from cart")
+        time.sleep(2)
         remove_count += 1
         expected_count = original_cart_count - remove_count
 
@@ -92,6 +95,7 @@ def remove_items_from_cart(driver):
             )
         )
     print(f"Total items removed from cart: {remove_count}")
+    time.sleep(4)
 
     # Verify the cart is empty
     assert (len(driver.find_elements(By.CLASS_NAME, "cart_item")) == 0), "Cart is not empty after removing items"
