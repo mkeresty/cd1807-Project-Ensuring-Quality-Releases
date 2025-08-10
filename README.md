@@ -125,11 +125,24 @@ How to find specific logs within Azure
 - In the Azure portal go to the web app service that was just deployed
 - Go to **Log Analytics workspaces** then click **Create** and fill in the information
 - After the resource is created, on the left click **Logs**
-- Ensure your data sources are connected
+- Create a new **Connection rule** and ensure your VM's are selected
+- Ensure the minimum log level is **INFO**
 - Fill in the Query
 ```KQL
+// General heartbeats, myLinuxVm should show up
 Heartbeat
 | where TimeGenerated > ago(2h)
+
+// General Syslogs
+Syslog
+| where TimeGenerated > ago(10m)
+
+// Selenium logs
+Syslog
+| where TimeGenerated > ago(30m)
+| where ProcessName == "selenium" or SyslogMessage contains "Selenium"
+| project TimeGenerated, Computer, Facility, SeverityLevel, ProcessName, SyslogMessage
+| order by TimeGenerated desc
 
 ```
 
