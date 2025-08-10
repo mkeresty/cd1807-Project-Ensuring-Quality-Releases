@@ -1,9 +1,13 @@
+data "azurerm_resource_group" "rg" {
+  name = var.resource_group
+}
+
 resource "azurerm_service_plan" "test" {
   name                = "service-plan"
   location            = "${var.location}"
   resource_group_name = "${var.resource_group}"
   os_type             = "Windows"
-  sku_name            = "B1"
+  sku_name            = "P1v3"
 }
 
 resource "azurerm_windows_web_app" "test" {
