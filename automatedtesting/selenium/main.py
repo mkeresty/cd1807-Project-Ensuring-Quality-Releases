@@ -125,9 +125,9 @@ def main():
     driver = None
     try:
         driver = make_driver()
-        login(driver,"https://www.saucedemo.com/", "standard_user", "secret_sauce")
         time.sleep(2)
         reset_app_state(driver)
+        login(driver,"https://www.saucedemo.com/", "standard_user", "secret_sauce")
         time.sleep(2)
         add_items_to_cart(driver)
         time.sleep(2)
