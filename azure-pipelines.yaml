@@ -296,6 +296,14 @@ stages:
           - script: |
               cat $(Pipeline.Workspace)/drop-postman-tests/postman-tests/postman.xml
             displayName: 'Print Postman Reports'
+          - task: PublishTestResults@2
+            displayName: 'Publish Postman Test Results (JUnit)'
+            inputs:
+              testResultsFormat: 'JUnit'
+              testResultsFiles: '$(Pipeline.Workspace)/drop-postman-tests/postman-tests/postman.xml'
+              testRunTitle: 'Postman API Tests'
+              mergeTestResults: true
+              failTaskOnFailedTests: false  
           - publish: $(Pipeline.Workspace)/drop-postman-tests/postman-tests/postman.xml
             artifact: postman-report
             displayName: 'Publish Postman Report'
