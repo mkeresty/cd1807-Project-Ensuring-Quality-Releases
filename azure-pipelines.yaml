@@ -344,7 +344,7 @@ stages:
               jmeter -n \
                 -t endurance.jmx \
                 -JbaseUrl=$(webAppUrl) \
-                -Jcsv_file=$(Pipeline.Workspace)/drop-jmeter-tests/jmeter-tests/results/endurance/postid.csv \
+                -Jcsv_file=postid.csv \
                 -l $(Pipeline.Workspace)/drop-jmeter-tests/jmeter-tests/results/endurance/test-results.csv \
                 -e -o $(Pipeline.Workspace)/drop-jmeter-tests/jmeter-tests/results/endurance/html \
                 -j $(Pipeline.Workspace)/drop-jmeter-tests/jmeter-tests/results/endurance/jmeter.log
