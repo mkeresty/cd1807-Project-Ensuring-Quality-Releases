@@ -34,6 +34,7 @@ def reset_app_state(driver):
     driver.delete_all_cookies()
     driver.execute_script("window.localStorage.clear();")
     driver.execute_script("window.sessionStorage.clear();")
+    driver.refresh()
 
     
 def add_items_to_cart(driver):
@@ -123,11 +124,13 @@ def main():
 
 
     driver = None
+    url = "https://www.saucedemo.com/"
     try:
         driver = make_driver()
+        driver.get(url)
         time.sleep(2)
         reset_app_state(driver)
-        login(driver,"https://www.saucedemo.com/", "standard_user", "secret_sauce")
+        login(driver, url, "standard_user", "secret_sauce")
         time.sleep(2)
         add_items_to_cart(driver)
         time.sleep(2)
