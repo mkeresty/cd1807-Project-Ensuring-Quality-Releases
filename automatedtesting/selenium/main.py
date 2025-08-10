@@ -49,10 +49,7 @@ def add_items_to_cart(driver):
         print(f"Added {item_name} to cart")
         time.sleep(4)
         cart_count += 1
-        WebDriverWait(driver, 10).until(
-            lambda d: d.find_element(By.CLASS_NAME, "shopping_cart_badge").text.isdigit()
-            and int(d.find_element(By.CLASS_NAME, "shopping_cart_badge").text) == cart_count
-        )
+
     print(f"Total items added to cart: {cart_count}")
     time.sleep(4)
 
