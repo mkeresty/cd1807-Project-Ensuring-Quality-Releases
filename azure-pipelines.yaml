@@ -7,11 +7,11 @@ pool: myPool
 
 variables:
   python.version: '3.7.6'
-  azureServiceConnectionId: 'bd9f542c-eff1-415c-af35-58f76bec8d9f'
+  azureServiceConnectionId: '3979aa73-ae54-4f8d-9435-833861b5b22d'
   projectRoot: $(System.DefaultWorkingDirectory)
   subscriptionId: '0a18c62f-d3bc-43d1-8baf-18c6dbdb4e2a'
   resourceGroupName: 'Azuredevops'
-  armBackendStorageAccountName: 'tfstate2711927667'
+  armBackendStorageAccountName: 'tfstate2899131026'
   armBackendContainerName: 'tfstate'
   packerImageName: 'myPackerImage'
   environmentName: 'myEnvironment'

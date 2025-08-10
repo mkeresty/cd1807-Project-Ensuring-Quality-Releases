@@ -6,7 +6,7 @@ az vm create \
   --admin-username devopsagent \
   --admin-password 'DevOpsAgent@123' \
   --public-ip-sku Standard \
-  --size Standard_DS1_v2
+  --size Standard_DS1_v2 
 
 az vm open-port \
   --resource-group Azuredevops \
@@ -14,7 +14,7 @@ az vm open-port \
   --port 22
 
 
-ssh devopsagent@<publicIp> #4.151.112.185
+ssh devopsagent@<publicIp> # 20.97.12.42
 sudo snap install docker
 python3 --version
 sudo groupadd docker

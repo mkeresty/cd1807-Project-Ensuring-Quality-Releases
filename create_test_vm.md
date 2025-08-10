@@ -13,11 +13,11 @@ az vm open-port \
   --port 22
 
 
-ssh azureuser@<publicIp> # 4.151.66.255
+ssh azureuser@<publicIp> # 4.151.156.139
 
 # Copied from dev portal
 # make sure you use the link below to download, the one given is wrong
 
 
-mkdir azagent;cd azagent;curl -fkSL -o vstsagent.tar.gz https://download.agent.dev.azure.com/agent/4.259.0/vsts-agent-linux-x64-4.259.0.tar.gz;tar -zxvf vstsagent.tar.gz; if [ -x "$(command -v systemctl)" ]; then ./config.sh --environment --environmentname "myEnvironment" --acceptteeeula --agent $HOSTNAME --url https://dev.azure.com/odluser285429/ --work _work --projectname 'udacity' --auth PAT --token tokenvalue --runasservice; sudo ./svc.sh install; sudo ./svc.sh start; else ./config.sh --environment --environmentname "myEnvironment" --acceptteeeula --agent $HOSTNAME --url https://dev.azure.com/odluser285429/ --work _work --projectname 'udacity' --auth PAT --token tokenvalue; ./run.sh; fi
+mkdir azagent;cd azagent;curl -fkSL -o vstsagent.tar.gz https://download.agent.dev.azure.com/agent/4.259.0/vsts-agent-linux-x64-4.259.0.tar.gz;tar -zxvf vstsagent.tar.gz; if [ -x "$(command -v systemctl)" ]; then ./config.sh --environment --environmentname "myEnvironment" --acceptteeeula --agent $HOSTNAME --url https://dev.azure.com/odluser285429/ --work _work --projectname 'udacity' --auth PAT --token 5n1puETiySRn6CfJvvdQdln9LOyTwrjn20nOys45BuGs88LSvUTLJQQJ99BHACAAAAAPDBwgAAASAZDO3Hv0 --runasservice; sudo ./svc.sh install; sudo ./svc.sh start; else ./config.sh --environment --environmentname "myEnvironment" --acceptteeeula --agent $HOSTNAME --url https://dev.azure.com/odluser285429/ --work _work --projectname 'udacity' --auth PAT --token 5n1puETiySRn6CfJvvdQdln9LOyTwrjn20nOys45BuGs88LSvUTLJQQJ99BHACAAAAAPDBwgAAASAZDO3Hv0; ./run.sh; fi
 ```
