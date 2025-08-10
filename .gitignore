@@ -28,7 +28,7 @@ override.tf.json
 
 # Virtual Environment directories
 myvenv/
-
+upload.py
 
 
 # Secrets

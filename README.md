@@ -115,20 +115,22 @@ terraform destroy
 #### Azure Monitor
 Monitor to alert if a 404 error happens
 - In the Azure portal go to the web app service that was just deployed
-- Go to **Alerts** and then click **New alert rule**
-- Set the **Condition** as ```Http 404```
+- Go to **Monitoring > Alerts** and then click **Create alert rule**
+- Set the **Condition** as ```Http 4xx```
 - Set the **Action Group** as Email and fill in details 
 - Click **Create alert rule**
 
 #### Querying Logs
 How to find specific logs within Azure
 - In the Azure portal go to the web app service that was just deployed
-- Go to **Diagnostic settings** then click **Add diagnostic setting**
+- Go to **Log Analytics workspaces** then click **Create** and fill in the information
+- After the resource is created, on the left click **Logs**
+- Ensure your data sources are connected
 - Fill in the Query
 ```KQL
-Operation
-| where TimeGenerated > ago(1h)
-| sumarize count () by TimeGenerated, OperationStatus, Detail
+Heartbeat
+| where TimeGenerated > ago(2h)
+
 ```
 
 ### Destroying Resources

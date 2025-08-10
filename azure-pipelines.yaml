@@ -207,7 +207,7 @@ stages:
 
                 cd $(Pipeline.Workspace)/drop-ui-tests/ui-tests
                 rm -f selenium.log
-                python3 main.py | tee selenium.log
+                stdbuf -oL -eL python3 main.py | tee >(logger -t selenium) selenium.log
                 cat selenium.log
           - script: cat $(Pipeline.Workspace)/drop-ui-tests/ui-tests/selenium.log
             displayName: 'Print Selenium Log to Pipeline'
