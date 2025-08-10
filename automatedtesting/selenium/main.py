@@ -54,11 +54,11 @@ def add_items_to_cart(driver):
     time.sleep(4)
 
     WebDriverWait(driver, 10).until(
-        expected_conditions.presence_of_element_located((By.CLASS_NAME, "shopping_cart_badge"))
+        expected_conditions.presence_of_element_located((By.CSS_SELECTOR, "[data-test='shopping-cart-badge']"))
     )
 
     # Verify the cart count
-    cart_badge_count = driver.find_element(By.CLASS_NAME, "shopping_cart_badge").text
+    cart_badge_count = driver.find_element(By.CSS_SELECTOR, "[data-test='shopping-cart-badge']").text
     assert (int(cart_badge_count) == cart_count), f"Expected {cart_count} items in cart, but found {cart_badge_count}"
     print("All items added to cart successfully")
 
@@ -74,7 +74,7 @@ def remove_items_from_cart(driver):
         expected_conditions.presence_of_element_located((By.CLASS_NAME, "cart_list"))
     )
 
-    original_cart_count = int(driver.find_element(By.CLASS_NAME, "shopping_cart_badge").text)
+    original_cart_count = int(driver.find_element(By.CSS_SELECTOR, "[data-test='shopping-cart-badge']").text)
     print(f"Original cart count: {original_cart_count}")
     
     # Find all cart items in containers
@@ -91,11 +91,11 @@ def remove_items_from_cart(driver):
 
         WebDriverWait(driver, 10).until(
             lambda d: (
-                len(d.find_elements(By.CLASS_NAME, "shopping_cart_badge")) == 0
+                len(d.find_elements(By.CSS_SELECTOR, "[data-test='shopping-cart-badge']")) == 0
                 if expected_count == 0
                 else (
-                    d.find_element(By.CLASS_NAME, "shopping_cart_badge").text.isdigit()
-                    and int(d.find_element(By.CLASS_NAME, "shopping_cart_badge").text) == expected_count
+                    d.find_element(By.CSS_SELECTOR, "[data-test='shopping-cart-badge']").text.isdigit()
+                    and int(d.find_element(By.CSS_SELECTOR, "[data-test='shopping-cart-badge']").text) == expected_count
                 )
             )
         )
