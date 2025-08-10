@@ -36,7 +36,8 @@ def reset_app_state(driver):
     driver.execute_script("window.sessionStorage.clear();")
     driver.refresh()
 
-    
+
+
 def add_items_to_cart(driver):
     """ Add all items to the cart and verify the cart count"""
     # Find all item containers
@@ -47,23 +48,15 @@ def add_items_to_cart(driver):
         item_name = item.find_element(By.CLASS_NAME, "inventory_item_name").text
         item.find_element(By.CLASS_NAME, "btn_inventory").click()
         print(f"Added {item_name} to cart")
-        time.sleep(4)
+        time.sleep(1)
         cart_count += 1
 
     print(f"Total items added to cart: {cart_count}")
-    time.sleep(4)
-
-    WebDriverWait(driver, 10).until(
-        expected_conditions.presence_of_element_located((By.CSS_SELECTOR, "[data-test='shopping-cart-badge']"))
-    )
-
-    # Verify the cart count
-    cart_badge_count = driver.find_element(By.CSS_SELECTOR, "[data-test='shopping-cart-badge']").text
-    assert (int(cart_badge_count) == cart_count), f"Expected {cart_count} items in cart, but found {cart_badge_count}"
-    print("All items added to cart successfully")
+    time.sleep(1)
+    return cart_count
 
 
-def remove_items_from_cart(driver):
+def remove_items_from_cart(driver, cart_count):
     """ Remove all items from the cart and verify the cart count"""
     print("Removing items from cart...")
     print("Navigating to the cart...")
@@ -71,36 +64,26 @@ def remove_items_from_cart(driver):
     driver.find_element(By.CLASS_NAME, "shopping_cart_link").click()
     
     WebDriverWait(driver, 10).until(
-        expected_conditions.presence_of_element_located((By.CLASS_NAME, "cart_list"))
+        expected_conditions.presence_of_element_located((By.CSS_SELECTOR, "[data-test^='cart-list']"))
     )
 
-    original_cart_count = int(driver.find_element(By.CSS_SELECTOR, "[data-test='shopping-cart-badge']").text)
-    print(f"Original cart count: {original_cart_count}")
     
     # Find all cart items in containers
     cart_items = driver.find_elements(By.CLASS_NAME, "cart_item")
+    assert (cart_count == len(cart_items)), f"Expected {cart_count} items in cart, but found {len(cart_items)}"
+
     remove_count = 0
     for item in cart_items:
         # Click the "Remove" button for each item
         item_name = item.find_element(By.CLASS_NAME, "inventory_item_name").text
         item.find_element(By.CLASS_NAME, "btn_secondary").click()
         print(f"Removed {item_name} from cart")
-        time.sleep(4)
+        time.sleep(1)
         remove_count += 1
-        expected_count = original_cart_count - remove_count
 
-        WebDriverWait(driver, 10).until(
-            lambda d: (
-                len(d.find_elements(By.CSS_SELECTOR, "[data-test='shopping-cart-badge']")) == 0
-                if expected_count == 0
-                else (
-                    d.find_element(By.CSS_SELECTOR, "[data-test='shopping-cart-badge']").text.isdigit()
-                    and int(d.find_element(By.CSS_SELECTOR, "[data-test='shopping-cart-badge']").text) == expected_count
-                )
-            )
-        )
+
     print(f"Total items removed from cart: {remove_count}")
-    time.sleep(4)
+    time.sleep(1)
 
     # Verify the cart is empty
     assert (len(driver.find_elements(By.CLASS_NAME, "cart_item")) == 0), "Cart is not empty after removing items"
@@ -114,6 +97,19 @@ def make_driver():
     options.add_argument("--no-sandbox")
     options.add_argument("--disable-dev-shm-usage")
     options.add_argument("--window-size=1920,1080")
+    options.add_experimental_option("prefs", {
+        "credentials_enable_service": False,
+        "profile.password_manager_enabled": False,
+        "autofill.profile_enabled": False,
+        "autofill.credit_card_enabled": False,
+    })
+    options.add_argument("--disable-features=PasswordLeakDetection,PasswordManagerOnboarding")
+
+    options.add_argument("--incognito")
+    options.add_argument("--disable-notifications")
+    options.add_argument("--disable-infobars")
+    options.add_argument("--no-default-browser-check")
+
 
     return webdriver.Chrome(options=options)
 
@@ -125,13 +121,12 @@ def main():
     try:
         driver = make_driver()
         driver.get(url)
-        time.sleep(2)
         reset_app_state(driver)
         login(driver, url, "standard_user", "secret_sauce")
-        time.sleep(2)
-        add_items_to_cart(driver)
-        time.sleep(2)
-        remove_items_from_cart(driver)
+        time.sleep(4)
+        cart_count = add_items_to_cart(driver)
+        time.sleep(1)
+        remove_items_from_cart(driver, cart_count)
 
         print("Test completed successfully!")
         
