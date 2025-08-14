@@ -2,7 +2,7 @@
 ## Project 3: Ensuring Quality Releases
 
 ### Description
-This repo walks demonstrates the deployment and testing of a rest api using Terraform, Packer, Jmeter, Postman and Azure
+This repo walks demonstrates the deployment and testing of a rest api using Terraform, Packer, Jmeter, Postman and Azure.
 
 ## Dependencies
 - Azure account
@@ -102,14 +102,15 @@ terraform destroy
 - Create new agent pool in **Project Settings > Agent pools** with type **self-hosted** and check **grant access permissions to all pipelines**
 - Follow the steps in ```create_agent.md```. You will now see your agent online in the Dev Portal ![Agent Online](./screenshots/12_agent_online.png)
 - Go to **Pipelines > Environments > Create environment** and create a new pipeline environment of type **Virtual Machines** then select **Generic provider** and **Linux** and copy the command it provides, then follow the steps in ```create_test_vm.md```. You will now see your vm in your environment
-[myLinuxVm](./screenshots/18_test_vm_resource.png)
+![myLinuxVm](./screenshots/18_test_vm_resource.png)
 - Install Terraform extension from the marketplace
-[Extension](./screenshots/13_install_terraform_extension.png)
+![Extension](./screenshots/13_install_terraform_extension.png)
 - Upload ```terraform.tfvars``` to pipelines file library
 - Click **Create Pipeline** and then **Existing Azure Pipelines YAML file**
 - Add ```ARM_ACCESS_KEY``` variables into the pipeline, NOT library
 - Click **Run**
 
+![Pipeline](./screenshots/22_az_pipeline_pass.png)
 
 ### Alerts and Monitoring
 #### Azure Monitor
@@ -120,7 +121,7 @@ Monitor to alert if a 404 error happens
 - Set the **Action Group** as Email and fill in details 
 - Click **Create alert rule**
 
-[Alert](./screenshots/44_az_email_alert.png)
+![Alert](./screenshots/44_az_email_alert.png)
 
 #### Querying Logs
 How to find specific logs within Azure
@@ -147,8 +148,8 @@ Syslog
 | order by TimeGenerated desc
 
 ```
-[Heartbeat](./screenshots/51_az_logs_heartbeat.png)
-[General Logs](./screenshots/54_az_logs_selenium.png)
+![Heartbeat](./screenshots/51_az_logs_heartbeat.png)
+![General Logs](./screenshots/54_az_logs_selenium.png)
 
 
 
