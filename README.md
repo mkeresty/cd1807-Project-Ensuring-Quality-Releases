@@ -2,7 +2,7 @@
 ## Project 3: Ensuring Quality Releases
 
 ### Description
-This repo ..............
+This repo walks demonstrates the deployment and testing of a rest api using Terraform, Packer, Jmeter, Postman and Azure
 
 ## Dependencies
 - Azure account
@@ -104,7 +104,7 @@ terraform destroy
 - Go to **Pipelines > Environments > Create environment** and create a new pipeline environment of type **Virtual Machines** then select **Generic provider** and **Linux** and copy the command it provides, then follow the steps in ```create_test_vm.md```. You will now see your vm in your environment
 [myLinuxVm](./screenshots/18_test_vm_resource.png)
 - Install Terraform extension from the marketplace
-[Extension](./13_install_terraform_extension.png)
+[Extension](./screenshots/13_install_terraform_extension.png)
 - Upload ```terraform.tfvars``` to pipelines file library
 - Click **Create Pipeline** and then **Existing Azure Pipelines YAML file**
 - Add ```ARM_ACCESS_KEY``` variables into the pipeline, NOT library
@@ -119,6 +119,8 @@ Monitor to alert if a 404 error happens
 - Set the **Condition** as ```Http 4xx```
 - Set the **Action Group** as Email and fill in details 
 - Click **Create alert rule**
+
+[Alert](./screenshots/44_az_email_alert.png)
 
 #### Querying Logs
 How to find specific logs within Azure
@@ -145,6 +147,10 @@ Syslog
 | order by TimeGenerated desc
 
 ```
+[Heartbeat](./screenshots/51_az_logs_heartbeat.png)
+[General Logs](./screenshots/54_az_logs_selenium.png)
+
+
 
 ### Destroying Resources
 In your local cli at ```./terraform/environments/test```
